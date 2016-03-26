@@ -1,4 +1,4 @@
-package com.liwenquan.sleep;
+package com.liwenquan.sl;
 
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 
-public class PlayAlarmAty extends AppCompatActivity {
+public class PlayAlarmActivity extends AppCompatActivity {
     private MediaPlayer mp;
 
     @Override

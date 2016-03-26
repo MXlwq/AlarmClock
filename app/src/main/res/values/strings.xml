@@ -1,22 +1,11 @@
 <resources>
-    <string name="app_name">魅睡着</string>
-    <array name="dummy_items">
-        <item>One</item>
-        <item>Two</item>
-        <item>Three</item>
-        <item>Four</item>
-        <item>Five</item>
-        <item>Six</item>
-        <item>Seven</item>
-        <item>Eight</item>
-        <item>Nine</item>
-        <item>Ten</item>
-    </array>
-    <string name="title_activity_play_alarm_aty">PlayAlarmAty</string>
-    <string name="title_activity_clock_set_aty">ClockSetAty</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_clock_set_fragment">ClockSetFragment</string>
-    <string name="title_activity_music_list_aty">MusicListAty</string>
+    <string name="app_name">WakeUp</string>
+    <string name="image_translucent_bar">Image Translucent Bar Training</string>
+    <string name="color_translucent_bar">Color Translucent Bar Training</string>
+    <string name="tool_bar">ToolBar Training</string>
+    <string name="menu_bug">提Bug</string>
+    <string name="menu_about_us">关于</string>
+    <string name="home_page">Alarms</string>
+    <string name="title_activity_set">SetActivity</string>
+    <string name="title_activity_setting">SettingActivity</string>
 </resources>

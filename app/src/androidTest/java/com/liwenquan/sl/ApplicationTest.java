@@ -1,4 +1,4 @@
-package com.liwenquan.sleep;
+package com.liwenquan.sl;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

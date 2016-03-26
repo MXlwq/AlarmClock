@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.liwenquan.sleep.ClockSetAty"
-    tools:showIn="@layout/activity_set_clock">
+    tools:context="com.liwenquan.sl.SetActivity"
+    tools:showIn="@layout/activity_set">
 
 </RelativeLayout>

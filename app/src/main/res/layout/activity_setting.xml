@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_menu"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:fitsSystemWindows="true"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,29 +25,15 @@
 
         </android.support.v7.widget.RecyclerView>
 
-        <ImageView
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:background="@mipmap/add"
-            android:id="@+id/imgAdd"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="27dp" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="测试时间"
+            android:text="我是设置界面"
             android:id="@+id/tvTime"
             android:layout_above="@+id/imgAdd"
             android:layout_alignEnd="@+id/imgAdd"
             android:layout_marginBottom="45dp" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="测试界面"
-            android:id="@+id/btnTest"/>
 
     </RelativeLayout>
 
