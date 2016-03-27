@@ -2,6 +2,6 @@
 <resources>
     <item name="action_search" type="id">false</item>
     <item name="action_setting" type="id">false</item>
-    <item name="action_settings" type="id">false</item>
+    <item name="action_bug" type="id">false</item>
     <item name="action_about" type="id">false</item>
 </resources>

@@ -43,11 +43,6 @@
             android:layout_above="@+id/imgAdd"
             android:layout_alignEnd="@+id/imgAdd"
             android:layout_marginBottom="45dp" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="测试界面"
-            android:id="@+id/btnTest"/>
 
     </RelativeLayout>
 

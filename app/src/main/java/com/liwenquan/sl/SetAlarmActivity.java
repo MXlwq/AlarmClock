@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
-public class SetActivity extends AppCompatActivity {
+public class SetAlarmActivity extends AppCompatActivity {
 
     private static final int Alarm = 1;
     private TimePicker timePicker;
@@ -22,9 +22,9 @@ public class SetActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 
-        setContentView(R.layout.activity_set);
+        setContentView(R.layout.activity_add_alarm);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("设置");//设置主标题
+        toolbar.setTitle("设置闹钟");//设置主标题
         toolbar.setNavigationIcon(R.mipmap.back);//设置导航栏图标
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -62,7 +62,7 @@ public class SetActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent i=new Intent(SetActivity.this,MainActivity.class);
+                Intent i=new Intent(SetAlarmActivity.this,MainActivity.class);
                 i.putExtra("时间", (System.currentTimeMillis() / 1000L)+"");
                 startActivity(i);
                 finish();

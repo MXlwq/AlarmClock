@@ -9,7 +9,7 @@
         android:title="设置"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@id/action_settings"
+        android:id="@id/action_bug"
         android:orderInCategory="100"
         android:title="@string/menu_bug"
         app:showAsAction="never" />

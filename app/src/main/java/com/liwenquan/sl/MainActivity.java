@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -33,9 +32,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 // Handle the menu item
-                Toast.makeText(MainActivity.this,
-                        "功能待添加",
-                        Toast.LENGTH_SHORT).show();
+                int id = item.getItemId();
+
+                //noinspection SimplifiableIfStatement
+                if (id == R.id.action_bug) {
+                    startActivity(new Intent(MainActivity.this, PlayAlarmActivity.class));
+                    return true;
+                }
+                else if(id==R.id.action_about){
+                    startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+                    return true;
+                }
                 return true;
             }
         });
@@ -43,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         findViewById(R.id.imgAdd).setOnClickListener(this);
         findViewById(R.id.action_setting).setOnClickListener(this);
-        findViewById(R.id.btnTest).setOnClickListener(this);
         tvTime.setText("当前的时间"+getIntent().getStringExtra("时间"));
 
 
@@ -57,29 +63,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnTest:
-                startActivity(new Intent(MainActivity.this,PlayAlarmActivity.class));
-                break;
             case R.id.imgAdd:
-                startActivity(new Intent(MainActivity.this, SetActivity.class));
+                startActivity(new Intent(MainActivity.this, AddAlarmActivity.class));
                 break;
             case R.id.action_setting:
                 startActivity(new Intent(MainActivity.this,SettingActivity.class));
@@ -132,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 textView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(MainActivity.this, SetActivity.class));
+                        startActivity(new Intent(MainActivity.this, AddAlarmActivity.class));
 //                        Snackbar.make(v, "当前点击的位置：" + getAdapterPosition(), Snackbar.LENGTH_LONG)
 //                                .setAction("Action", null).show();
                     }

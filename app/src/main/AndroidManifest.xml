@@ -19,14 +19,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SetActivity"
+            android:name=".AddAlarmActivity"
             android:label="@string/title_activity_set"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SettingActivity"
             android:label="@string/title_activity_setting"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".PlayAlarmActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PlayAlarmActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AboutUsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SetAlarmActivity"></activity>
     </application>
 
 </manifest>
