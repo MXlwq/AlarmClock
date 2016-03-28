@@ -32,7 +32,8 @@
         <activity
             android:name=".AboutUsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SetAlarmActivity"></activity>
+        <activity android:name=".SetAlarmActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

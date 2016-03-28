@@ -10,8 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_menu"
-        android:theme="@style/Theme.ToolBar.Clock">
+        android:background="@color/color_menu">
 
     </android.support.v7.widget.Toolbar>
 
