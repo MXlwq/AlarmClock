@@ -2,26 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_menu">
+        android:background="@color/color_menu"
+        android:fitsSystemWindows="true">
 
     </android.support.v7.widget.Toolbar>
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_about"
+        android:textColor="@color/color_red"
+        android:textSize="22dip" />
+
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="我是关于界面"
-        android:id="@+id/tvTime"
-        android:layout_above="@+id/imgAdd"
-        android:layout_alignEnd="@+id/imgAdd"
-        android:layout_marginBottom="45dp" />
+        android:layout_marginTop="20dp"
+        android:layout_margin="5dp"
+        android:text="@string/button_commitbug"
+        android:textColor="@color/color_red" />
+
 
 </LinearLayout>
 

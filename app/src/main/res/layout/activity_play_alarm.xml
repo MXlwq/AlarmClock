@@ -22,10 +22,11 @@
 
     <Switch
         android:id="@+id/switch1"
-        android:layout_width="167dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="关闭闹钟"
-        android:textSize="20sp"/>
+        android:textSize="30dip"
+        android:textColor="#FFFFFF"/>
 
 </LinearLayout>

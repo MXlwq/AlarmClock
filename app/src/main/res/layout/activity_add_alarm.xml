@@ -8,13 +8,14 @@
     tools:context="com.liwenquan.sleep.ClockSetAty">
 
     <android.support.v7.widget.Toolbar
-        android:fitsSystemWindows="true"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ff4182">
+        android:background="@color/color_addMenu"
+        android:fitsSystemWindows="true">
 
     </android.support.v7.widget.Toolbar>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,10 +49,10 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="#9E9E9E" />
+                android:background="@color/color_liner" />
 
             <LinearLayout
-                android:id="@+id/clockset"
+                android:id="@+id/chooseSong"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="10dp"
@@ -64,8 +65,8 @@
                     android:layout_height="60dp"
                     android:layout_weight="0.95"
                     android:gravity="center_vertical"
-                    android:text=" 铃声 "
-                    android:textColor="#000000"
+                    android:text="@string/text_song"
+                    android:textColor="@color/color_black"
                     android:textSize="16sp" />
 
                 <ImageView
@@ -80,25 +81,29 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="#9E9E9E" />
+                android:background="@color/color_liner" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center">
 
                 <TextView
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text=" 音量 "
-                    android:textColor="#000000"
+                    android:text="@string/text_volume"
+                    android:textColor="@color/color_black"
                     android:textSize="16sp" />
 
                 <SeekBar
+                    android:id="@+id/seekbar"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp" />
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progress="50"/>
 
             </LinearLayout>
 
@@ -107,15 +112,14 @@
                 android:layout_height="1dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="#9E9E9E" />
+                android:background="@color/color_liner" />
 
             <Switch
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:text=" 响铃时震动"
-                android:textColor="#000000"
+                android:text="@string/text_shake"
                 android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>
@@ -128,26 +132,26 @@
         android:weightSum="1">
 
         <Button
+            android:id="@+id/btnDelClock"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:text="删除"
-            android:id="@+id/btnDelClock"/>
+            android:text="@string/button_delete" />
 
         <ImageView
+            android:id="@+id/btnSaveClock"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:background="#9E9E9E"
-            android:id="@+id/btnSaveClock"/>
+            android:background="@color/color_liner" />
 
         <Button
             android:id="@+id/btnSave"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:text="保存" />
+            android:text="@string/button_save" />
     </LinearLayout>
 
 </LinearLayout>

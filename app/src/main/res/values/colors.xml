@@ -15,5 +15,7 @@
     <color name="color_512da8">#512da8</color>
     <color name="color_cd3e3a">#cd3e3a</color>
     <color name="color_menu">#FFC107</color>
-    color_menu
+    <color name="color_addMenu">#ff4182</color>
+    <color name="color_liner">#9E9E9E</color>
+    <color name="color_black">#000000</color>
 </resources>

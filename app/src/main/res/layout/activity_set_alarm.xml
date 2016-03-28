@@ -8,13 +8,14 @@
     tools:context="com.liwenquan.sleep.ClockSetAty">
 
     <android.support.v7.widget.Toolbar
-        android:fitsSystemWindows="true"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ff4182">
+        android:background="#ff4182"
+        android:fitsSystemWindows="true">
 
     </android.support.v7.widget.Toolbar>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -128,19 +129,19 @@
         android:weightSum="1">
 
         <Button
+            android:id="@+id/btnDelClock"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:text="删除"
-            android:id="@+id/btnDelClock"/>
+            android:text="删除" />
 
         <ImageView
+            android:id="@+id/btnSaveClock"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:background="#9E9E9E"
-            android:id="@+id/btnSaveClock"/>
+            android:background="#9E9E9E" />
 
         <Button
             android:id="@+id/btnSave"

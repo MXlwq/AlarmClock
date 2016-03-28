@@ -8,4 +8,12 @@
     <string name="home_page">Alarms</string>
     <string name="title_activity_set">SetActivity</string>
     <string name="title_activity_setting">SettingActivity</string>
+    <string name="text_song">铃声</string>
+    <string name="text_volume">音量</string>
+    <string name="text_shake">响铃时震动</string>
+    <string name="button_delete">删除</string>
+    <string name="button_save">保存</string>
+    <string name="button_commitbug">点我提交八阿哥啦~</string>
+    <string name="text_about">本程序是beta阶段，发现bug欢迎反馈，为了实现以下功能来帮助你起床\n1.防关闭又睡过头，想要关闭闹钟，可能要花大力气或者动脑筋啦\n2.自己调节难度和闹钟关闭的方式想要早起，可以调的变态一点=-=。\n3.闹钟响起的时候不能通过关闭手机来关闭闹钟，也不能降低音量，总之，不完成是不会停的，除非电池没电了^-^</string>
+
 </resources>

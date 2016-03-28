@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
 public class SetAlarmActivity extends AppCompatActivity {
 
     private static final int Alarm = 1;
@@ -37,7 +38,7 @@ public class SetAlarmActivity extends AppCompatActivity {
 
         Spinner spinner = (Spinner) findViewById(R.id.sp);
         spinner.setSelection(2, true);//将“每天”设置为默认
-        TimePicker timePicker= (TimePicker) findViewById(R.id.timePicker);
+        TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
 
         findViewById(R.id.clockset).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,8 +63,8 @@ public class SetAlarmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent i=new Intent(SetAlarmActivity.this,MainActivity.class);
-                i.putExtra("时间", (System.currentTimeMillis() / 1000L)+"");
+                Intent i = new Intent(SetAlarmActivity.this, MainActivity.class);
+                i.putExtra("时间", (System.currentTimeMillis() / 1000L) + "");
                 startActivity(i);
                 finish();
             }
