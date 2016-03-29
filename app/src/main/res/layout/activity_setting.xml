@@ -37,11 +37,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="10dp"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_margin="10dp"
             android:gravity="center_vertical">
             <TextView
                 android:layout_width="wrap_content"
@@ -51,21 +51,17 @@
 
             <Switch
                 android:layout_width="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_height="30dp"
                 android:textSize="16sp" />
         </LinearLayout>
         <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:background="@color/color_liner" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_margin="5dp"
             android:orientation="vertical"
             android:gravity="center_vertical">
 
@@ -86,14 +82,11 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:background="@color/color_liner" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_margin="5dp"
             android:gravity="center_vertical">
             <TextView
                 android:layout_width="wrap_content"
@@ -111,13 +104,10 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:background="@color/color_liner" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_margin="5dp"
             android:orientation="vertical"
             android:gravity="center_vertical">
             <TextView
@@ -137,8 +127,6 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:background="@color/color_liner" />
     </LinearLayout>
 
