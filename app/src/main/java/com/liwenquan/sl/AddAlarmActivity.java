@@ -1,6 +1,5 @@
 package com.liwenquan.sl;
 
-import android.app.AlarmManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,22 +16,18 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class AddAlarmActivity extends AppCompatActivity {
 
     private static final int Alarm = 1;
-    private TimePicker timePicker;
     private AudioManager audiomanger;
     private int maxVolume, currentVolume;
     private SeekBar seekBar;
     private int hour, minute;
+    String hourformat, minuteformat;
     SharedPreferences.Editor editor;
     StringBuffer sb;
-    private AlarmManager alarmManager;
-    static List<String> list = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +77,6 @@ public class AddAlarmActivity extends AppCompatActivity {
         findViewById(R.id.btnSave).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                list.add(hour + ":" + minute);
                 Intent i = new Intent(AddAlarmActivity.this, MainActivity.class);
                 i.putExtra("时间", hour + ":" + minute);
                 startActivity(i);

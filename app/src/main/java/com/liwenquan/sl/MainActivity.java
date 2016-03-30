@@ -1,7 +1,6 @@
 package com.liwenquan.sl;
 
 import android.app.AlarmManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,13 +9,10 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -41,13 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         setContentView(R.layout.activity_main);
-//        Log.d(TAG,"OnCreate...");
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setAdapter(new MyAdapter(list));
-        //saveAlarmList();
+
+
         tvTime = (TextView) findViewById(R.id.tvTime);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.menu_main);
@@ -72,23 +63,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         findViewById(R.id.imgAdd).setOnClickListener(this);
         findViewById(R.id.action_setting).setOnClickListener(this);
-        tvTime.setText("当前的时间" + getIntent().getStringExtra("时间"));
 
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        //创建一个线性布局
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        //设置布局管理器
+        mRecyclerView.setLayoutManager(layoutManager);
+        //使RecyclerView保持固定的大小,这样会提高RecyclerView的性能
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        //创建Adapter，并指定数据集
+
+        list.add(getIntent().getStringExtra("时间"));
+        MyAdapter adapter = new MyAdapter(list);
+        //设置Adapter
+        mRecyclerView.setAdapter(adapter);
     }
 
     private static final String KEY = "alarmList";
 
-    public void saveAlarmList() {
-        editor = getSharedPreferences(MainActivity.class.getName(), Context.MODE_PRIVATE).edit();
-        sb = new StringBuffer();
-        for (int i = 0; i < count; i++) {
-            sb.append(AddAlarmActivity.list.get(i)).append(",");
-        }
-//        String content = sb.toString().substring(0, sb.length() - 1);
-//        editor.putString(KEY, content);
-//        editor.commit();
-    }
+//    public void saveAlarmList() {
+//        editor = getSharedPreferences(MainActivity.class.getName(), Context.MODE_PRIVATE).edit();
+//        sb = new StringBuffer();
+//        for (int i = 0; i < count; i++) {
+//            sb.append(AddAlarmActivity.list.get(i)).append(",");
+//        }
+////        String content = sb.toString().substring(0, sb.length() - 1);
+////        editor.putString(KEY, content);
+////        editor.commit();
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -107,75 +116,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.action_setting:
                 startActivity(new Intent(MainActivity.this, SettingActivity.class));
-        }
-    }
-
-    private class MyAdapter extends RecyclerView.Adapter {
-        private List<String> list;
-
-        public MyAdapter(List<String> list) {
-            this.list = list;
-        }
-
-        @Override
-        public int getItemCount() {
-            // TODO Auto-generated method stub
-            return list.size();
-        }
-
-        @Override
-        public int getItemViewType(int position) {
-            return super.getItemViewType(position);
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
-            // TODO Auto-generated method stub
-            View view = LayoutInflater.from(viewGroup.getContext()).inflate(
-                    R.layout.list_cell, viewGroup, false);
-            ViewHolder holder = new ViewHolder(view);
-            return holder;
-        }
-
-        @Override
-        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-            ViewHolder vh = (ViewHolder) holder;
-            vh.getTvClock().setText(list.get(position));
-        }
-
-
-        class ViewHolder extends RecyclerView.ViewHolder {
-
-            public Button tvClock;
-
-            public Button getTvClock() {
-                return tvClock;
-            }
-
-            public ViewHolder(View view) {
-                super(view);
-                // TODO Auto-generated constructor stub
-                tvClock = (Button) view.findViewById(R.id.tvClock);
-
-                tvClock.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(MainActivity.this, AddAlarmActivity.class));
-//                        Snackbar.make(v, "当前点击的位置：" + getAdapterPosition(), Snackbar.LENGTH_LONG)
-//                                .setAction("Action", null).show();
-                    }
-                });
-                tvTime.setOnLongClickListener(new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View v) {
-                        //remove(getAdapterPosition());
-
-                        return true;
-
-                    }
-                });
-            }
-
         }
     }
 
