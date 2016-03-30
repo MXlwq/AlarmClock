@@ -14,37 +14,34 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white">
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
         </android.support.v7.widget.RecyclerView>
-
-        <ImageView
-            android:id="@+id/imgAdd"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="27dp"
-            android:background="@mipmap/add" />
 
         <TextView
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/imgAdd"
-            android:layout_alignEnd="@+id/imgAdd"
-            android:layout_marginBottom="45dp"
+            android:layout_gravity="bottom|left"
             android:text="测试时间"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    </RelativeLayout>
+        <ImageView
+            android:id="@+id/imgAdd"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginBottom="30dp"
+            android:layout_gravity="bottom|center"
+            android:background="@mipmap/add" />
+
+
+    </FrameLayout>
 
 </LinearLayout>

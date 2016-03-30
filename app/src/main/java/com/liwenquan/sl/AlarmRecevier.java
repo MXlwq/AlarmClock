@@ -19,6 +19,6 @@ public class AlarmRecevier extends BroadcastReceiver {
         Intent i = new Intent(context, PlayAlarmActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
-        Toast.makeText(context, "test", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, R.string.app_name , Toast.LENGTH_SHORT).show();
     }
 }

@@ -24,6 +24,7 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    //private static final String TAG="MainActivity";
 
     SharedPreferences.Editor editor;
     StringBuffer sb;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         setContentView(R.layout.activity_main);
-
+//        Log.d(TAG,"OnCreate...");
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         mRecyclerView.setHasFixedSize(true);
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.imgAdd:
                 startActivity(new Intent(MainActivity.this, AddAlarmActivity.class));
-                //finish();
+                finish();
                 break;
             case R.id.action_setting:
                 startActivity(new Intent(MainActivity.this, SettingActivity.class));
@@ -115,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public MyAdapter(List<String> list) {
             this.list = list;
         }
+
         @Override
         public int getItemCount() {
             // TODO Auto-generated method stub
@@ -137,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-            ViewHolder vh=(ViewHolder) holder;
+            ViewHolder vh = (ViewHolder) holder;
             vh.getTvClock().setText(list.get(position));
         }
 
@@ -177,88 +179,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-//    class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-//        private List<String> list;
-//
-//        public MyAdapter(List<String> list) {
-//            this.list = list;
-//        }
-//
-//
-//        @Override
-//        public int getItemCount() {
-//            // TODO Auto-generated method stub
-//            return list.size();
-//        }
-//
-//        @Override
-//        public int getItemViewType(int position) {
-//            return super.getItemViewType(position);
-//        }
-//
-//        @Override
-//        public void onBindViewHolder(ViewHolder viewHolder, int position) {
-//            // TODO Auto-generated method stub
-//            viewHolder.textView.setText(list.get(position));
-//        }
-//
-//        @Override
-//        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
-//            // TODO Auto-generated method stub
-//            View view = LayoutInflater.from(viewGroup.getContext()).inflate(
-//                    R.layout.list_cell, viewGroup, false);
-//            ViewHolder holder = new ViewHolder(view);
-//            return holder;
-//        }
-//
-//
-//        public class ViewHolder extends RecyclerView.ViewHolder {
-//
-//            public Button textView;
-//
-//            public ViewHolder(View view) {
-//                super(view);
-//                // TODO Auto-generated constructor stub
-//                textView = (Button) view.findViewById(R.id.tvTitle);
-//                textView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        startActivity(new Intent(MainActivity.this, AddAlarmActivity.class));
-////                        Snackbar.make(v, "当前点击的位置：" + getAdapterPosition(), Snackbar.LENGTH_LONG)
-////                                .setAction("Action", null).show();
-//                    }
-//                });
-//                textView.setOnLongClickListener(new View.OnLongClickListener() {
-//                    @Override
-//                    public boolean onLongClick(View v) {
-////                        remove(getAdapterPosition());
-//
-//                        return true;
-//
-//                    }
-//                });
-//            }
-//
-//        }
-//
-////        public void remove(int position) {
-////            list.remove(position);
-////            notifyItemRemoved(position);
-////            sb = new StringBuffer();
-////            for (int i = 0; i < getItemCount(); i++) {
-////                sb.append(list.get(i)).append(",");
-////            }
-////            String content;
-////            if (getItemCount() == 0)
-////                content = null;
-////            else
-////                content = sb.toString().substring(0, sb.length() - 1);
-////            editor = getContext().getSharedPreferences(ClockFragment.class.getName(), Context.MODE_PRIVATE).edit();
-////            editor.putString(KEY, content);
-////            editor.commit();
-////        }
-//
-//
-//    }
 
 }

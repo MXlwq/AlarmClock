@@ -28,11 +28,12 @@ public class AddAlarmActivity extends AppCompatActivity {
     private AudioManager audiomanger;
     private int maxVolume, currentVolume;
     private SeekBar seekBar;
-    private int hour,minute;
+    private int hour, minute;
     SharedPreferences.Editor editor;
     StringBuffer sb;
     private AlarmManager alarmManager;
     static List<String> list = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,28 +43,20 @@ public class AddAlarmActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_alarm);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("添加闹钟");//设置主标题
-        toolbar.setNavigationIcon(R.mipmap.back);//设置导航栏图标
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
 
         Spinner spinner = (Spinner) findViewById(R.id.sp);
         spinner.setSelection(2, true);//将“每天”设置为默认
 
         TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
-        Calendar c=Calendar.getInstance();
-        hour=c.get(Calendar.HOUR_OF_DAY);
-        minute=c.get(Calendar.MINUTE);
+        Calendar c = Calendar.getInstance();
+        hour = c.get(Calendar.HOUR_OF_DAY);
+        minute = c.get(Calendar.MINUTE);
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                AddAlarmActivity.this.hour=hourOfDay;
-                AddAlarmActivity.this.minute=minute;
+                AddAlarmActivity.this.hour = hourOfDay;
+                AddAlarmActivity.this.minute = minute;
             }
         });
         findViewById(R.id.chooseSong).setOnClickListener(new View.OnClickListener() {
@@ -89,9 +82,9 @@ public class AddAlarmActivity extends AppCompatActivity {
         findViewById(R.id.btnSave).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                list.add(hour+":"+minute);
+                list.add(hour + ":" + minute);
                 Intent i = new Intent(AddAlarmActivity.this, MainActivity.class);
-                i.putExtra("时间",hour+":"+minute);
+                i.putExtra("时间", hour + ":" + minute);
                 startActivity(i);
                 finish();
             }
@@ -121,7 +114,8 @@ public class AddAlarmActivity extends AppCompatActivity {
             }
         });
     }
-    private void saveTime(int hour,int minute){
+
+    private void saveTime(int hour, int minute) {
         editor = getSharedPreferences(AddAlarmActivity.class.getName(), Context.MODE_PRIVATE).edit();
         sb = new StringBuffer();
 //        for (int i = 0; i < adapter.getItemCount(); i++) {
@@ -131,6 +125,7 @@ public class AddAlarmActivity extends AppCompatActivity {
 //        editor.putString(KEY, content);
 //        editor.commit();
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

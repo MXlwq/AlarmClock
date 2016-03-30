@@ -13,27 +13,6 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:background="@android:color/white">-->
-        <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent">-->
-
-        <!--</android.support.v7.widget.RecyclerView>-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-            <!--android:text="我是设置界面"-->
-            <!--android:id="@+id/tvTime"-->
-            <!--android:layout_above="@+id/imgAdd"-->
-            <!--android:layout_alignEnd="@+id/imgAdd"-->
-            <!--android:layout_marginBottom="45dp" />-->
-
-    <!--</RelativeLayout>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -47,12 +26,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_notification"
-                android:textSize="20sp"/>
+                android:textColor="@color/color_black"
+                android:textSize="17sp" />
 
             <Switch
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:textSize="16sp" />
+                android:layout_height="30dp" />
         </LinearLayout>
         <ImageView
         android:layout_width="match_parent"
@@ -69,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_Volume"
-                android:textSize="20sp"/>
+                android:textSize="17sp" />
             <SeekBar
                 android:id="@+id/seekbar2"
                 android:layout_width="match_parent"
@@ -92,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_Gradual"
-                android:textSize="20sp"
+                android:textSize="17sp"
                 android:layout_weight="1"/>
 
             <CheckBox
@@ -107,14 +86,14 @@
             android:background="@color/color_liner" />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="65dp"
             android:orientation="vertical"
             android:gravity="center_vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_snooze"
-                android:textSize="20sp"
+                android:textSize="17sp"
                 android:layout_weight="1"/>
             <TextView
                 android:layout_width="wrap_content"
