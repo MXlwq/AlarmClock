@@ -51,24 +51,29 @@
                 android:layout_marginRight="16dp"
                 android:background="@color/color_liner" />
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/lllable"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="64dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/alarm_name"
-                android:textColor="@color/color_black"
-                android:textSize="16sp" />
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:text="Test"
-                android:textSize="12sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/alarm_name"
+                    android:textColor="@color/color_black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvalarmlable"
+                    android:text="闹钟"
+                    android:textSize="13sp" />
+            </LinearLayout>
 
             <ImageView
                 android:layout_width="match_parent"

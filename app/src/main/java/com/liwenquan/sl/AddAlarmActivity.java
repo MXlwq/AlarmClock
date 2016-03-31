@@ -1,18 +1,23 @@
 package com.liwenquan.sl;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -26,6 +31,7 @@ public class AddAlarmActivity extends AppCompatActivity {
     private int maxVolume, currentVolume;
     private SeekBar seekBar;
     private int hour, minute;
+    private TextView mtvLable;
     String hourformat, minuteformat;
     SharedPreferences.Editor editor;
     StringBuffer sb;
@@ -67,6 +73,38 @@ public class AddAlarmActivity extends AppCompatActivity {
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE,
                         "设置闹钟铃声");
                 startActivityForResult(intent, Alarm);
+            }
+        });
+        findViewById(R.id.lllable).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddAlarmActivity.this);
+                builder.setTitle("标签");
+                //    通过LayoutInflater来加载一个xml的布局文件作为一个View对象
+                View view = LayoutInflater.from(AddAlarmActivity.this).inflate(R.layout.dialog_lable, null);
+                //    设置我们自己定义的布局文件作为弹出框的Content
+                builder.setView(view);
+
+                final EditText metLable = (EditText)view.findViewById(R.id.etLable);
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        String lable = metLable.getText().toString().trim();
+//                        new Intent().putExtra("我是标签",lable);
+                        Toast.makeText(AddAlarmActivity.this, "标签：" + lable, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+
+                    }
+                });
+                builder.show();
             }
         });
         findViewById(R.id.btnDelClock).setOnClickListener(new View.OnClickListener() {
