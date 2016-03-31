@@ -48,6 +48,7 @@ public class AddAlarmActivity extends AppCompatActivity {
         Calendar c = Calendar.getInstance();
         hour = c.get(Calendar.HOUR_OF_DAY);
         minute = c.get(Calendar.MINUTE);
+        timePicker.setIs24HourView(true);//是否显示24小时制？默认false
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
@@ -114,6 +115,7 @@ public class AddAlarmActivity extends AppCompatActivity {
     }
 
     private static final String KEY = "alarmList";
+
     public void saveAlarmList(List<String> list) {
         editor = getSharedPreferences(AddAlarmActivity.class.getName(), MODE_PRIVATE).edit();
         sb = new StringBuffer();
@@ -124,7 +126,6 @@ public class AddAlarmActivity extends AppCompatActivity {
         editor.putString(KEY, content);
         editor.commit();
     }
-
 
 
     @Override

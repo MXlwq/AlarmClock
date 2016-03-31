@@ -31,6 +31,7 @@ public class SetAlarmActivity extends AppCompatActivity {
     private int hour, minute;
     SharedPreferences.Editor editor;
     StringBuffer sb;
+    String AlarmHour, AlarmMinute, AlarmString;
     private AlarmManager alarmManager;
     static List<String> list = new ArrayList<String>();
 
@@ -53,6 +54,13 @@ public class SetAlarmActivity extends AppCompatActivity {
         Calendar c = Calendar.getInstance();
         hour = c.get(Calendar.HOUR_OF_DAY);
         minute = c.get(Calendar.MINUTE);
+        timePicker.setIs24HourView(true);//是否显示24小时制？默认false
+        AlarmString = getIntent().getStringExtra("打开相应的闹钟");
+        String[] stringArray = AlarmString.split(":");
+        AlarmHour = stringArray[0];
+        AlarmMinute = stringArray[1];
+        timePicker.setCurrentHour(Integer.valueOf(AlarmHour));
+        timePicker.setCurrentMinute(Integer.valueOf(AlarmMinute));
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {

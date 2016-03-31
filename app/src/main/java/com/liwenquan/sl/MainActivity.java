@@ -1,6 +1,8 @@
 package com.liwenquan.sl;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -49,13 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 DividerItemDecoration.VERTICAL_LIST));
         //创建Adapter，并指定数据集
 
-        list.clear();
-        if(savedInstanceState==null);
-            readSavedAlarmList();
-
-        MyAdapter adapter = new MyAdapter(list);
-        //设置Adapter
-        mRecyclerView.setAdapter(adapter);
 
         tvTime = (TextView) findViewById(R.id.tvTime);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -83,6 +78,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.action_setting).setOnClickListener(this);
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        list.clear();
+        readSavedAlarmList();
+
+        MyAdapter adapter = new MyAdapter(this, list);
+        //设置Adapter
+        mRecyclerView.setAdapter(adapter);
+    }
+
+    public void startAlarmDetailsActivity(String s) {
+        Intent intent = new Intent(MainActivity.this, SetAlarmActivity.class);
+        intent.putExtra("打开相应的闹钟", s);
+        startActivity(intent);
+    }
+
+    public void deleteAlarm(int i) {
+        final long alarmId = i;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Please confirm")
+                .setTitle("Delete set?")
+                .setCancelable(true)
+                .setNegativeButton("Cancel", null)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //deleteSavedAlarmList(alarmId);
+                    }
+                }).show();
     }
 
     private void readSavedAlarmList() {

@@ -1,5 +1,7 @@
 package com.liwenquan.sl;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +15,16 @@ import java.util.List;
  */
 class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     //数据集
-    public static List<String> list;
-    public MyAdapter(List<String> list) {
+    private Context mContext;
+    private static List<String> list;
+    StringBuffer sb;
+    SharedPreferences.Editor editor;
+
+    public MyAdapter(Context context, List<String> list) {
+        mContext = context;
         this.list = list;
     }
+
 
     @Override
     public int getItemViewType(int position) {
@@ -31,6 +39,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // TODO Auto-generated method stub
         return list.size();
     }
+
     public void addData(int position) {
         list.add(position, "Insert One");
         notifyItemInserted(position);
@@ -40,6 +49,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         list.remove(position);
         notifyItemRemoved(position);
     }
+
     //绑定数据到ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
@@ -49,24 +59,58 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     //这个方法主要生成为每个Item inflater出一个View，该方法返回的是一个ViewHolder
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, final int position) {
         // TODO Auto-generated method stub
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(
                 R.layout.list_cell, viewGroup, false);
         view.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                ((MainActivity) mContext).startAlarmDetailsActivity(list.get(position));
+                System.err.print("position" + position);
+
             }
         });
+
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View view) {
+                ((MainActivity) mContext).deleteAlarm(position);
+                return true;
+            }
+        });
+
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
+    private static final String KEY = "alarmList";
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+//    public void remove(int position) {
+//        list.remove(position);
+//        notifyItemRemoved(position);
+//        sb = new StringBuffer();
+//        for (int i = 0; i < getItemCount(); i++) {
+//            sb.append(list.get(i)).append(",");
+//        }
+//        String content;
+//        if (getItemCount() == 0)
+//            content = null;
+//        else
+//            content = sb.toString().substring(0, sb.length() - 1);
+//        editor = this.getSharedPreferences(AddAlarmActivity.class.getName(), Context.MODE_PRIVATE).edit();
+//        editor.putString(KEY, content);
+//        editor.commit();
+//    }
+
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvTime;
         private MyItemClickListener mListener;
+
         //private MyItemLongClickListener mLongClickListener;
         public TextView getTextView() {
             return tvTime;
@@ -79,10 +123,6 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         }
 
-        @Override
-        public void onClick(View v) {
-
-        }
     }
 
 
