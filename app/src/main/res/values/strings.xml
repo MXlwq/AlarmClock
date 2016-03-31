@@ -17,6 +17,7 @@
     <string name="alarm_name">闹钟标签</string>
     <string name="text_Volume">音量</string>
     <string name="text_Gradual">声音渐强</string>
+    <string name="hint_lable">闹钟标签</string>
     <string name="text_snooze">小睡时间</string>
     <string name="text_snoozetime">5分钟</string>
     <string name="button_commitbug">点我提交八阿哥啦~</string>

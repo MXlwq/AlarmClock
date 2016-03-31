@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by LWQ on 2016/3/30.
@@ -16,11 +16,11 @@ import java.util.List;
 class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     //数据集
     private Context mContext;
-    private static List<String> list;
+    private static ArrayList<String> list;
     StringBuffer sb;
     SharedPreferences.Editor editor;
 
-    public MyAdapter(Context context, List<String> list) {
+    public MyAdapter(Context context, ArrayList<String> list) {
         mContext = context;
         this.list = list;
     }
@@ -55,6 +55,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         // TODO Auto-generated method stub
         viewHolder.getTextView().setText(list.get(position));
+        //viewHolder.getTvLable().setText(list.get(position));
     }
 
     //这个方法主要生成为每个Item inflater出一个View，该方法返回的是一个ViewHolder
@@ -68,8 +69,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 ((MainActivity) mContext).startAlarmDetailsActivity(list.get(position));
-                System.err.print("position" + position);
-
+                //System.err.print("position" + position);
             }
         });
 
@@ -108,18 +108,29 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvTime;
+        private TextView mtvTime;
+
+        public TextView getTvLable() {
+            return mtvLable;
+        }
+
+        private TextView mtvLable;
+
+        public TextView getTvTime() {
+            return mtvTime;
+        }
+
         private MyItemClickListener mListener;
 
         //private MyItemLongClickListener mLongClickListener;
         public TextView getTextView() {
-            return tvTime;
+            return mtvTime;
         }
 
         public ViewHolder(View view) {
             super(view);
             // TODO Auto-generated constructor stub
-            tvTime = (TextView) view.findViewById(R.id.tvTime);
+            mtvTime = (TextView) view.findViewById(R.id.tvTime);
 
         }
 

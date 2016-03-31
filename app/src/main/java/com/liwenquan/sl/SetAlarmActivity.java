@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -24,12 +25,13 @@ import java.util.Calendar;
 import java.util.List;
 
 public class SetAlarmActivity extends AppCompatActivity {
-
+    private TextView mtvalarmlable;
     private static final int Alarm = 1;
     private AudioManager audiomanger;
     private int maxVolume, currentVolume;
     private SeekBar seekBar;
     private int hour, minute;
+    private TextView mtvLable;
     String hourformat, minuteformat;
     SharedPreferences.Editor editor;
     StringBuffer sb;
@@ -43,6 +45,7 @@ public class SetAlarmActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_alarm);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("添加闹钟");//设置主标题
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);
 
         Spinner spinner = (Spinner) findViewById(R.id.sp);
@@ -90,9 +93,10 @@ public class SetAlarmActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
-                        String a = metLable.getText().toString().trim();
-
-                        Toast.makeText(SetAlarmActivity.this, "标签：" + a, Toast.LENGTH_SHORT).show();
+                        String lable = metLable.getText().toString().trim();
+                        mtvalarmlable= (TextView) findViewById(R.id.tvalarmlable);
+                        mtvalarmlable.setText(lable);
+                        Toast.makeText(SetAlarmActivity.this, "已设定标签：" + lable, Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener()
@@ -150,6 +154,7 @@ public class SetAlarmActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private static final String KEY = "alarmList";
 

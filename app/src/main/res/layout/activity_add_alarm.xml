@@ -37,19 +37,15 @@
                 android:id="@+id/sp"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
                 android:entries="@array/languages"
-                android:spinnerMode="dialog">
+                android:spinnerMode="dialog"
+                style="?android:listSeparatorTextViewStyle">
 
             </Spinner>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@color/color_liner" />
+
 
             <LinearLayout
                 android:id="@+id/lllable"
@@ -58,7 +54,8 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:gravity="center_vertical"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                style="?android:listSeparatorTextViewStyle">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -75,12 +72,7 @@
                     android:textSize="13sp" />
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@color/color_liner" />
+
 
             <LinearLayout
                 android:id="@+id/chooseSong"
@@ -89,37 +81,34 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:orientation="horizontal"
-                android:weightSum="1">
+                style="?android:listSeparatorTextViewStyle">
 
                 <TextView
                     android:layout_width="300dp"
                     android:layout_height="60dp"
-                    android:layout_weight="0.95"
+                    android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="@string/text_song"
                     android:textColor="@color/color_black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/forward" />
+                    android:src="@mipmap/forward" />
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@color/color_liner" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                style="?android:listSeparatorTextViewStyle">
 
                 <TextView
                     android:layout_width="60dp"
@@ -138,18 +127,14 @@
 
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@color/color_liner" />
+
 
             <Switch
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
+                android:padding="6dp"
                 android:text="@string/text_shake"
                 android:textSize="16sp" />
         </LinearLayout>

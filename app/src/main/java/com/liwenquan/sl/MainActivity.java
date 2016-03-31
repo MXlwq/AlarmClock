@@ -18,7 +18,6 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView mRecyclerView;
     int count;
 
-    public static List<String> list = new ArrayList<String>();
+    public static ArrayList<String> list = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -7,8 +7,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvTime"
@@ -20,8 +20,8 @@
             android:background="#fafafa"
             android:gravity="left|center_vertical"
             android:paddingLeft="8dp"
-            android:textSize="24sp"
-            android:textColor="@color/color_black"/>
+            android:textColor="@color/color_black"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/tvLable"
@@ -33,8 +33,8 @@
             android:background="#fafafa"
             android:gravity="left|top"
             android:paddingLeft="8dp"
-            android:text="ceshi"
-            android:textSize="12sp" />
+            android:text="闹钟"
+            android:textSize="14sp" />
     </LinearLayout>
 
     <Switch

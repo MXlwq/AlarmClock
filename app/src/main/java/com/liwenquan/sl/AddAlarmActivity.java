@@ -25,7 +25,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class AddAlarmActivity extends AppCompatActivity {
-
+    private TextView mtvalarmlable;
     private static final int Alarm = 1;
     private AudioManager audiomanger;
     private int maxVolume, currentVolume;
@@ -45,6 +45,7 @@ public class AddAlarmActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_alarm);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("添加闹钟");//设置主标题
+        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);
 
         Spinner spinner = (Spinner) findViewById(R.id.sp);
@@ -86,14 +87,16 @@ public class AddAlarmActivity extends AppCompatActivity {
                 builder.setView(view);
 
                 final EditText metLable = (EditText)view.findViewById(R.id.etLable);
+
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
                         String lable = metLable.getText().toString().trim();
-//                        new Intent().putExtra("我是标签",lable);
-                        Toast.makeText(AddAlarmActivity.this, "标签：" + lable, Toast.LENGTH_SHORT).show();
+                        mtvalarmlable= (TextView) findViewById(R.id.tvalarmlable);
+                        mtvalarmlable.setText(lable);
+                        Toast.makeText(AddAlarmActivity.this, "已设定标签：" + lable, Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener()
@@ -151,6 +154,7 @@ public class AddAlarmActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private static final String KEY = "alarmList";
 
