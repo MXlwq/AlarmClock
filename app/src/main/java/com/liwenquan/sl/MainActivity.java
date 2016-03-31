@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView mRecyclerView;
     int count;
 
-    List<String> list = new ArrayList<String>();
+    public static List<String> list = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         setContentView(R.layout.activity_main);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        //创建一个线性布局
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        //设置布局管理器
+        mRecyclerView.setLayoutManager(layoutManager);
+        //使RecyclerView保持固定的大小,这样会提高RecyclerView的性能
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this,
+                DividerItemDecoration.VERTICAL_LIST));
+        //创建Adapter，并指定数据集
 
+        list.clear();
+        if(savedInstanceState==null);
+            readSavedAlarmList();
+
+        MyAdapter adapter = new MyAdapter(list);
+        //设置Adapter
+        mRecyclerView.setAdapter(adapter);
 
         tvTime = (TextView) findViewById(R.id.tvTime);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -67,37 +85,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        //创建一个线性布局
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        //设置布局管理器
-        mRecyclerView.setLayoutManager(layoutManager);
-        //使RecyclerView保持固定的大小,这样会提高RecyclerView的性能
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        //创建Adapter，并指定数据集
-
-        list.add(getIntent().getStringExtra("时间"));
-        MyAdapter adapter = new MyAdapter(list);
-        //设置Adapter
-        mRecyclerView.setAdapter(adapter);
+    private void readSavedAlarmList() {
+        SharedPreferences sp = getSharedPreferences(AddAlarmActivity.class.getName(), MODE_PRIVATE);
+        String content = sp.getString(KEY, null);
+        if (content != null) {
+            String[] timeStrings = content.split(",");
+            for (String string : timeStrings) {
+                list.add(string);
+            }
+        }
     }
+
 
     private static final String KEY = "alarmList";
 
-//    public void saveAlarmList() {
-//        editor = getSharedPreferences(MainActivity.class.getName(), Context.MODE_PRIVATE).edit();
-//        sb = new StringBuffer();
-//        for (int i = 0; i < count; i++) {
-//            sb.append(AddAlarmActivity.list.get(i)).append(",");
-//        }
-////        String content = sb.toString().substring(0, sb.length() - 1);
-////        editor.putString(KEY, content);
-////        editor.commit();
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

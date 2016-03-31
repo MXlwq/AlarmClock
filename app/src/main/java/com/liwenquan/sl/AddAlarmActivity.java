@@ -17,6 +17,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class AddAlarmActivity extends AppCompatActivity {
 
@@ -71,16 +72,19 @@ public class AddAlarmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO
+                //editor.clear();
                 finish();
             }
         });
         findViewById(R.id.btnSave).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                MainActivity.list.add(hour + ":" + minute);
+                saveAlarmList(MainActivity.list);
                 Intent i = new Intent(AddAlarmActivity.this, MainActivity.class);
-                i.putExtra("时间", hour + ":" + minute);
                 startActivity(i);
-                finish();
+                AddAlarmActivity.this.finish();
             }
         });
         audiomanger = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -109,16 +113,19 @@ public class AddAlarmActivity extends AppCompatActivity {
         });
     }
 
-    private void saveTime(int hour, int minute) {
-        editor = getSharedPreferences(AddAlarmActivity.class.getName(), Context.MODE_PRIVATE).edit();
+    private static final String KEY = "alarmList";
+    public void saveAlarmList(List<String> list) {
+        editor = getSharedPreferences(AddAlarmActivity.class.getName(), MODE_PRIVATE).edit();
         sb = new StringBuffer();
-//        for (int i = 0; i < adapter.getItemCount(); i++) {
-//            sb.append(list.get(i)).append(",");
-//        }
-//        String content = sb.toString().substring(0, sb.length() - 1);
-//        editor.putString(KEY, content);
-//        editor.commit();
+        for (int i = 0; i < list.size(); i++) {
+            sb.append(MainActivity.list.get(i)).append(",");
+        }
+        String content = sb.toString().substring(0, sb.length() - 1);
+        editor.putString(KEY, content);
+        editor.commit();
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

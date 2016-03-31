@@ -37,8 +37,8 @@
                 android:id="@+id/sp"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:entries="@array/languages"
                 android:spinnerMode="dialog">
 
@@ -47,16 +47,42 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/color_liner" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/alarm_name"
+                android:textColor="@color/color_black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="Test"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:background="@color/color_liner" />
 
             <LinearLayout
                 android:id="@+id/chooseSong"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:orientation="horizontal"
                 android:weightSum="1">
 
@@ -79,15 +105,15 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:background="@color/color_liner" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:gravity="center_vertical">
 
                 <TextView
@@ -103,22 +129,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:max="100"
-                    android:progress="50"/>
+                    android:progress="50" />
 
             </LinearLayout>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:background="@color/color_liner" />
 
             <Switch
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:text="@string/text_shake"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -127,30 +153,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_weight="0.1"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnDelClock"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:text="@string/button_delete" />
 
         <ImageView
             android:id="@+id/btnSaveClock"
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
             android:background="@color/color_liner" />
 
         <Button
             android:id="@+id/btnSave"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:text="@string/button_save" />
     </LinearLayout>
 
