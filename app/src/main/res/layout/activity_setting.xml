@@ -5,23 +5,26 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:fitsSystemWindows="true"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_menu">
+        android:background="@color/color_menu"
+        android:fitsSystemWindows="true">
 
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
+        android:layout_margin="16dp"
         android:orientation="vertical">
+
         <LinearLayout
+            style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:gravity="center_vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -33,80 +36,76 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp" />
         </LinearLayout>
-        <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/color_liner" />
 
         <LinearLayout
+            style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:orientation="vertical"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_Volume"
+                android:textColor="@color/color_black"
                 android:textSize="17sp" />
+
             <SeekBar
                 android:id="@+id/seekbar2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:max="100"
-                android:progress="50"/>
+                android:progress="50" />
 
 
         </LinearLayout>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/color_liner" />
 
         <LinearLayout
+            style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:gravity="center_vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/text_Gradual"
-                android:textSize="17sp"
-                android:layout_weight="1"/>
+                android:textColor="@color/color_black"
+                android:textSize="17sp" />
 
             <CheckBox
+                android:id="@+id/radioButton2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/radioButton2" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/color_liner" />
+
         <LinearLayout
+            style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:orientation="vertical"
-            android:gravity="center_vertical">
+            android:layout_height="70dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="bottom"
                 android:text="@string/text_snooze"
-                android:textSize="17sp"
-                android:layout_weight="1"/>
+                android:textColor="@color/color_black"
+                android:textSize="17sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/text_snoozetime"
-                android:textSize="14sp"
-                android:layout_weight="1"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/color_liner" />
     </LinearLayout>
 
 </LinearLayout>

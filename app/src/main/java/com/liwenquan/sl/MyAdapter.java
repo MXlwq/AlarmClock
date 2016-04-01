@@ -1,6 +1,7 @@
 package com.liwenquan.sl;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     //数据集
     private Context mContext;
-    private static ArrayList<String> list,listlable;
+    private static ArrayList<String> list, listlable;
     StringBuffer sb;
     SharedPreferences.Editor editor;
 
@@ -64,23 +65,23 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // TODO Auto-generated method stub
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(
                 R.layout.list_cell, viewGroup, false);
-        view.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                ((MainActivity) mContext).startAlarmDetailsActivity(list.get(position));
-                //System.err.print("position" + position);
-            }
-        });
-
-        view.setOnLongClickListener(new View.OnLongClickListener() {
-
-            @Override
-            public boolean onLongClick(View view) {
-                ((MainActivity) mContext).deleteAlarm(position);
-                return true;
-            }
-        });
+//        view.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View view) {
+//                ((MainActivity) mContext).startAlarmDetailsActivity(list.get(position));
+//                //System.err.print("position" + position);
+//            }
+//        });
+//
+//        view.setOnLongClickListener(new View.OnLongClickListener() {
+//
+//            @Override
+//            public boolean onLongClick(View view) {
+//                ((MainActivity) mContext).deleteAlarm(position);
+//                return true;
+//            }
+//        });
 
         ViewHolder holder = new ViewHolder(view);
         return holder;
@@ -109,6 +110,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mtvTime;
+
         //private MyItemLongClickListener mLongClickListener;
         public TextView getTvTime() {
             return mtvTime;
@@ -120,12 +122,19 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 //        }
 
 
-
         public ViewHolder(View view) {
             super(view);
             // TODO Auto-generated constructor stub
             mtvTime = (TextView) view.findViewById(R.id.tvTime);
 //            mtvLable=(TextView)view.findViewById(R.id.tvLable);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(mContext, SetAlarmActivity.class);
+                    i.putExtra(SetAlarmActivity.EXTAR_TIME, list.get(getPosition()));
+                    mContext.startActivity(i);
+                }
+            });
         }
 
     }

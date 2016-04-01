@@ -24,6 +24,7 @@ import android.widget.Toast;
 import java.util.List;
 
 public class SetAlarmActivity extends AppCompatActivity {
+    public static final String EXTAR_TIME = "com.lwq.getTime";
     private TextView mtvalarmlable;
     private static final int Alarm = 1;
     private AudioManager audiomanger;
@@ -31,7 +32,7 @@ public class SetAlarmActivity extends AppCompatActivity {
     private SeekBar seekBar;
     private int hour, minute;
     private TextView mtvLable;
-    private String mTime,mhour,mminute;
+    private String mTime;
     SharedPreferences.Editor editor;
     StringBuffer sb;
 
@@ -52,19 +53,23 @@ public class SetAlarmActivity extends AppCompatActivity {
 
         TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
 
-        timePicker.setCurrentHour(10);
-        timePicker.setCurrentMinute(01);
+
+        String s = getIntent().getStringExtra(EXTAR_TIME);
+        //Log.e("检查点", "点击位置的时间是"+s);
+        String timelist[] = s.split(":");
+        timePicker.setCurrentHour(Integer.valueOf(timelist[0]));
+        timePicker.setCurrentMinute(Integer.valueOf(timelist[1]));
 
         hour = timePicker.getCurrentHour();
         minute = timePicker.getCurrentMinute();
 
-        mTime=formattime(hour,minute);
+        mTime = formattime(hour, minute);
 
         timePicker.setIs24HourView(true);//是否显示24小时制？默认false
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                mTime=formattime(hourOfDay,minute);
+                mTime = formattime(hourOfDay, minute);
 
             }
         });
@@ -91,24 +96,20 @@ public class SetAlarmActivity extends AppCompatActivity {
                 //    设置我们自己定义的布局文件作为弹出框的Content
                 builder.setView(view);
 
-                final EditText metLable = (EditText)view.findViewById(R.id.etLable);
+                final EditText metLable = (EditText) view.findViewById(R.id.etLable);
 
-                builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
-                {
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
+                    public void onClick(DialogInterface dialog, int which) {
                         String lable = metLable.getText().toString().trim();
-                        mtvalarmlable= (TextView) findViewById(R.id.tvalarmlable);
+                        mtvalarmlable = (TextView) findViewById(R.id.tvalarmlable);
                         mtvalarmlable.setText(lable);
                         Toast.makeText(SetAlarmActivity.this, "已设定标签：" + lable, Toast.LENGTH_SHORT).show();
                     }
                 });
-                builder.setNegativeButton("取消", new DialogInterface.OnClickListener()
-                {
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
+                    public void onClick(DialogInterface dialog, int which) {
 
                     }
                 });
@@ -159,15 +160,16 @@ public class SetAlarmActivity extends AppCompatActivity {
             }
         });
     }
-    private String formattime(int hour,int minute){
-        String mTime,mhour,mminute;
-        if(hour<10)
-            mhour="0"+hour;
-        else mhour=""+hour;
-        if(minute<10)
-            mminute="0"+minute;
-        else mminute=""+minute;
-        mTime=mhour+":"+mminute;
+
+    private String formattime(int hour, int minute) {
+        String mTime, mhour, mminute;
+        if (hour < 10)
+            mhour = "0" + hour;
+        else mhour = "" + hour;
+        if (minute < 10)
+            mminute = "0" + minute;
+        else mminute = "" + minute;
+        mTime = mhour + ":" + mminute;
         return mTime;
     }
 
