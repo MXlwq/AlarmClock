@@ -16,13 +16,14 @@ import java.util.ArrayList;
 class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     //数据集
     private Context mContext;
-    private static ArrayList<String> list;
+    private static ArrayList<String> list,listlable;
     StringBuffer sb;
     SharedPreferences.Editor editor;
 
     public MyAdapter(Context context, ArrayList<String> list) {
         mContext = context;
         this.list = list;
+        //this.listlable=listlable;
     }
 
 
@@ -40,22 +41,21 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return list.size();
     }
 
-    public void addData(int position) {
-        list.add(position, "Insert One");
-        notifyItemInserted(position);
-    }
-
-    public void removeData(int position) {
-        list.remove(position);
-        notifyItemRemoved(position);
-    }
+//    public void addData(int position) {
+//        list.add(position, "Insert One");
+//        notifyItemInserted(position);
+//    }
+//
+//    public void removeData(int position) {
+//        list.remove(position);
+//        notifyItemRemoved(position);
+//    }
 
     //绑定数据到ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         // TODO Auto-generated method stub
-        viewHolder.getTextView().setText(list.get(position));
-        //viewHolder.getTvLable().setText(list.get(position));
+        viewHolder.getTvTime().setText(list.get(position));
     }
 
     //这个方法主要生成为每个Item inflater出一个View，该方法返回的是一个ViewHolder
@@ -109,29 +109,23 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mtvTime;
-
-        public TextView getTvLable() {
-            return mtvLable;
-        }
-
-        private TextView mtvLable;
-
+        //private MyItemLongClickListener mLongClickListener;
         public TextView getTvTime() {
             return mtvTime;
         }
+//
+//        private TextView mtvLable;
+//        public TextView getTvLable() {
+//            return mtvLable;
+//        }
 
-        private MyItemClickListener mListener;
 
-        //private MyItemLongClickListener mLongClickListener;
-        public TextView getTextView() {
-            return mtvTime;
-        }
 
         public ViewHolder(View view) {
             super(view);
             // TODO Auto-generated constructor stub
             mtvTime = (TextView) view.findViewById(R.id.tvTime);
-
+//            mtvLable=(TextView)view.findViewById(R.id.tvLable);
         }
 
     }

@@ -146,14 +146,13 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnDelClock"
+            android:id="@+id/btnCancel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/button_delete" />
+            android:text="@string/button_cancel" />
 
         <ImageView
-            android:id="@+id/btnSaveClock"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="16dp"
@@ -161,11 +160,11 @@
             android:background="@color/color_liner" />
 
         <Button
-            android:id="@+id/btnSave"
+            android:id="@+id/btnOk"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/button_save" />
+            android:text="@string/button_ok" />
     </LinearLayout>
 
 </LinearLayout>

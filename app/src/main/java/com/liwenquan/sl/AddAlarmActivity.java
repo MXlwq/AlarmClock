@@ -32,6 +32,7 @@ public class AddAlarmActivity extends AppCompatActivity {
     private SeekBar seekBar;
     private int hour, minute;
     private TextView mtvLable;
+    private String mTime,mhour,mminute;
     String hourformat, minuteformat;
     SharedPreferences.Editor editor;
     StringBuffer sb;
@@ -55,12 +56,13 @@ public class AddAlarmActivity extends AppCompatActivity {
         Calendar c = Calendar.getInstance();
         hour = c.get(Calendar.HOUR_OF_DAY);
         minute = c.get(Calendar.MINUTE);
+        mTime=formattime(hour,minute);
+
         timePicker.setIs24HourView(true);//是否显示24小时制？默认false
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                AddAlarmActivity.this.hour = hourOfDay;
-                AddAlarmActivity.this.minute = minute;
+                mTime=formattime(hourOfDay,minute);
             }
         });
         findViewById(R.id.chooseSong).setOnClickListener(new View.OnClickListener() {
@@ -110,7 +112,7 @@ public class AddAlarmActivity extends AppCompatActivity {
                 builder.show();
             }
         });
-        findViewById(R.id.btnDelClock).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnCancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO
@@ -118,11 +120,11 @@ public class AddAlarmActivity extends AppCompatActivity {
                 finish();
             }
         });
-        findViewById(R.id.btnSave).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnOk).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                MainActivity.list.add(hour + ":" + minute);
+                MainActivity.list.add(mTime);
                 saveAlarmList(MainActivity.list);
                 Intent i = new Intent(AddAlarmActivity.this, MainActivity.class);
                 startActivity(i);
@@ -155,8 +157,18 @@ public class AddAlarmActivity extends AppCompatActivity {
         });
     }
 
-
-    private static final String KEY = "alarmList";
+    private String formattime(int hour,int minute){
+        String mTime,mhour,mminute;
+        if(hour<10)
+            mhour="0"+hour;
+        else mhour=""+hour;
+        if(minute<10)
+            mminute="0"+minute;
+        else mminute=""+minute;
+        mTime=mhour+":"+mminute;
+        return mTime;
+    }
+    public static final String KEY = "alarmList";
 
     public void saveAlarmList(List<String> list) {
         editor = getSharedPreferences(AddAlarmActivity.class.getName(), MODE_PRIVATE).edit();

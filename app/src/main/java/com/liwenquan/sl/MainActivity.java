@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int count;
 
     public static ArrayList<String> list = new ArrayList<String>();
+    //public static ArrayList<String> listlable=new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +84,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
         list.clear();
+        //listlable.clear();
         readSavedAlarmList();
+        //readSavedAlarmLableList();
 
         MyAdapter adapter = new MyAdapter(this, list);
         //设置Adapter
@@ -113,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void readSavedAlarmList() {
         SharedPreferences sp = getSharedPreferences(AddAlarmActivity.class.getName(), MODE_PRIVATE);
-        String content = sp.getString(KEY, null);
+        String content = sp.getString(AddAlarmActivity.KEY, null);
         if (content != null) {
             String[] timeStrings = content.split(",");
             for (String string : timeStrings) {
@@ -121,9 +124,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+//    private void readSavedAlarmLableList() {
+//        SharedPreferences sp = getSharedPreferences("saveAlarmLableList", MODE_PRIVATE);
+//        String content = sp.getString(AddAlarmActivity.KEY_LABLE, null);
+//        if (content != null) {
+//            String[] timeStrings = content.split(",");
+//            for (String string : timeStrings) {
+//                listlable.add(string);
+//            }
+//        }
+//    }
 
 
-    private static final String KEY = "alarmList";
 
 
     @Override

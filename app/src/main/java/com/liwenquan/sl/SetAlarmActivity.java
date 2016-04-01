@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.util.Calendar;
 import java.util.List;
 
 public class SetAlarmActivity extends AppCompatActivity {
@@ -32,7 +31,7 @@ public class SetAlarmActivity extends AppCompatActivity {
     private SeekBar seekBar;
     private int hour, minute;
     private TextView mtvLable;
-    String hourformat, minuteformat;
+    private String mTime,mhour,mminute;
     SharedPreferences.Editor editor;
     StringBuffer sb;
 
@@ -42,9 +41,9 @@ public class SetAlarmActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 
-        setContentView(R.layout.activity_add_alarm);
+        setContentView(R.layout.activity_set_alarm);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("添加闹钟");//设置主标题
+        toolbar.setTitle("设置闹钟");//设置主标题
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);
 
@@ -52,15 +51,21 @@ public class SetAlarmActivity extends AppCompatActivity {
         spinner.setSelection(2, true);//将“每天”设置为默认
 
         TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
-        Calendar c = Calendar.getInstance();
-        hour = c.get(Calendar.HOUR_OF_DAY);
-        minute = c.get(Calendar.MINUTE);
+
+        timePicker.setCurrentHour(10);
+        timePicker.setCurrentMinute(01);
+
+        hour = timePicker.getCurrentHour();
+        minute = timePicker.getCurrentMinute();
+
+        mTime=formattime(hour,minute);
+
         timePicker.setIs24HourView(true);//是否显示24小时制？默认false
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                SetAlarmActivity.this.hour = hourOfDay;
-                SetAlarmActivity.this.minute = minute;
+                mTime=formattime(hourOfDay,minute);
+
             }
         });
         findViewById(R.id.chooseSong).setOnClickListener(new View.OnClickListener() {
@@ -118,11 +123,11 @@ public class SetAlarmActivity extends AppCompatActivity {
                 finish();
             }
         });
-        findViewById(R.id.btnSave).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnSaveClock).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                MainActivity.list.add(hour + ":" + minute);
+                MainActivity.list.add(mTime);
                 saveAlarmList(MainActivity.list);
                 Intent i = new Intent(SetAlarmActivity.this, MainActivity.class);
                 startActivity(i);
@@ -154,7 +159,17 @@ public class SetAlarmActivity extends AppCompatActivity {
             }
         });
     }
-
+    private String formattime(int hour,int minute){
+        String mTime,mhour,mminute;
+        if(hour<10)
+            mhour="0"+hour;
+        else mhour=""+hour;
+        if(minute<10)
+            mminute="0"+minute;
+        else mminute=""+minute;
+        mTime=mhour+":"+mminute;
+        return mTime;
+    }
 
     private static final String KEY = "alarmList";
 
