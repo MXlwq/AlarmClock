@@ -1,8 +1,7 @@
 package com.liwenquan.sl;
 
 import android.app.AlarmManager;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -39,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         setContentView(R.layout.activity_main);
+
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         //创建一个线性布局
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.imgAdd).setOnClickListener(this);
         findViewById(R.id.action_setting).setOnClickListener(this);
 
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
     }
 
@@ -84,10 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
         list.clear();
-        //listlable.clear();
         readSavedAlarmList();
-        //readSavedAlarmLableList();
-
         MyAdapter adapter = new MyAdapter(this, list);
         //设置Adapter
         mRecyclerView.setAdapter(adapter);
@@ -99,20 +97,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-    public void deleteAlarm(int i) {
-        final long alarmId = i;
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Please confirm")
-                .setTitle("Delete set?")
-                .setCancelable(true)
-                .setNegativeButton("Cancel", null)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //deleteSavedAlarmList(alarmId);
-                    }
-                }).show();
-    }
+//    public void deleteAlarm(int i) {
+//        final long alarmId = i;
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setMessage("Please confirm")
+//                .setTitle("Delete set?")
+//                .setCancelable(true)
+//                .setNegativeButton("Cancel", null)
+//                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        //deleteSavedAlarmList(alarmId);
+//                    }
+//                }).show();
+//    }
 
     private void readSavedAlarmList() {
         SharedPreferences sp = getSharedPreferences(AddAlarmActivity.class.getName(), MODE_PRIVATE);
@@ -124,18 +122,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
-//    private void readSavedAlarmLableList() {
-//        SharedPreferences sp = getSharedPreferences("saveAlarmLableList", MODE_PRIVATE);
-//        String content = sp.getString(AddAlarmActivity.KEY_LABLE, null);
-//        if (content != null) {
-//            String[] timeStrings = content.split(",");
-//            for (String string : timeStrings) {
-//                listlable.add(string);
-//            }
-//        }
-//    }
-
-
 
 
     @Override
@@ -151,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.imgAdd:
                 startActivity(new Intent(MainActivity.this, AddAlarmActivity.class));
-                finish();
+
                 break;
             case R.id.action_setting:
                 startActivity(new Intent(MainActivity.this, SettingActivity.class));

@@ -14,9 +14,9 @@
     </android.support.v7.widget.Toolbar>
 
     <TextView
-        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:text="@string/text_about"
         android:textColor="@color/color_about"
         android:textSize="20sp" />

@@ -28,7 +28,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PlayAlarmActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/KaleTheme" />
         <activity
             android:name=".AboutUsActivity"
             android:theme="@style/AppTheme.NoActionBar" />

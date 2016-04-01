@@ -1,31 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_content"
+    android:id="@+id/paly_alarm"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2196F3"
+    android:background="#36AEEA"
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.liwenquan.sleep.MainActivity"
-    android:weightSum="1">
+    tools:context="com.liwenquan.sleep.MainActivity">
 
 
     <AnalogClock
         android:id="@+id/analogClock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop= "100dp" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
 
-    <Switch
-        android:id="@+id/switch1"
+    <Button
+        android:id="@+id/putoff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="关闭闹钟"
-        android:textSize="30dip"
-        android:textColor="#FFFFFF"/>
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="#54B9ED"
+        android:paddingBottom="8dp"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        android:paddingTop="8dp"
+        android:text="推迟"
+        android:textColor="#F5FCFE"
+        android:textSize="20sp" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/stopclock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="右滑停止闹钟"
+        android:textSize="18dp" />
+
+</RelativeLayout>

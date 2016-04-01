@@ -25,6 +25,7 @@ import java.util.List;
 
 public class SetAlarmActivity extends AppCompatActivity {
     public static final String EXTAR_TIME = "com.lwq.getTime";
+    public static final String EXTAR_POSITON = "com.lwq.position";
     private TextView mtvalarmlable;
     private static final int Alarm = 1;
     private AudioManager audiomanger;
@@ -55,6 +56,7 @@ public class SetAlarmActivity extends AppCompatActivity {
 
 
         String s = getIntent().getStringExtra(EXTAR_TIME);
+        final int position = getIntent().getIntExtra(EXTAR_POSITON, 0);
         //Log.e("检查点", "点击位置的时间是"+s);
         String timelist[] = s.split(":");
         timePicker.setCurrentHour(Integer.valueOf(timelist[0]));
@@ -120,14 +122,17 @@ public class SetAlarmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO
-                //editor.clear();
+                MainActivity.list.remove(position);
+                saveAlarmList(MainActivity.list);
                 finish();
+
             }
         });
         findViewById(R.id.btnSaveClock).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                MainActivity.list.remove(position);
                 MainActivity.list.add(mTime);
                 saveAlarmList(MainActivity.list);
                 Intent i = new Intent(SetAlarmActivity.this, MainActivity.class);
@@ -181,7 +186,11 @@ public class SetAlarmActivity extends AppCompatActivity {
         for (int i = 0; i < list.size(); i++) {
             sb.append(MainActivity.list.get(i)).append(",");
         }
-        String content = sb.toString().substring(0, sb.length() - 1);
+        String content;
+        if (list.size() == 0)
+            content = null;
+        else
+            content = sb.toString().substring(0, sb.length() - 1);
         editor.putString(KEY, content);
         editor.commit();
     }

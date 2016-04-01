@@ -1,5 +1,7 @@
 package com.liwenquan.sl;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,8 +34,10 @@ public class AddAlarmActivity extends AppCompatActivity {
     private SeekBar seekBar;
     private int hour, minute;
     private TextView mtvLable;
-    private String mTime,mhour,mminute;
-    String hourformat, minuteformat;
+    private String mTime;
+    private Calendar calendar;
+    private AlarmManager alarmManager;
+    static PendingIntent pi;
     SharedPreferences.Editor editor;
     StringBuffer sb;
 
@@ -56,13 +60,17 @@ public class AddAlarmActivity extends AppCompatActivity {
         Calendar c = Calendar.getInstance();
         hour = c.get(Calendar.HOUR_OF_DAY);
         minute = c.get(Calendar.MINUTE);
-        mTime=formattime(hour,minute);
-
+        mTime = formattime(hour, minute);
+        calendar = Calendar.getInstance();
         timePicker.setIs24HourView(true);//是否显示24小时制？默认false
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                mTime=formattime(hourOfDay,minute);
+                mTime = formattime(hourOfDay, minute);
+                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                calendar.set(Calendar.MINUTE, minute);
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
             }
         });
         findViewById(R.id.chooseSong).setOnClickListener(new View.OnClickListener() {
@@ -88,24 +96,20 @@ public class AddAlarmActivity extends AppCompatActivity {
                 //    设置我们自己定义的布局文件作为弹出框的Content
                 builder.setView(view);
 
-                final EditText metLable = (EditText)view.findViewById(R.id.etLable);
+                final EditText metLable = (EditText) view.findViewById(R.id.etLable);
 
-                builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
-                {
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
+                    public void onClick(DialogInterface dialog, int which) {
                         String lable = metLable.getText().toString().trim();
-                        mtvalarmlable= (TextView) findViewById(R.id.tvalarmlable);
+                        mtvalarmlable = (TextView) findViewById(R.id.tvalarmlable);
                         mtvalarmlable.setText(lable);
                         Toast.makeText(AddAlarmActivity.this, "已设定标签：" + lable, Toast.LENGTH_SHORT).show();
                     }
                 });
-                builder.setNegativeButton("取消", new DialogInterface.OnClickListener()
-                {
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
+                    public void onClick(DialogInterface dialog, int which) {
 
                     }
                 });
@@ -116,7 +120,6 @@ public class AddAlarmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO
-                //editor.clear();
                 finish();
             }
         });
@@ -124,10 +127,15 @@ public class AddAlarmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent i = new Intent(AddAlarmActivity.this, PlayAlarmActivity.class);
+                PendingIntent pi = PendingIntent.getActivity(AddAlarmActivity.this, 0, i, 0);
+                alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+                        calendar.getTimeInMillis(), 5 * 60 * 1000, pi);
                 MainActivity.list.add(mTime);
                 saveAlarmList(MainActivity.list);
-                Intent i = new Intent(AddAlarmActivity.this, MainActivity.class);
-                startActivity(i);
+                Intent intent = new Intent(AddAlarmActivity.this, MainActivity.class);
+                startActivity(intent);
                 AddAlarmActivity.this.finish();
             }
         });
@@ -157,17 +165,18 @@ public class AddAlarmActivity extends AppCompatActivity {
         });
     }
 
-    private String formattime(int hour,int minute){
-        String mTime,mhour,mminute;
-        if(hour<10)
-            mhour="0"+hour;
-        else mhour=""+hour;
-        if(minute<10)
-            mminute="0"+minute;
-        else mminute=""+minute;
-        mTime=mhour+":"+mminute;
+    private String formattime(int hour, int minute) {
+        String mTime, mhour, mminute;
+        if (hour < 10)
+            mhour = "0" + hour;
+        else mhour = "" + hour;
+        if (minute < 10)
+            mminute = "0" + minute;
+        else mminute = "" + minute;
+        mTime = mhour + ":" + mminute;
         return mTime;
     }
+
     public static final String KEY = "alarmList";
 
     public void saveAlarmList(List<String> list) {

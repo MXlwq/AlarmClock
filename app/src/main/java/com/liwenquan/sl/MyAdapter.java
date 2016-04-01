@@ -17,14 +17,13 @@ import java.util.ArrayList;
 class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     //数据集
     private Context mContext;
-    private static ArrayList<String> list, listlable;
+    private static ArrayList<String> list;
     StringBuffer sb;
     SharedPreferences.Editor editor;
 
     public MyAdapter(Context context, ArrayList<String> list) {
         mContext = context;
         this.list = list;
-        //this.listlable=listlable;
     }
 
 
@@ -42,15 +41,6 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return list.size();
     }
 
-//    public void addData(int position) {
-//        list.add(position, "Insert One");
-//        notifyItemInserted(position);
-//    }
-//
-//    public void removeData(int position) {
-//        list.remove(position);
-//        notifyItemRemoved(position);
-//    }
 
     //绑定数据到ViewHolder
     @Override
@@ -65,23 +55,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // TODO Auto-generated method stub
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(
                 R.layout.list_cell, viewGroup, false);
-//        view.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View view) {
-//                ((MainActivity) mContext).startAlarmDetailsActivity(list.get(position));
-//                //System.err.print("position" + position);
-//            }
-//        });
-//
-//        view.setOnLongClickListener(new View.OnLongClickListener() {
-//
-//            @Override
-//            public boolean onLongClick(View view) {
-//                ((MainActivity) mContext).deleteAlarm(position);
-//                return true;
-//            }
-//        });
+
 
         ViewHolder holder = new ViewHolder(view);
         return holder;
@@ -89,49 +63,26 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private static final String KEY = "alarmList";
 
-//    public void remove(int position) {
-//        list.remove(position);
-//        notifyItemRemoved(position);
-//        sb = new StringBuffer();
-//        for (int i = 0; i < getItemCount(); i++) {
-//            sb.append(list.get(i)).append(",");
-//        }
-//        String content;
-//        if (getItemCount() == 0)
-//            content = null;
-//        else
-//            content = sb.toString().substring(0, sb.length() - 1);
-//        editor = this.getSharedPreferences(AddAlarmActivity.class.getName(), Context.MODE_PRIVATE).edit();
-//        editor.putString(KEY, content);
-//        editor.commit();
-//    }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mtvTime;
 
-        //private MyItemLongClickListener mLongClickListener;
         public TextView getTvTime() {
             return mtvTime;
         }
-//
-//        private TextView mtvLable;
-//        public TextView getTvLable() {
-//            return mtvLable;
-//        }
 
 
         public ViewHolder(View view) {
             super(view);
             // TODO Auto-generated constructor stub
             mtvTime = (TextView) view.findViewById(R.id.tvTime);
-//            mtvLable=(TextView)view.findViewById(R.id.tvLable);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(mContext, SetAlarmActivity.class);
                     i.putExtra(SetAlarmActivity.EXTAR_TIME, list.get(getPosition()));
+                    i.putExtra(SetAlarmActivity.EXTAR_POSITON, getPosition());
                     mContext.startActivity(i);
                 }
             });
