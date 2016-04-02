@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -20,16 +19,12 @@ public class PlayAlarmActivity extends Activity {
     private AlarmManager alarmManager;
     private GestureDetector mGestureDetector;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-                | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+
         setContentView(R.layout.activity_play_alarm);
-        mp = MediaPlayer.create(this, RingtoneManager.getActualDefaultRingtoneUri(this,
+        mp = MediaPlayer.create(PlayAlarmActivity.this, RingtoneManager.getActualDefaultRingtoneUri(this,
                 RingtoneManager.TYPE_ALARM));
         mp.start();
         putoff = (Button) findViewById(R.id.putoff);
@@ -52,21 +47,6 @@ public class PlayAlarmActivity extends Activity {
         mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                /**
-                 * 当手势滑动的时候，关闭页面的效果，具体需求具体对待
-                 * 向下滑动，向上滑动，向右滑动（常用使用该方式）
-                 */
-
-//                // 手势向下 down
-//                if ((e2.getRawY() - e1.getRawY()) > 200) {
-//                    //finish();//在此处控制关闭
-//                    return true;
-//                }
-//                // 手势向上 up
-//                if ((e1.getRawY() - e2.getRawY()) > 100) {
-//                    finish();//在此处控制关闭
-//                    return true;
-//                }
                 // 控制只右滑
                 if (e2.getX() - e1.getX() > 0
                         && (e1.getX() >= 0 && e1.getX() <= 500)) {
@@ -97,7 +77,6 @@ public class PlayAlarmActivity extends Activity {
         super.onBackPressed();
         //overridePendingTransition(0, R.anim.base_slide_right_out);
     }
-
 
     @Override
     protected void onDestroy() {

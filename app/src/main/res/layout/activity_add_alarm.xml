@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     tools:context="com.liwenquan.sleep.ClockSetAty">
 
     <android.support.v7.widget.Toolbar
@@ -33,17 +32,16 @@
 
             </TimePicker>
 
-            <Spinner
-                android:id="@+id/sp"
-                style="?android:listSeparatorTextViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:entries="@array/languages"
-                android:spinnerMode="dialog">
-
-            </Spinner>
+            <!--<Spinner-->
+                <!--android:id="@+id/sp"-->
+                <!--style="?android:listSeparatorTextViewStyle"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="60dp"-->
+                <!--android:layout_marginLeft="12dp"-->
+                <!--android:layout_marginRight="12dp"-->
+                <!--android:entries="@array/languages"-->
+                <!--android:spinnerMode="dialog">-->
+            <!--</Spinner>-->
 
 
             <LinearLayout
@@ -147,12 +145,6 @@
             android:layout_weight="1"
             android:text="@string/button_cancel" />
 
-        <ImageView
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/color_liner" />
 
         <Button
             android:id="@+id/btnOk"

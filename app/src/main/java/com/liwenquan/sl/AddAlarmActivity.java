@@ -15,10 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -44,17 +42,14 @@ public class AddAlarmActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-
         setContentView(R.layout.activity_add_alarm);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("添加闹钟");//设置主标题
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);
 
-        Spinner spinner = (Spinner) findViewById(R.id.sp);
-        spinner.setSelection(2, true);//将“每天”设置为默认
+//        Spinner spinner = (Spinner) findViewById(R.id.sp);
+//        spinner.setSelection(2, true);//将“每天”设置为默认
 
         TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
         Calendar c = Calendar.getInstance();
