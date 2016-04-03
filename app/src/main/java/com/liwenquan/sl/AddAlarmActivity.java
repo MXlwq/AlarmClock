@@ -134,6 +134,7 @@ public class AddAlarmActivity extends AppCompatActivity {
                 AddAlarmActivity.this.finish();
             }
         });
+
         audiomanger = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         maxVolume = audiomanger.getStreamMaxVolume(AudioManager.STREAM_ALARM);
         seekBar = (SeekBar) findViewById(R.id.seekbar);

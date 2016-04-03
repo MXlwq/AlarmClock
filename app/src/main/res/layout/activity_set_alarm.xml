@@ -4,14 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     tools:context="com.liwenquan.sleep.ClockSetAty">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_addMenu"
+        android:background="@color/color_menu"
         android:fitsSystemWindows="true">
 
     </android.support.v7.widget.Toolbar>
@@ -24,6 +23,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TimePicker
@@ -34,7 +34,90 @@
             </TimePicker>
 
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="重复"
+                android:textColor="@color/color_black"
+                android:textSize="16sp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <ToggleButton
+                    android:id="@+id/toggleButton"
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_view"
+                    android:textColor="@color/color_addMenu"
+                    android:textOff="周一"
+                    android:textOn="周一" />
+
+                <ToggleButton
+                    android:id="@+id/toggleButton2"
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_view"
+                    android:textColor="@color/color_addMenu"
+                    android:textOff="周二"
+                    android:textOn="周二" />
+
+                <ToggleButton
+                    android:id="@+id/toggleButton3"
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_view"
+                    android:textColor="@color/color_addMenu"
+                    android:textOff="周三"
+                    android:textOn="周三" />
+
+                <ToggleButton
+                    android:id="@+id/toggleButton4"
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_view"
+                    android:textColor="@color/color_addMenu"
+                    android:textOff="周四"
+                    android:textOn="周四" />
+
+                <ToggleButton
+                    android:id="@+id/toggleButton5"
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_view"
+                    android:textColor="@color/color_addMenu"
+                    android:textOff="周五"
+                    android:textOn="周五" />
+
+                <ToggleButton
+                    android:id="@+id/toggleButton6"
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_view"
+                    android:textColor="@color/color_addMenu"
+                    android:textOff="周六"
+                    android:textOn="周六" />
+
+                <ToggleButton
+                    android:id="@+id/toggleButton7"
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_view"
+                    android:textColor="@color/color_addMenu"
+                    android:textOff="周日"
+                    android:textOn="周日" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"></LinearLayout>
 
             <LinearLayout
                 android:id="@+id/lllable"
