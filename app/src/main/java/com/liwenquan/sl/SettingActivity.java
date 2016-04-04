@@ -10,8 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class SettingActivity extends AppCompatActivity {
-    int yourChose = -1;
+    int yourChose = 1;
     private TextView mTvSnoozeTime;
+    String[] mList = {"1分钟", "5分钟", "10分钟","30分钟"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +22,10 @@ public class SettingActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         toolbar.setNavigationIcon(R.mipmap.back);//设置导航栏图标
         setSupportActionBar(toolbar);
-
+        mTvSnoozeTime= (TextView) findViewById(R.id.tvSnoozeTime);
+        if(savedInstanceState!=null){
+            mTvSnoozeTime.setText(savedInstanceState.getString("我是睡眠时间"));
+        }
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,8 +43,14 @@ public class SettingActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("我是睡眠时间",mList[yourChose]);
+    }
+
     private void showSinChosDia() {
-        final String[] mList = {"1分钟", "5分钟", "10分钟","30分钟"};
+
         yourChose = 1;
         AlertDialog.Builder singleChoiseDialog = new AlertDialog.Builder(SettingActivity.this);
         singleChoiseDialog.setTitle("小睡时间");

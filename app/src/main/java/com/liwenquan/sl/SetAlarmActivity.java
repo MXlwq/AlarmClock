@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -34,7 +36,7 @@ public class SetAlarmActivity extends AppCompatActivity {
     private String mTime;
     SharedPreferences.Editor editor;
     StringBuffer sb;
-
+    Uri ringUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,13 +74,27 @@ public class SetAlarmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(
-                        RingtoneManager.ACTION_RINGTONE_PICKER);
-                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,
-                        RingtoneManager.TYPE_ALARM);
-                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE,
-                        "设置闹钟铃声");
-                startActivityForResult(intent, Alarm);
+//                Intent intent = new Intent(
+//                        RingtoneManager.ACTION_RINGTONE_PICKER);
+//                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,
+//                        RingtoneManager.TYPE_ALARM);
+//                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE,
+//                        "设置闹钟铃声");
+//                startActivityForResult(intent, Alarm);
+
+                Intent intent = new Intent();
+                intent.setAction(RingtoneManager.ACTION_RINGTONE_PICKER);
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "设置闹玲铃声");
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALL);
+                Uri pickedUri = RingtoneManager.getActualDefaultRingtoneUri(SetAlarmActivity.this,RingtoneManager.TYPE_ALARM);
+                if (pickedUri!=null) {
+                    intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI,pickedUri);
+                    ringUri = pickedUri;
+                }
+                startActivityForResult(intent, 1);
+
+
             }
         });
         findViewById(R.id.lllable).setOnClickListener(new View.OnClickListener() {
@@ -192,18 +208,48 @@ public class SetAlarmActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK) {
+//        if (resultCode != RESULT_OK) {
+//            return;
+//        } else {
+//            Uri uri = data
+//                    .getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+//            if (uri != null) {
+//                RingtoneManager.setActualDefaultRingtoneUri(this,
+//                        RingtoneManager.TYPE_ALARM, uri);
+//                Toast.makeText(getApplicationContext(), "设置闹钟铃声成功！", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+
+        if (resultCode!=RESULT_OK) {
             return;
-        } else {
-            Uri uri = data
-                    .getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
-            if (uri != null) {
-                RingtoneManager.setActualDefaultRingtoneUri(this,
-                        RingtoneManager.TYPE_ALARM, uri);
+        }
+        switch (requestCode) {
+            case 1:
+                //获取选中的铃声的URI
+                Uri pickedURI = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+
+                RingtoneManager.setActualDefaultRingtoneUri(this, RingtoneManager.TYPE_ALARM, pickedURI);
+                getName(RingtoneManager.TYPE_ALARM);
                 Toast.makeText(getApplicationContext(), "设置闹钟铃声成功！", Toast.LENGTH_SHORT).show();
-            }
+                break;
+            default:
+                break;
         }
 
+    }
+    private void getName(int type){
+        Uri pickedUri = RingtoneManager.getActualDefaultRingtoneUri(this, type);
+
+        Cursor cursor = this.getContentResolver().query(pickedUri, new String[]{MediaStore.Audio.Media.TITLE}, null, null, null);
+        if (cursor!=null) {
+            if (cursor.moveToFirst()) {
+                String ring_name = cursor.getString(0);
+
+                String[] c = cursor.getColumnNames();
+
+            }
+            cursor.close();
+        }
     }
 }
 

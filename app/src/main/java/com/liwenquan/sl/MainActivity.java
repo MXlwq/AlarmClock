@@ -94,20 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-//    public void deleteAlarm(int i) {
-//        final long alarmId = i;
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setMessage("Please confirm")
-//                .setTitle("Delete set?")
-//                .setCancelable(true)
-//                .setNegativeButton("Cancel", null)
-//                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        //deleteSavedAlarmList(alarmId);
-//                    }
-//                }).show();
-//    }
+
 
     private void readSavedAlarmList() {
         SharedPreferences sp = getSharedPreferences(AddAlarmActivity.class.getName(), MODE_PRIVATE);

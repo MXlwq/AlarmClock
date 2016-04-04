@@ -2,6 +2,6 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@drawable/background_color" android:state_checked="true" />
     <!-- pressed -->
-    <item android:drawable="@drawable/background01" />
+    <item android:drawable="@mipmap/background01" />
     <!-- default/unchecked -->
 </selector>

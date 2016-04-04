@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">WakeUp</string>
-    <string name="image_translucent_bar">Image Translucent Bar Training</string>
-    <string name="color_translucent_bar">Color Translucent Bar Training</string>
-    <string name="tool_bar">ToolBar Training</string>
     <string name="menu_bug">提Bug</string>
     <string name="menu_about_us">关于</string>
     <string name="home_page">Alarms</string>

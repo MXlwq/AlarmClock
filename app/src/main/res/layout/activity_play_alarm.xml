@@ -25,7 +25,7 @@
         android:id="@+id/putoff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/putoff" />
+        android:background="@mipmap/putoff" />
 
     <TextView
         android:id="@+id/stopclock"

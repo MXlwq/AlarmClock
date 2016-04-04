@@ -155,7 +155,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="300dp"
+                    android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
@@ -215,7 +215,7 @@
 
         <Button
             android:id="@+id/btnCancel"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/button_cancel" />
@@ -223,10 +223,11 @@
 
         <Button
             android:id="@+id/btnOk"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/button_ok" />
+            android:text="@string/button_ok"
+            />
     </LinearLayout>
 
 </LinearLayout>
