@@ -83,10 +83,10 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/snoozeTime"
             style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:id="@+id/snoozeTime"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
@@ -100,9 +100,9 @@
                 android:textSize="17sp" />
 
             <TextView
+                android:id="@+id/tvSnoozeTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvSnoozeTime"
                 android:layout_weight="1"
                 android:text="@string/text_snoozetime"
                 android:textSize="14sp" />

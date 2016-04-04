@@ -4,34 +4,28 @@
     android:id="@+id/paly_alarm"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#36AEEA"
+    android:background="@drawable/background_color"
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="com.liwenquan.sleep.MainActivity">
 
-
-    <AnalogClock
-        android:id="@+id/analogClock"
-        android:layout_width="match_parent"
+    <TextClock
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:id="@+id/textClock"
+        android:textSize="70sp"
+        android:textColor="#FCFEFF"
+        android:typeface="sans"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="86dp" />
 
     <Button
         android:id="@+id/putoff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="#54B9ED"
-        android:paddingBottom="8dp"
-        android:paddingLeft="32dp"
-        android:paddingRight="32dp"
-        android:paddingTop="8dp"
-        android:text="推迟"
-        android:textColor="#F5FCFE"
-        android:textSize="20sp" />
+        android:background="@drawable/putoff" />
 
     <TextView
         android:id="@+id/stopclock"
@@ -40,8 +34,11 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:gravity="center"
-        android:padding="8dp"
+        android:layout_margin="24dp"
         android:text="右滑停止闹钟"
-        android:textSize="18dp" />
+        android:textColor="#FFFDFE"
+        android:textSize="16dp" />
+
+
 
 </RelativeLayout>
