@@ -48,8 +48,6 @@ public class AddAlarmActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);
 
-//        Spinner spinner = (Spinner) findViewById(R.id.sp);
-//        spinner.setSelection(2, true);//将“每天”设置为默认
 
         TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
         Calendar c = Calendar.getInstance();
@@ -57,6 +55,7 @@ public class AddAlarmActivity extends AppCompatActivity {
         minute = c.get(Calendar.MINUTE);
         mTime = formattime(hour, minute);
         calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
         timePicker.setIs24HourView(true);//是否显示24小时制？默认false
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
@@ -125,8 +124,8 @@ public class AddAlarmActivity extends AppCompatActivity {
                 Intent i = new Intent(AddAlarmActivity.this, PlayAlarmActivity.class);
                 PendingIntent pi = PendingIntent.getActivity(AddAlarmActivity.this, 0, i, 0);
                 alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-                        calendar.getTimeInMillis(), 5 * 60 * 1000, pi);
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP,
+                        calendar.getTimeInMillis(),pi);
                 MainActivity.list.add(mTime);
                 saveAlarmList(MainActivity.list);
                 Intent intent = new Intent(AddAlarmActivity.this, MainActivity.class);

@@ -26,12 +26,12 @@ public class PlayAlarmActivity extends Activity {
         setContentView(R.layout.activity_play_alarm);
         mp = MediaPlayer.create(PlayAlarmActivity.this, RingtoneManager.getActualDefaultRingtoneUri(PlayAlarmActivity.this,
                 RingtoneManager.TYPE_ALARM));
+        mp.setLooping(true);
         mp.start();
         putoff = (Button) findViewById(R.id.putoff);
         putoff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 finish();
             }
         });
@@ -55,7 +55,8 @@ public class PlayAlarmActivity extends Activity {
                         // And cancel the alarm.
                         AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
                         am.cancel(AddAlarmActivity.pi);
-                        finish();
+                        mp.stop();
+                        PlayAlarmActivity.this.finish();
                         onBackPressed();
                     }
                 }
