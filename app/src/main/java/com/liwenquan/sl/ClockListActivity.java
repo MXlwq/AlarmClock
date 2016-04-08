@@ -22,14 +22,15 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
     private ArrayList<Clock> mClocks;
     public static final String EXTRA_CRIME_ID="com.liwenquan.sleep.clock_id";
     private ListView mListView;
+    ClockAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clock_list);
         mClocks=ClockLab.get(this).getClocks();
-        ClockAdapter adapter=new ClockAdapter(mClocks);
-        ListView listView= (ListView) findViewById(R.id.list_view);
-        listView.setAdapter(adapter);
+        adapter=new ClockAdapter(mClocks);
+        ListView mListView= (ListView) findViewById(R.id.list_view);
+        mListView.setAdapter(adapter);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.menu_main);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -57,10 +58,8 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
         findViewById(R.id.clock_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Clock c=new Clock();
-                ClockLab .get(getApplicationContext()).addClock(c);
+
                 Intent i=new Intent(getApplicationContext(),AddAlarmActivity.class);
-                i.putExtra(EXTRA_CRIME_ID,c.getId());
                 startActivityForResult(i,0);
             }
         });
@@ -78,15 +77,15 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
     public void onResume() {
         super.onResume();
         //刷新列表信息；
-//        ((ClockAdapter)getListAdapter()).notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
             case R.id.action_setting:
                 startActivity(new Intent(ClockListActivity.this, SettingActivity.class));
+                break;
         }
     }
 
@@ -96,7 +95,6 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
         public ClockAdapter(ArrayList<Clock> crimes) {
             super(ClockListActivity.this,0,crimes);
         }
-
 
         //覆盖getView方法
         @Override
@@ -109,7 +107,7 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
             titleTextView.setText(c.getLable());
 
             //格式化时间
-            SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy/MMM/d EEE, HH:mm");
+            SimpleDateFormat dateFormater = new SimpleDateFormat("HH:mm");
             TextView dateTextView =(TextView)convertView.findViewById(R.id.tvTime);
             dateTextView.setText(dateFormater.format(c.getDate()));
 

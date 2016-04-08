@@ -26,7 +26,6 @@ public class PlayAlarmActivity extends Activity {
         setContentView(R.layout.activity_play_alarm);
         mp = MediaPlayer.create(PlayAlarmActivity.this, RingtoneManager.getActualDefaultRingtoneUri(PlayAlarmActivity.this,
                 RingtoneManager.TYPE_ALARM));
-        mp.setLooping(true);
         mp.start();
         putoff = (Button) findViewById(R.id.putoff);
         putoff.setOnClickListener(new View.OnClickListener() {

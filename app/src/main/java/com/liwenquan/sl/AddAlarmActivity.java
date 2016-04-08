@@ -22,7 +22,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
-import java.util.List;
 
 public class AddAlarmActivity extends AppCompatActivity {
     public static final String KEY = "alarmList";
@@ -39,7 +38,8 @@ public class AddAlarmActivity extends AppCompatActivity {
     private String mTime;
     private Calendar calendar;
     private AlarmManager alarmManager;
-
+    Clock clock;
+    private static final int INTERVAL = 1000 * 60 * 60 * 24;// 24h
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,18 +54,22 @@ public class AddAlarmActivity extends AppCompatActivity {
         Calendar c = Calendar.getInstance();
         hour = c.get(Calendar.HOUR_OF_DAY);
         minute = c.get(Calendar.MINUTE);
-        mTime = formattime(hour, minute);
+        clock=new Clock(Calendar.getInstance().getTime());
+
+
+        //mTime = formattime(hour, minute);
         calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         timePicker.setIs24HourView(true);//是否显示24小时制？默认false
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                mTime = formattime(hourOfDay, minute);
+                //mTime = formattime(hourOfDay, minute);
                 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 calendar.set(Calendar.MINUTE, minute);
                 calendar.set(Calendar.SECOND, 0);
                 calendar.set(Calendar.MILLISECOND, 0);
+                clock=new Clock(calendar.getTime());
             }
         });
         findViewById(R.id.chooseSong).setOnClickListener(new View.OnClickListener() {
@@ -99,6 +103,7 @@ public class AddAlarmActivity extends AppCompatActivity {
                         String lable = metLable.getText().toString().trim();
                         mtvalarmlable = (TextView) findViewById(R.id.tvalarmlable);
                         mtvalarmlable.setText(lable);
+                        clock.setLable(lable);
                         Toast.makeText(AddAlarmActivity.this, "已设定标签：" + lable, Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -125,10 +130,14 @@ public class AddAlarmActivity extends AppCompatActivity {
                 Intent i = new Intent(AddAlarmActivity.this, PlayAlarmActivity.class);
                 PendingIntent pi = PendingIntent.getActivity(AddAlarmActivity.this, 0, i, 0);
                 alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                        INTERVAL, pi);
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP,
                         calendar.getTimeInMillis(), pi);
-                MainActivity.list.add(mTime);
-                saveAlarmList(MainActivity.list);
+                //Toast.makeText(AddAlarmActivity.this," "+calendar.getTimeInMillis(),Toast.LENGTH_SHORT).show();
+//                MainActivity.list.add(mTime);
+//                saveAlarmList(MainActivity.list);
+                ClockLab.get(getApplicationContext()).addClock(clock);
                 Intent intent = new Intent(AddAlarmActivity.this, ClockListActivity.class);
                 startActivity(intent);
                 ClockLab.get(getApplicationContext()).saveClocks();
@@ -163,28 +172,28 @@ public class AddAlarmActivity extends AppCompatActivity {
         });
     }
 
-    private String formattime(int hour, int minute) {
-        String mTime, mhour, mminute;
-        if (hour < 10)
-            mhour = "0" + hour;
-        else mhour = "" + hour;
-        if (minute < 10)
-            mminute = "0" + minute;
-        else mminute = "" + minute;
-        mTime = mhour + ":" + mminute;
-        return mTime;
-    }
+//    private String formattime(int hour, int minute) {
+//        String mTime, mhour, mminute;
+//        if (hour < 10)
+//            mhour = "0" + hour;
+//        else mhour = "" + hour;
+//        if (minute < 10)
+//            mminute = "0" + minute;
+//        else mminute = "" + minute;
+//        mTime = mhour + ":" + mminute;
+//        return mTime;
+//    }
 
-    public void saveAlarmList(List<String> list) {
-        editor = getSharedPreferences(AddAlarmActivity.class.getName(), MODE_PRIVATE).edit();
-        sb = new StringBuffer();
-        for (int i = 0; i < list.size(); i++) {
-            sb.append(MainActivity.list.get(i)).append(",");
-        }
-        String content = sb.toString().substring(0, sb.length() - 1);
-        editor.putString(KEY, content);
-        editor.commit();
-    }
+//    public void saveAlarmList(List<String> list) {
+//        editor = getSharedPreferences(AddAlarmActivity.class.getName(), MODE_PRIVATE).edit();
+//        sb = new StringBuffer();
+//        for (int i = 0; i < list.size(); i++) {
+//            sb.append(MainActivity.list.get(i)).append(",");
+//        }
+//        String content = sb.toString().substring(0, sb.length() - 1);
+//        editor.putString(KEY, content);
+//        editor.commit();
+//    }
 
 
     @Override

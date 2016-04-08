@@ -29,7 +29,7 @@ public class ClockIntentJSONSerialize {
         this.mFilename = mFilename;
     }
 
-    public ArrayList<Clock> loadCrimes() throws IOException,JSONException{
+    public ArrayList<Clock> loadClocks() throws IOException,JSONException{
         ArrayList<Clock> clocks=new ArrayList<Clock>();
         BufferedReader reader=null;
         try{

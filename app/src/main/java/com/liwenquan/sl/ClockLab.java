@@ -25,11 +25,12 @@ public class ClockLab {
         mSerializer=new ClockIntentJSONSerialize(mAppContext,FILENAME);
 
         try{
-            mClocks=mSerializer.loadCrimes();
+            mClocks=mSerializer.loadClocks();
+            Log.e(TAG,"Success Loaded cimes:");
         }
         catch (Exception e){
             mClocks=new ArrayList<Clock>();
-            Log.d(TAG,"Error Loading cimes:"+e);
+            Log.e(TAG,"Error Loading cimes:"+e);
         }
 
     }
@@ -58,10 +59,10 @@ public class ClockLab {
     public boolean saveClocks(){
         try{
             mSerializer.saveClocks(mClocks);
-            Log.d(TAG,"Crimes saved to file");
+            Log.e(TAG,"Crimes saved to file");
             return true;
         } catch (Exception e){
-            Log.d(TAG,"Error saving cimes:",e);
+            Log.e(TAG,"Error saving cimes:",e);
             return false;
         }
     }
