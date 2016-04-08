@@ -21,14 +21,13 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     //private static final String TAG="MainActivity";
 
+    public static ArrayList<String> list = new ArrayList<String>();
     SharedPreferences.Editor editor;
     StringBuffer sb;
+    int count;
     private AlarmManager alarmManager;
     private TextView tvTime;
     private RecyclerView mRecyclerView;
-    int count;
-
-    public static ArrayList<String> list = new ArrayList<String>();
     //public static ArrayList<String> listlable=new ArrayList<String>();
 
     @Override
@@ -93,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intent.putExtra("打开相应的闹钟", s);
         startActivity(intent);
     }
-
 
 
     private void readSavedAlarmList() {

@@ -15,24 +15,25 @@ import java.util.ArrayList;
  * Created by LWQ on 2016/3/30.
  */
 class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    //数据集
-    private Context mContext;
+    private static final String KEY = "alarmList";
     private static ArrayList<String> list;
     StringBuffer sb;
     SharedPreferences.Editor editor;
+    //数据集
+    private Context mContext;
+
 
     public MyAdapter(Context context, ArrayList<String> list) {
         mContext = context;
         this.list = list;
     }
 
+    //adapter需要实现以下三个方法
 
     @Override
     public int getItemViewType(int position) {
         return super.getItemViewType(position);
     }
-
-    //adapter需要实现以下三个方法
 
     //获取数据集大小
     @Override
@@ -40,7 +41,6 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // TODO Auto-generated method stub
         return list.size();
     }
-
 
     //绑定数据到ViewHolder
     @Override
@@ -61,17 +61,9 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return holder;
     }
 
-    private static final String KEY = "alarmList";
-
-
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mtvTime;
-
-        public TextView getTvTime() {
-            return mtvTime;
-        }
-
 
         public ViewHolder(View view) {
             super(view);
@@ -86,6 +78,10 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     mContext.startActivity(i);
                 }
             });
+        }
+
+        public TextView getTvTime() {
+            return mtvTime;
         }
 
     }

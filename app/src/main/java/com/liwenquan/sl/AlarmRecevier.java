@@ -10,6 +10,7 @@ import android.net.Uri;
  */
 public class AlarmRecevier extends BroadcastReceiver {
     Uri ringUri;
+
     @Override
     public void onReceive(Context context, Intent intent) {
 //        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);

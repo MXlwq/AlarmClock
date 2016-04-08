@@ -26,17 +26,19 @@ import java.util.List;
 public class SetAlarmActivity extends AppCompatActivity {
     public static final String EXTAR_TIME = "com.lwq.getTime";
     public static final String EXTAR_POSITON = "com.lwq.position";
-    private TextView mtvalarmlable;
     private static final int Alarm = 1;
+    private static final String KEY = "alarmList";
+    SharedPreferences.Editor editor;
+    StringBuffer sb;
+    Uri ringUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+    private TextView mtvalarmlable;
     private AudioManager audiomanger;
     private int maxVolume, currentVolume;
     private SeekBar seekBar;
     private int hour, minute;
     private TextView mtvLable;
     private String mTime;
-    SharedPreferences.Editor editor;
-    StringBuffer sb;
-    Uri ringUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,9 +89,9 @@ public class SetAlarmActivity extends AppCompatActivity {
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "设置闹玲铃声");
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALL);
-                Uri pickedUri = RingtoneManager.getActualDefaultRingtoneUri(SetAlarmActivity.this,RingtoneManager.TYPE_ALARM);
-                if (pickedUri!=null) {
-                    intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI,pickedUri);
+                Uri pickedUri = RingtoneManager.getActualDefaultRingtoneUri(SetAlarmActivity.this, RingtoneManager.TYPE_ALARM);
+                if (pickedUri != null) {
+                    intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, pickedUri);
                     ringUri = pickedUri;
                 }
                 startActivityForResult(intent, 1);
@@ -187,8 +189,6 @@ public class SetAlarmActivity extends AppCompatActivity {
         return mTime;
     }
 
-    private static final String KEY = "alarmList";
-
     public void saveAlarmList(List<String> list) {
         editor = getSharedPreferences(AddAlarmActivity.class.getName(), MODE_PRIVATE).edit();
         sb = new StringBuffer();
@@ -220,7 +220,7 @@ public class SetAlarmActivity extends AppCompatActivity {
 //            }
 //        }
 
-        if (resultCode!=RESULT_OK) {
+        if (resultCode != RESULT_OK) {
             return;
         }
         switch (requestCode) {
@@ -237,11 +237,12 @@ public class SetAlarmActivity extends AppCompatActivity {
         }
 
     }
-    private void getName(int type){
+
+    private void getName(int type) {
         Uri pickedUri = RingtoneManager.getActualDefaultRingtoneUri(this, type);
 
         Cursor cursor = this.getContentResolver().query(pickedUri, new String[]{MediaStore.Audio.Media.TITLE}, null, null, null);
-        if (cursor!=null) {
+        if (cursor != null) {
             if (cursor.moveToFirst()) {
                 String ring_name = cursor.getString(0);
 

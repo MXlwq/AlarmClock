@@ -25,8 +25,12 @@ import java.util.Calendar;
 import java.util.List;
 
 public class AddAlarmActivity extends AppCompatActivity {
-    private TextView mtvalarmlable;
+    public static final String KEY = "alarmList";
     private static final int Alarm = 1;
+    static PendingIntent pi;
+    SharedPreferences.Editor editor;
+    StringBuffer sb;
+    private TextView mtvalarmlable;
     private AudioManager audiomanger;
     private int maxVolume, currentVolume;
     private SeekBar seekBar;
@@ -35,9 +39,6 @@ public class AddAlarmActivity extends AppCompatActivity {
     private String mTime;
     private Calendar calendar;
     private AlarmManager alarmManager;
-    static PendingIntent pi;
-    SharedPreferences.Editor editor;
-    StringBuffer sb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,11 +126,13 @@ public class AddAlarmActivity extends AppCompatActivity {
                 PendingIntent pi = PendingIntent.getActivity(AddAlarmActivity.this, 0, i, 0);
                 alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP,
-                        calendar.getTimeInMillis(),pi);
+                        calendar.getTimeInMillis(), pi);
                 MainActivity.list.add(mTime);
                 saveAlarmList(MainActivity.list);
-                Intent intent = new Intent(AddAlarmActivity.this, MainActivity.class);
+                Intent intent = new Intent(AddAlarmActivity.this, ClockListActivity.class);
                 startActivity(intent);
+                ClockLab.get(getApplicationContext()).saveClocks();
+
                 AddAlarmActivity.this.finish();
             }
         });
@@ -171,8 +174,6 @@ public class AddAlarmActivity extends AppCompatActivity {
         mTime = mhour + ":" + mminute;
         return mTime;
     }
-
-    public static final String KEY = "alarmList";
 
     public void saveAlarmList(List<String> list) {
         editor = getSharedPreferences(AddAlarmActivity.class.getName(), MODE_PRIVATE).edit();

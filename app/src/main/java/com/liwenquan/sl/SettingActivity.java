@@ -11,8 +11,9 @@ import android.widget.Toast;
 
 public class SettingActivity extends AppCompatActivity {
     int yourChose = 1;
+    String[] mList = {"1分钟", "5分钟", "10分钟", "30分钟"};
     private TextView mTvSnoozeTime;
-    String[] mList = {"1分钟", "5分钟", "10分钟","30分钟"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +23,8 @@ public class SettingActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         toolbar.setNavigationIcon(R.mipmap.back);//设置导航栏图标
         setSupportActionBar(toolbar);
-        mTvSnoozeTime= (TextView) findViewById(R.id.tvSnoozeTime);
-        if(savedInstanceState!=null){
+        mTvSnoozeTime = (TextView) findViewById(R.id.tvSnoozeTime);
+        if (savedInstanceState != null) {
             mTvSnoozeTime.setText(savedInstanceState.getString("我是睡眠时间"));
         }
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -46,7 +47,7 @@ public class SettingActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("我是睡眠时间",mList[yourChose]);
+        outState.putString("我是睡眠时间", mList[yourChose]);
     }
 
     private void showSinChosDia() {
@@ -68,7 +69,7 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
-                mTvSnoozeTime= (TextView) findViewById(R.id.tvSnoozeTime);
+                mTvSnoozeTime = (TextView) findViewById(R.id.tvSnoozeTime);
                 mTvSnoozeTime.setText(mList[yourChose]);
 
             }
@@ -79,13 +80,14 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
                 showClickMessage(mList[yourChose]);
-                mTvSnoozeTime= (TextView) findViewById(R.id.tvSnoozeTime);
+                mTvSnoozeTime = (TextView) findViewById(R.id.tvSnoozeTime);
                 mTvSnoozeTime.setText(mList[yourChose]);
             }
         });
         singleChoiseDialog.show();
 
     }
+
     /*显示点击的内容*/
     private void showClickMessage(String message) {
         Toast.makeText(SettingActivity.this, "小睡时间设定为：" + message, Toast.LENGTH_SHORT).show();
