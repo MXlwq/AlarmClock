@@ -18,16 +18,10 @@ public class Clock {
     private static final String JSON_LABLE ="title" ;
     private static final String JSON_SHAKE ="solved" ;
     private static final String JSON_DATE = "date";
+    private static final String JSON_ON="On";
     private static final String JSON_RING="ring";
     private static final String JSON_WEEKLYREPEAT="weeklyrepeat";
 
-    public boolean isOn() {
-        return mOn;
-    }
-
-    public void setOn(boolean mOn) {
-        this.mOn = mOn;
-    }
 
     private boolean mOn;
     private UUID mId;
@@ -38,6 +32,13 @@ public class Clock {
     private int mWeeklyRepeat;
     private boolean mShake;
 
+    public boolean isOn() {
+        return mOn;
+    }
+
+    public void setOn(boolean mOn) {
+        this.mOn = mOn;
+    }
     public UUID getId() {
         return mId;
     }
@@ -98,6 +99,7 @@ public class Clock {
         else
             mLable="闹钟";
         mDate=new Date(json.getLong(JSON_DATE));
+        mOn=json.getBoolean(JSON_ON);
         //mShake=json.getBoolean(JSON_SHAKE);
         //mRing=json.getString(JSON_RING);
         //mWeeklyRepeat=json.getInt(JSON_WEEKLYREPEAT);
@@ -109,6 +111,7 @@ public class Clock {
         json.put(JSON_ID,mId.toString());
         json.put(JSON_LABLE,mLable);
         json.put(JSON_DATE,mDate.getTime());
+        json.put(JSON_ON,mOn);
         //json.put(JSON_WEEKLYREPEAT,mWeeklyRepeat);
         //json.put(JSON_SHAKE,mShake);
         //json.put(JSON_RING,mRing);

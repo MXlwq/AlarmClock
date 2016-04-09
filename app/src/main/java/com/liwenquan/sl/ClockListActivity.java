@@ -8,7 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -23,6 +26,7 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
     public static final String EXTRA_CRIME_ID="com.liwenquan.sleep.clock_id";
     private ListView mListView;
     ClockAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,14 +69,6 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
         });
     }
 
-//    @Override
-//    public void onListItemClick(ListView l, View v, int position, long id) {
-//        super.onListItemClick(l, v, position, id);
-//        Clock c=((ClockAdapter)getListAdapter()).getItem(position);
-//        Intent i=new Intent(ClockListActivity.this,AddAlarmActivity.class);
-//        i.putExtra(EXTRA_CRIME_ID,c.getId());
-//        startActivity(i);
-//    }
     @Override
     public void onResume() {
         super.onResume();
@@ -92,6 +88,10 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
     //定制列表项，创建ArrayAdapter作为CrimeListFragment的内部类
     private class ClockAdapter extends ArrayAdapter<Clock> {
 
+        Switch mswitchOn;
+        Clock c;
+        LinearLayout mtvClockClock;
+        SimpleDateFormat dateFormater;
         public ClockAdapter(ArrayList<Clock> crimes) {
             super(ClockListActivity.this,0,crimes);
         }
@@ -99,18 +99,40 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
         //覆盖getView方法
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+
             if(convertView==null){
                 convertView=getLayoutInflater().inflate(R.layout.list_cell,null);
             }
-            Clock c=getItem(position);
+            c=getItem(position);
             TextView titleTextView=(TextView)convertView.findViewById(R.id.tvlable);
             titleTextView.setText(c.getLable());
 
+            mswitchOn= (Switch) convertView.findViewById(R.id.switchOn);
+            mswitchOn.setChecked(c.isOn());
+            mswitchOn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    mswitchOn.setChecked(isChecked);
+                    c.setOn(isChecked);
+                    ClockLab.get(getApplicationContext()).saveClocks();
+                }
+            });
+
             //格式化时间
-            SimpleDateFormat dateFormater = new SimpleDateFormat("HH:mm");
+            dateFormater = new SimpleDateFormat("HH:mm");
             TextView dateTextView =(TextView)convertView.findViewById(R.id.tvTime);
             dateTextView.setText(dateFormater.format(c.getDate()));
 
+            mtvClockClock= (LinearLayout) convertView.findViewById(R.id.tvClockClock);
+            mtvClockClock.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(ClockListActivity.this, SetAlarmActivity.class);
+                    i.putExtra("闹钟时间", dateFormater.format(c.getDate()));
+                    i.putExtra("闹钟标签", c.getLable());
+                    startActivity(i);
+                }
+            });
             return convertView;
         }
     }

@@ -149,9 +149,7 @@ public class AddAlarmActivity extends AppCompatActivity {
                         INTERVAL, pi);
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP,
                         calendar.getTimeInMillis(), pi);
-                //Toast.makeText(AddAlarmActivity.this," "+calendar.getTimeInMillis(),Toast.LENGTH_SHORT).show();
-//                MainActivity.list.add(mTime);
-//                saveAlarmList(MainActivity.list);
+
                 ClockLab.get(getApplicationContext()).addClock(clock);
                 Intent intent = new Intent(AddAlarmActivity.this, ClockListActivity.class);
                 startActivity(intent);

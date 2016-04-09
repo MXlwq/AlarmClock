@@ -38,6 +38,7 @@ public class SetAlarmActivity extends AppCompatActivity {
     private int hour, minute;
     private TextView mtvLable;
     private String mTime;
+    private EditText metLable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,10 @@ public class SetAlarmActivity extends AppCompatActivity {
         TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
 
 
-        String s = getIntent().getStringExtra(EXTAR_TIME);
+        String s = getIntent().getStringExtra("闹钟时间");
+        String mLable = getIntent().getStringExtra("闹钟标签");
+        mtvalarmlable = (TextView) findViewById(R.id.tvalarmlable);
+        mtvalarmlable.setText(mLable);
         final int position = getIntent().getIntExtra(EXTAR_POSITON, 0);
         //Log.e("检查点", "点击位置的时间是"+s);
         String timelist[] = s.split(":");
@@ -76,14 +80,6 @@ public class SetAlarmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                Intent intent = new Intent(
-//                        RingtoneManager.ACTION_RINGTONE_PICKER);
-//                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,
-//                        RingtoneManager.TYPE_ALARM);
-//                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE,
-//                        "设置闹钟铃声");
-//                startActivityForResult(intent, Alarm);
-
                 Intent intent = new Intent();
                 intent.setAction(RingtoneManager.ACTION_RINGTONE_PICKER);
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
@@ -102,6 +98,7 @@ public class SetAlarmActivity extends AppCompatActivity {
         findViewById(R.id.lllable).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(SetAlarmActivity.this);
                 builder.setTitle("标签");
                 //    通过LayoutInflater来加载一个xml的布局文件作为一个View对象
@@ -109,13 +106,13 @@ public class SetAlarmActivity extends AppCompatActivity {
                 //    设置我们自己定义的布局文件作为弹出框的Content
                 builder.setView(view);
 
-                final EditText metLable = (EditText) view.findViewById(R.id.etLable);
-
+                metLable = (EditText) view.findViewById(R.id.etLable);
+                //metLable.setText();
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String lable = metLable.getText().toString().trim();
-                        mtvalarmlable = (TextView) findViewById(R.id.tvalarmlable);
+
                         mtvalarmlable.setText(lable);
                         Toast.makeText(SetAlarmActivity.this, "已设定标签：" + lable, Toast.LENGTH_SHORT).show();
                     }
