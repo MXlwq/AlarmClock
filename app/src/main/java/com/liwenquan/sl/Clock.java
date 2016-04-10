@@ -99,9 +99,17 @@ public class Clock {
         else
             mLable="闹钟";
         mDate=new Date(json.getLong(JSON_DATE));
-        mOn=json.getBoolean(JSON_ON);
+        if(json.has(JSON_ON)){
+            mOn=json.getBoolean(JSON_ON);
+        }
+        else
+            mOn=true;
+        if(json.has(JSON_RING)){
+            mRing=json.getString(JSON_RING);
+        }
+        else
+            mRing="音乐";
         //mShake=json.getBoolean(JSON_SHAKE);
-        mRing=json.getString(JSON_RING);
         //mWeeklyRepeat=json.getInt(JSON_WEEKLYREPEAT);
     }
 

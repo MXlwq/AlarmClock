@@ -2,6 +2,7 @@ package com.liwenquan.sl;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.os.Bundle;
@@ -16,13 +17,15 @@ public class PlayAlarmActivity extends Activity {
     private MediaPlayer mp;
     private TextView tvStop;
     private Button putoff;
+    PendingIntent pi;
     private AlarmManager alarmManager;
     private GestureDetector mGestureDetector;
-
+    private Clock mclock;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        String clockId= getIntent().getStringExtra(ClockListActivity.EXTRA_CRIME_ID);
+        mclock=ClockLab.get(PlayAlarmActivity.this).getClock(clockId);
         setContentView(R.layout.activity_play_alarm);
         mp = MediaPlayer.create(PlayAlarmActivity.this, RingtoneManager.getActualDefaultRingtoneUri(PlayAlarmActivity.this,
                 RingtoneManager.TYPE_ALARM));
@@ -53,7 +56,8 @@ public class PlayAlarmActivity extends Activity {
                             && Math.abs(velocityX) > 100) {
                         // And cancel the alarm.
                         AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-                        am.cancel(AddAlarmActivity.pi);
+                        pi= PendingIntent.getBroadcast(PlayAlarmActivity.this, Integer.valueOf(mclock.getId().hashCode()), AddAlarmActivity.i, 0);
+                        am.cancel(pi);
                         mp.stop();
                         PlayAlarmActivity.this.finish();
                         onBackPressed();

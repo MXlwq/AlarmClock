@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,7 +45,8 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
 
                 //noinspection SimplifiableIfStatement
                 if (id == R.id.action_bug) {
-                    startActivity(new Intent(ClockListActivity.this, PlayAlarmActivity.class));
+                    Toast.makeText(ClockListActivity.this,"点击关于⊙０⊙",Toast.LENGTH_SHORT).show();
+                    //startActivity(new Intent(ClockListActivity.this, PlayAlarmActivity.class));
                     return true;
                 } else if (id == R.id.action_about) {
                     startActivity(new Intent(ClockListActivity.this, AboutUsActivity.class));

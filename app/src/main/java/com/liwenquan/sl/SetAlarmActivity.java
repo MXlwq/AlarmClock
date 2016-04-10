@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class SetAlarmActivity extends AppCompatActivity {
@@ -41,6 +42,7 @@ public class SetAlarmActivity extends AppCompatActivity {
     private EditText metLable;
     private Clock mclock;
     private String lable;
+    private Calendar calendar;
     private TextView mRingName;
     private Uri pickedURI;
     @Override
@@ -72,13 +74,16 @@ public class SetAlarmActivity extends AppCompatActivity {
         minute = timePicker.getCurrentMinute();
 
         mTime = formattime(hour, minute);
-
+        calendar = Calendar.getInstance();
         timePicker.setIs24HourView(true);//是否显示24小时制？默认false
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                mTime = formattime(hourOfDay, minute);
-
+                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                calendar.set(Calendar.MINUTE, minute);
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+                mclock.setDate(calendar.getTime());
             }
         });
         findViewById(R.id.chooseSong).setOnClickListener(new View.OnClickListener() {
@@ -145,8 +150,6 @@ public class SetAlarmActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SetAlarmActivity.this, ClockListActivity.class);
                 startActivity(intent);
-
-                mclock.setRing(pickedURI.toString());
                 if(mclock.getLable()==null){
                     mclock.setLable("闹钟");
                 }
@@ -219,8 +222,9 @@ public class SetAlarmActivity extends AppCompatActivity {
                 //获取选中的铃声的URI
                 pickedURI = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
                 mRingName.setText(pickedURI.toString());
+                mclock.setRing(pickedURI.toString());
+                ClockLab.get(getApplicationContext()).saveClocks();
                 //Log.i(TAG,pickedURI.toString());
-
                 getName(RingtoneManager.TYPE_ALARM);
 
                 break;

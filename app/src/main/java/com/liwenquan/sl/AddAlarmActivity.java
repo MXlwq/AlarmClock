@@ -43,6 +43,7 @@ public class AddAlarmActivity extends AppCompatActivity {
     private AlarmManager alarmManager;
     private Clock mclock;
     private TextView mRingName;
+    static Intent i;
     Uri ringUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
     private static final int INTERVAL = 1000 * 60 * 60 * 24;// 24h
     @Override
@@ -135,8 +136,8 @@ public class AddAlarmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(AddAlarmActivity.this, PlayAlarmActivity.class);
-                PendingIntent pi = PendingIntent.getActivity(AddAlarmActivity.this, 0, i, 0);
+                i = new Intent(AddAlarmActivity.this, PlayAlarmActivity.class);
+                PendingIntent pi = PendingIntent.getActivity(AddAlarmActivity.this, mclock.getId().hashCode(), i, 0);
                 alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                         INTERVAL, pi);
@@ -149,6 +150,7 @@ public class AddAlarmActivity extends AppCompatActivity {
                 if (mclock.getLable() == null) {
                     mclock.setLable("闹钟");
                 }
+                mclock.setOn(true);
                 ClockLab.get(getApplicationContext()).saveClocks();
                 AddAlarmActivity.this.finish();
 

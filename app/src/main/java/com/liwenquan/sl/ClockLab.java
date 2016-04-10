@@ -25,11 +25,11 @@ public class ClockLab {
 
         try{
             mClocks=mSerializer.loadClocks();
-            Log.e(TAG,"Success Loaded cimes:");
+            Log.e(TAG,"Crimes Loading cimes");
         }
         catch (Exception e){
             mClocks=new ArrayList<Clock>();
-            Log.e(TAG,"Error Loading cimes:"+e);
+            Log.e(TAG,"Error Loading cimes");
         }
 
     }
