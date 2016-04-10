@@ -16,35 +16,30 @@ public class PlayAlarmActivity extends Activity {
 
     private MediaPlayer mp;
     private TextView tvStop;
-    private Button putoff;
+    private Button mputoff;
     PendingIntent pi;
     private AlarmManager alarmManager;
     private GestureDetector mGestureDetector;
     private Clock mclock;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String clockId= getIntent().getStringExtra(ClockListActivity.EXTRA_CRIME_ID);
-        mclock=ClockLab.get(PlayAlarmActivity.this).getClock(clockId);
+        String clockId = getIntent().getStringExtra(ClockListActivity.EXTRA_CRIME_ID);
+        mclock = ClockLab.get(PlayAlarmActivity.this).getClock(clockId);
         setContentView(R.layout.activity_play_alarm);
         mp = MediaPlayer.create(PlayAlarmActivity.this, RingtoneManager.getActualDefaultRingtoneUri(PlayAlarmActivity.this,
                 RingtoneManager.TYPE_ALARM));
         mp.start();
-        putoff = (Button) findViewById(R.id.putoff);
-        putoff.setOnClickListener(new View.OnClickListener() {
+        mputoff = (Button) findViewById(R.id.putoff);
+        mputoff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
         tvStop = (TextView) findViewById(R.id.stopclock);
-//        tvStop.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View arg0) {
-//                // TODO 自动生成的方法存根
-//                startActivity(new Intent(PlayAlarmActivity.this, MainActivity.class));
-//            }
-//        });
+
         //1.重写 GestureDetector的onFling方法
         mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
             @Override
@@ -56,7 +51,7 @@ public class PlayAlarmActivity extends Activity {
                             && Math.abs(velocityX) > 100) {
                         // And cancel the alarm.
                         AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-                        pi= PendingIntent.getBroadcast(PlayAlarmActivity.this, Integer.valueOf(mclock.getId().hashCode()), AddAlarmActivity.i, 0);
+                        pi = PendingIntent.getBroadcast(PlayAlarmActivity.this, Integer.valueOf(mclock.getId().hashCode()), AddAlarmActivity.i, 0);
                         am.cancel(pi);
                         mp.stop();
                         PlayAlarmActivity.this.finish();

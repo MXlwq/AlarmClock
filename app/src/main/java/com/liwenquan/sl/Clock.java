@@ -1,4 +1,5 @@
 package com.liwenquan.sl;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,16 +12,16 @@ import java.util.UUID;
 public class Clock {
     /**
      * 需要存储的数据：
-     闹钟的时间、标签、音量、闹钟的铃声、重复时间、是否振动
-     还需要存储闹钟的编号
-     * */
+     * 闹钟的时间、标签、音量、闹钟的铃声、重复时间、是否振动
+     * 还需要存储闹钟的编号
+     */
     private static final String JSON_ID = "id";
-    private static final String JSON_LABLE ="title" ;
-    private static final String JSON_SHAKE ="solved" ;
+    private static final String JSON_LABLE = "title";
+    private static final String JSON_SHAKE = "solved";
     private static final String JSON_DATE = "date";
-    private static final String JSON_ON="On";
-    private static final String JSON_RING="ring";
-    private static final String JSON_WEEKLYREPEAT="weeklyrepeat";
+    private static final String JSON_ON = "On";
+    private static final String JSON_RING = "ring";
+    private static final String JSON_WEEKLYREPEAT = "weeklyrepeat";
 
 
     private boolean mOn;
@@ -28,7 +29,7 @@ public class Clock {
     private Date mDate;
     private String mLable;
     private String mRing;
-//    private int[] mWeeklyRepeat=new int[7];
+    //    private int[] mWeeklyRepeat=new int[7];
     private int mWeeklyRepeat;
     private boolean mShake;
 
@@ -39,6 +40,7 @@ public class Clock {
     public void setOn(boolean mOn) {
         this.mOn = mOn;
     }
+
     public String getId() {
         return mId;
     }
@@ -91,38 +93,36 @@ public class Clock {
         mId = UUID.randomUUID().toString();
         mDate = time;
     }
-    public Clock(JSONObject json) throws JSONException{
-        mId=UUID.fromString(json.getString(JSON_ID)).toString();
-        if(json.has(JSON_LABLE)){
-            mLable=json.getString(JSON_LABLE);
-        }
-        else
-            mLable="闹钟";
-        mDate=new Date(json.getLong(JSON_DATE));
-        if(json.has(JSON_ON)){
-            mOn=json.getBoolean(JSON_ON);
-        }
-        else
-            mOn=true;
-        if(json.has(JSON_RING)){
-            mRing=json.getString(JSON_RING);
-        }
-        else
-            mRing="音乐";
+
+    public Clock(JSONObject json) throws JSONException {
+        mId = UUID.fromString(json.getString(JSON_ID)).toString();
+        if (json.has(JSON_LABLE)) {
+            mLable = json.getString(JSON_LABLE);
+        } else
+            mLable = "闹钟";
+        mDate = new Date(json.getLong(JSON_DATE));
+        if (json.has(JSON_ON)) {
+            mOn = json.getBoolean(JSON_ON);
+        } else
+            mOn = true;
+        if (json.has(JSON_RING)) {
+            mRing = json.getString(JSON_RING);
+        } else
+            mRing = "音乐";
         //mShake=json.getBoolean(JSON_SHAKE);
         //mWeeklyRepeat=json.getInt(JSON_WEEKLYREPEAT);
     }
 
     public JSONObject toJSON() throws JSONException {
 
-        JSONObject json=new JSONObject();
-        json.put(JSON_ID,mId.toString());
-        json.put(JSON_LABLE,mLable);
-        json.put(JSON_DATE,mDate.getTime());
-        json.put(JSON_ON,mOn);
+        JSONObject json = new JSONObject();
+        json.put(JSON_ID, mId.toString());
+        json.put(JSON_LABLE, mLable);
+        json.put(JSON_DATE, mDate.getTime());
+        json.put(JSON_ON, mOn);
         //json.put(JSON_WEEKLYREPEAT,mWeeklyRepeat);
         //json.put(JSON_SHAKE,mShake);
-        json.put(JSON_RING,mRing);
+        json.put(JSON_RING, mRing);
 
         return json;
 

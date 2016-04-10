@@ -22,7 +22,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
-import java.util.List;
 
 public class SetAlarmActivity extends AppCompatActivity {
     public static final String EXTAR_TIME = "com.lwq.getTime";
@@ -45,6 +44,8 @@ public class SetAlarmActivity extends AppCompatActivity {
     private Calendar calendar;
     private TextView mRingName;
     private Uri pickedURI;
+    private int yourChose;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +55,8 @@ public class SetAlarmActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);
 
-        String clockId= getIntent().getStringExtra(ClockListActivity.EXTRA_CRIME_ID);
-        mclock=ClockLab.get(SetAlarmActivity.this).getClock(clockId);
+        String clockId = getIntent().getStringExtra(ClockListActivity.EXTRA_CRIME_ID);
+        mclock = ClockLab.get(SetAlarmActivity.this).getClock(clockId);
 
         TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
         mRingName = (TextView) findViewById(R.id.ring_name_set);
@@ -84,6 +85,18 @@ public class SetAlarmActivity extends AppCompatActivity {
                 calendar.set(Calendar.SECOND, 0);
                 calendar.set(Calendar.MILLISECOND, 0);
                 mclock.setDate(calendar.getTime());
+            }
+        });
+        findViewById(R.id.how_to_shutdown).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSinChosDia();
+            }
+        });
+        findViewById(R.id.how_to_shutdown).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSinChosDia();
             }
         });
         findViewById(R.id.chooseSong).setOnClickListener(new View.OnClickListener() {
@@ -150,7 +163,7 @@ public class SetAlarmActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SetAlarmActivity.this, ClockListActivity.class);
                 startActivity(intent);
-                if(mclock.getLable()==null){
+                if (mclock.getLable() == null) {
                     mclock.setLable("闹钟");
                 }
                 ClockLab.get(getApplicationContext()).saveClocks();
@@ -195,26 +208,10 @@ public class SetAlarmActivity extends AppCompatActivity {
         return mTime;
     }
 
-    public void saveAlarmList(List<String> list) {
-        editor = getSharedPreferences(AddAlarmActivity.class.getName(), MODE_PRIVATE).edit();
-        sb = new StringBuffer();
-        for (int i = 0; i < list.size(); i++) {
-            sb.append(MainActivity.list.get(i)).append(",");
-        }
-        String content;
-        if (list.size() == 0)
-            content = null;
-        else
-            content = sb.toString().substring(0, sb.length() - 1);
-        editor.putString(KEY, content);
-        editor.commit();
-    }
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode!=RESULT_OK) {
+        if (resultCode != RESULT_OK) {
             return;
         }
         switch (requestCode) {
@@ -233,11 +230,12 @@ public class SetAlarmActivity extends AppCompatActivity {
                 break;
         }
     }
-    private void getName(int type){
+
+    private void getName(int type) {
         Uri pickedUri = RingtoneManager.getActualDefaultRingtoneUri(this, type);
         //Log.i(TAG,pickedUri.toString());
         Cursor cursor = this.getContentResolver().query(pickedUri, new String[]{MediaStore.Audio.Media.TITLE}, null, null, null);
-        if (cursor!=null) {
+        if (cursor != null) {
             if (cursor.moveToFirst()) {
                 String ring_name = cursor.getString(0);
 
@@ -249,6 +247,71 @@ public class SetAlarmActivity extends AppCompatActivity {
             }
             cursor.close();
         }
+    }
+
+    private void showSinChosDia() {
+        final String[] mList = {"普通", "扫码", "拍相同颜色照片", "疯狂摇手机", "算术题"};
+        yourChose = 3;
+        AlertDialog.Builder sinChosDia = new AlertDialog.Builder(SetAlarmActivity.this);
+        sinChosDia.setTitle("选择闹钟停止方式");
+        sinChosDia.setSingleChoiceItems(mList, 0, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                yourChose = which;
+
+            }
+        });
+        sinChosDia.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+
+                showClickMessage(mList[yourChose]);
+
+            }
+        });
+        sinChosDia.create().show();
+    }
+
+    /*显示点击的内容*/
+    private void showClickMessage(String message) {
+
+        if (message == "疯狂摇手机")
+            showshakeChos();
+        else
+            //待补充
+            Toast.makeText(SetAlarmActivity.this, "你选择的是: " + message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void showshakeChos() {
+        final String[] mList = {"疯狂摇手机变换次数"};
+        yourChose = 0;
+        AlertDialog.Builder sinChosDia = new AlertDialog.Builder(SetAlarmActivity.this);
+        sinChosDia.setTitle("设置摇动次数");
+        //待修改为输入文本，或者选择！
+        sinChosDia.setSingleChoiceItems(mList, 0, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                yourChose = which;
+
+            }
+        });
+        sinChosDia.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+
+                showClickMessage(mList[yourChose]);
+
+            }
+        });
+        sinChosDia.create().show();
     }
 }
 

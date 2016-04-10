@@ -44,8 +44,10 @@ public class AddAlarmActivity extends AppCompatActivity {
     private Clock mclock;
     private TextView mRingName;
     static Intent i;
+    private int yourChose;
     Uri ringUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-    private static final int INTERVAL = 1000 * 60 * 60 * 24;// 24h
+    private static final int INTERVAL = 1000 * 60 * 5;// 24h
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +80,12 @@ public class AddAlarmActivity extends AppCompatActivity {
                 mclock = new Clock(calendar.getTime());
             }
         });
+        findViewById(R.id.how_to_shutdown).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSinChosDia();
+            }
+        });
         findViewById(R.id.chooseSong).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,9 +94,9 @@ public class AddAlarmActivity extends AppCompatActivity {
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "设置闹玲铃声");
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALL);
-                Uri pickedUri = RingtoneManager.getActualDefaultRingtoneUri(AddAlarmActivity.this,RingtoneManager.TYPE_ALARM);
-                if (pickedUri!=null) {
-                    intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI,pickedUri);
+                Uri pickedUri = RingtoneManager.getActualDefaultRingtoneUri(AddAlarmActivity.this, RingtoneManager.TYPE_ALARM);
+                if (pickedUri != null) {
+                    intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, pickedUri);
                     ringUri = pickedUri;
                 }
                 startActivityForResult(intent, 1);
@@ -182,10 +190,11 @@ public class AddAlarmActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode!=RESULT_OK) {
+        if (resultCode != RESULT_OK) {
             return;
         }
         switch (requestCode) {
@@ -203,11 +212,12 @@ public class AddAlarmActivity extends AppCompatActivity {
                 break;
         }
     }
-    private void getName(int type){
+
+    private void getName(int type) {
         Uri pickedUri = RingtoneManager.getActualDefaultRingtoneUri(this, type);
         //Log.i(TAG,pickedUri.toString());
         Cursor cursor = this.getContentResolver().query(pickedUri, new String[]{MediaStore.Audio.Media.TITLE}, null, null, null);
-        if (cursor!=null) {
+        if (cursor != null) {
             if (cursor.moveToFirst()) {
                 String ring_name = cursor.getString(0);
 
@@ -219,6 +229,71 @@ public class AddAlarmActivity extends AppCompatActivity {
             }
             cursor.close();
         }
+    }
+
+    private void showSinChosDia() {
+        final String[] mList = {"普通", "扫码", "拍相同颜色照片", "疯狂摇手机", "算术题"};
+        yourChose = 3;
+        AlertDialog.Builder sinChosDia = new AlertDialog.Builder(AddAlarmActivity.this);
+        sinChosDia.setTitle("选择闹钟停止方式");
+        sinChosDia.setSingleChoiceItems(mList, 0, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                yourChose = which;
+
+            }
+        });
+        sinChosDia.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+
+                showClickMessage(mList[yourChose]);
+
+            }
+        });
+        sinChosDia.create().show();
+    }
+
+    /*显示点击的内容*/
+    private void showClickMessage(String message) {
+
+        if (message == "疯狂摇手机")
+            showshakeChos();
+        else
+            //待补充
+            Toast.makeText(AddAlarmActivity.this, "你选择的是: " + message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void showshakeChos() {
+        final String[] mList = {"疯狂摇手机变换次数"};
+        yourChose = 0;
+        AlertDialog.Builder sinChosDia = new AlertDialog.Builder(AddAlarmActivity.this);
+        sinChosDia.setTitle("设置摇动次数");
+        //待修改为输入文本，或者选择！
+        sinChosDia.setSingleChoiceItems(mList, 0, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                yourChose = which;
+
+            }
+        });
+        sinChosDia.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+
+                showClickMessage(mList[yourChose]);
+
+            }
+        });
+        sinChosDia.create().show();
     }
 
 }

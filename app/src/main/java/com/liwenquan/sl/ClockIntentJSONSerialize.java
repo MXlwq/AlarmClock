@@ -29,35 +29,32 @@ public class ClockIntentJSONSerialize {
         this.mFilename = mFilename;
     }
 
-    public ArrayList<Clock> loadClocks() throws IOException,JSONException{
-        ArrayList<Clock> clocks=new ArrayList<Clock>();
-        BufferedReader reader=null;
-        try{
-            InputStream in=mContext.openFileInput(mFilename);
-            reader=new BufferedReader(new InputStreamReader(in));
-            StringBuilder jsonString=new StringBuilder();
-            String line=null;
-            while((line=reader.readLine())!=null)
-            {
+    public ArrayList<Clock> loadClocks() throws IOException, JSONException {
+        ArrayList<Clock> clocks = new ArrayList<Clock>();
+        BufferedReader reader = null;
+        try {
+            InputStream in = mContext.openFileInput(mFilename);
+            reader = new BufferedReader(new InputStreamReader(in));
+            StringBuilder jsonString = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
                 jsonString.append(line);
             }
-            JSONArray array=(JSONArray) new JSONTokener(jsonString.toString()).nextValue();
-            for(int i=0;i<array.length();i++){
+            JSONArray array = (JSONArray) new JSONTokener(jsonString.toString()).nextValue();
+            for (int i = 0; i < array.length(); i++) {
                 clocks.add(new Clock(array.getJSONObject(i)));
             }
-        }
-        catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
 
-        }
-        finally {
-            if(reader!=null)
+        } finally {
+            if (reader != null)
                 reader.close();
         }
         return clocks;
     }
 
 
-    public void saveClocks(ArrayList<Clock> clocks) throws JSONException,IOException {
+    public void saveClocks(ArrayList<Clock> clocks) throws JSONException, IOException {
         JSONArray array = new JSONArray();
         for (Clock c : clocks) {
             array.put(c.toJSON());
@@ -67,8 +64,7 @@ public class ClockIntentJSONSerialize {
             OutputStream out = mContext.openFileOutput(mFilename, Context.MODE_PRIVATE);
             writer = new OutputStreamWriter(out);
             writer.write(array.toString());
-        }
-        finally {
+        } finally {
             if (writer != null) {
                 writer.close();
             }

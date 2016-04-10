@@ -21,9 +21,9 @@ import java.util.ArrayList;
  * Created by LWQ on 2016/4/8.
  */
 public class ClockListActivity extends Activity implements View.OnClickListener {
-    private static final String TAG="CrimeListFragment";
+    private static final String TAG = "CrimeListFragment";
     private ArrayList<Clock> mClocks;
-    public static final String EXTRA_CRIME_ID="com.liwenquan.sleep.clock_id";
+    public static final String EXTRA_CRIME_ID = "com.liwenquan.sleep.clock_id";
     private ListView mListView;
     ClockAdapter adapter;
 
@@ -31,9 +31,9 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clock_list);
-        mClocks=ClockLab.get(this).getClocks();
-        adapter=new ClockAdapter(mClocks);
-        ListView mListView= (ListView) findViewById(R.id.list_view);
+        mClocks = ClockLab.get(this).getClocks();
+        adapter = new ClockAdapter(mClocks);
+        ListView mListView = (ListView) findViewById(R.id.list_view);
         mListView.setAdapter(adapter);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.menu_main);
@@ -45,7 +45,7 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
 
                 //noinspection SimplifiableIfStatement
                 if (id == R.id.action_bug) {
-                    Toast.makeText(ClockListActivity.this,"点击关于⊙０⊙",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ClockListActivity.this, "点击关于⊙０⊙", Toast.LENGTH_SHORT).show();
                     //startActivity(new Intent(ClockListActivity.this, PlayAlarmActivity.class));
                     return true;
                 } else if (id == R.id.action_about) {
@@ -64,8 +64,8 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
             @Override
             public void onClick(View v) {
 
-                Intent i=new Intent(getApplicationContext(),AddAlarmActivity.class);
-                startActivityForResult(i,0);
+                Intent i = new Intent(getApplicationContext(), AddAlarmActivity.class);
+                startActivityForResult(i, 0);
             }
         });
     }
@@ -92,23 +92,24 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
         Switch mswitchOn;
         TextView mtvClockClock;
         SimpleDateFormat dateFormater;
+
         public ClockAdapter(ArrayList<Clock> crimes) {
-            super(ClockListActivity.this,0,crimes);
+            super(ClockListActivity.this, 0, crimes);
         }
 
         //覆盖getView方法
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
 
-            if(convertView==null){
-                convertView=getLayoutInflater().inflate(R.layout.list_cell,null);
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.list_cell, null);
             }
             //问题在这里
-            final Clock c=getItem(position);
-            TextView titleTextView=(TextView)convertView.findViewById(R.id.tvlable);
+            final Clock c = getItem(position);
+            TextView titleTextView = (TextView) convertView.findViewById(R.id.tvlable);
             titleTextView.setText(c.getLable());
 
-            mswitchOn= (Switch) convertView.findViewById(R.id.switchOn);
+            mswitchOn = (Switch) convertView.findViewById(R.id.switchOn);
             mswitchOn.setChecked(c.isOn());
             mswitchOn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -121,10 +122,10 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
 
             //格式化时间
             dateFormater = new SimpleDateFormat("HH:mm");
-            TextView dateTextView =(TextView)convertView.findViewById(R.id.tvTime);
+            TextView dateTextView = (TextView) convertView.findViewById(R.id.tvTime);
             dateTextView.setText(dateFormater.format(c.getDate()));
 
-            mtvClockClock= (TextView) convertView.findViewById(R.id.tvTime);
+            mtvClockClock = (TextView) convertView.findViewById(R.id.tvTime);
             mtvClockClock.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

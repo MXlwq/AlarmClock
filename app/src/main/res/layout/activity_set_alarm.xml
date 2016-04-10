@@ -157,11 +157,52 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/ring_name_set"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:id="@+id/ring_name_set"
                         android:text="铃声"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/forward" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/how_to_shutdown"
+                style="?android:listSeparatorTextViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="关闭方式"
+                        android:textColor="@color/color_black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/way_to_shutdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="算术题"
                         android:textSize="13sp" />
                 </LinearLayout>
 
