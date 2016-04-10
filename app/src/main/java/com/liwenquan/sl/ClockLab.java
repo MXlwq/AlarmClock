@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 /**
  * Created by LWQ on 2016/4/8.
@@ -49,7 +48,7 @@ public class ClockLab {
     }
 
     //返回带有指定的ID的Crime对象。
-    public Clock getClock(UUID id){
+    public Clock getClock(String id){
         for(Clock c:mClocks){
             if(c.getId().equals(id))
                 return c;

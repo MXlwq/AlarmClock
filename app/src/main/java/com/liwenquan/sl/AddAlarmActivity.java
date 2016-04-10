@@ -42,7 +42,7 @@ public class AddAlarmActivity extends AppCompatActivity {
     private String mTime;
     private Calendar calendar;
     private AlarmManager alarmManager;
-    Clock clock;
+    private Clock clock;
     Uri ringUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
     private static final int INTERVAL = 1000 * 60 * 60 * 24;// 24h
     @Override
@@ -158,6 +158,7 @@ public class AddAlarmActivity extends AppCompatActivity {
                     clock.setLable("闹钟");
                 }
                 AddAlarmActivity.this.finish();
+
             }
         });
 

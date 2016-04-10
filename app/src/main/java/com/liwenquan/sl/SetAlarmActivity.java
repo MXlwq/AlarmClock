@@ -39,7 +39,8 @@ public class SetAlarmActivity extends AppCompatActivity {
     private TextView mtvLable;
     private String mTime;
     private EditText metLable;
-
+    private Clock mclock;
+    private String lable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,14 +50,15 @@ public class SetAlarmActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);
 
-
+        String clockId= getIntent().getStringExtra(ClockListActivity.EXTRA_CRIME_ID);
+        mclock=ClockLab.get(SetAlarmActivity.this).getClock(clockId);
         TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
 
 
         String s = getIntent().getStringExtra("闹钟时间");
-        String mLable = getIntent().getStringExtra("闹钟标签");
+        //String mLable = getIntent().getStringExtra("闹钟标签");
         mtvalarmlable = (TextView) findViewById(R.id.tvalarmlable);
-        mtvalarmlable.setText(mLable);
+        mtvalarmlable.setText(mclock.getLable());
         final int position = getIntent().getIntExtra(EXTAR_POSITON, 0);
         //Log.e("检查点", "点击位置的时间是"+s);
         String timelist[] = s.split(":");
@@ -105,14 +107,14 @@ public class SetAlarmActivity extends AppCompatActivity {
                 View view = LayoutInflater.from(SetAlarmActivity.this).inflate(R.layout.dialog_lable, null);
                 //    设置我们自己定义的布局文件作为弹出框的Content
                 builder.setView(view);
-
                 metLable = (EditText) view.findViewById(R.id.etLable);
+
                 //metLable.setText();
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String lable = metLable.getText().toString().trim();
-
+                        lable = metLable.getText().toString().trim();
+                        mclock.setLable(lable);
                         mtvalarmlable.setText(lable);
                         Toast.makeText(SetAlarmActivity.this, "已设定标签：" + lable, Toast.LENGTH_SHORT).show();
                     }
@@ -139,12 +141,9 @@ public class SetAlarmActivity extends AppCompatActivity {
         findViewById(R.id.btnSaveClock).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                MainActivity.list.remove(position);
-                MainActivity.list.add(mTime);
-                saveAlarmList(MainActivity.list);
-                Intent i = new Intent(SetAlarmActivity.this, MainActivity.class);
-                startActivity(i);
+                Intent intent = new Intent(SetAlarmActivity.this, ClockListActivity.class);
+                startActivity(intent);
+                ClockLab.get(SetAlarmActivity.this).saveClocks();
                 SetAlarmActivity.this.finish();
             }
         });

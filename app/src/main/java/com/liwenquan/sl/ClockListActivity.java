@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -89,8 +88,7 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
     private class ClockAdapter extends ArrayAdapter<Clock> {
 
         Switch mswitchOn;
-        Clock c;
-        LinearLayout mtvClockClock;
+        TextView mtvClockClock;
         SimpleDateFormat dateFormater;
         public ClockAdapter(ArrayList<Clock> crimes) {
             super(ClockListActivity.this,0,crimes);
@@ -98,12 +96,13 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
 
         //覆盖getView方法
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
 
             if(convertView==null){
                 convertView=getLayoutInflater().inflate(R.layout.list_cell,null);
             }
-            c=getItem(position);
+            //问题在这里
+            final Clock c=getItem(position);
             TextView titleTextView=(TextView)convertView.findViewById(R.id.tvlable);
             titleTextView.setText(c.getLable());
 
@@ -123,13 +122,15 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
             TextView dateTextView =(TextView)convertView.findViewById(R.id.tvTime);
             dateTextView.setText(dateFormater.format(c.getDate()));
 
-            mtvClockClock= (LinearLayout) convertView.findViewById(R.id.tvClockClock);
+            mtvClockClock= (TextView) convertView.findViewById(R.id.tvTime);
             mtvClockClock.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(ClockListActivity.this, SetAlarmActivity.class);
+                    i.putExtra(EXTRA_CRIME_ID, c.getId());
+                    //Toast.makeText(getApplicationContext(),"点击的是"+c.getId(), Toast.LENGTH_SHORT).show();
                     i.putExtra("闹钟时间", dateFormater.format(c.getDate()));
-                    i.putExtra("闹钟标签", c.getLable());
+                    //i.putExtra("闹钟标签", c.getLable());
                     startActivity(i);
                 }
             });

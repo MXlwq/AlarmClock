@@ -24,7 +24,7 @@ public class Clock {
 
 
     private boolean mOn;
-    private UUID mId;
+    private String mId;
     private Date mDate;
     private String mLable;
     private String mRing;
@@ -39,11 +39,11 @@ public class Clock {
     public void setOn(boolean mOn) {
         this.mOn = mOn;
     }
-    public UUID getId() {
+    public String getId() {
         return mId;
     }
 
-    public void setId(UUID mId) {
+    public void setId(String mId) {
         this.mId = mId;
     }
 
@@ -88,11 +88,11 @@ public class Clock {
     }
 
     public Clock(Date time) {
-        mId = UUID.randomUUID();
+        mId = UUID.randomUUID().toString();
         mDate = time;
     }
     public Clock(JSONObject json) throws JSONException{
-        mId=UUID.fromString(json.getString(JSON_ID));
+        mId=UUID.fromString(json.getString(JSON_ID)).toString();
         if(json.has(JSON_LABLE)){
             mLable=json.getString(JSON_LABLE);
         }
