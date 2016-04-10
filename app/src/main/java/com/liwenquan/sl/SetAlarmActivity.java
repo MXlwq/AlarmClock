@@ -41,6 +41,8 @@ public class SetAlarmActivity extends AppCompatActivity {
     private EditText metLable;
     private Clock mclock;
     private String lable;
+    private TextView mRingName;
+    private Uri pickedURI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,11 +54,12 @@ public class SetAlarmActivity extends AppCompatActivity {
 
         String clockId= getIntent().getStringExtra(ClockListActivity.EXTRA_CRIME_ID);
         mclock=ClockLab.get(SetAlarmActivity.this).getClock(clockId);
-        TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
 
+        TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
+        mRingName = (TextView) findViewById(R.id.ring_name_set);
+        mRingName.setText(mclock.getRing());
 
         String s = getIntent().getStringExtra("闹钟时间");
-        //String mLable = getIntent().getStringExtra("闹钟标签");
         mtvalarmlable = (TextView) findViewById(R.id.tvalarmlable);
         mtvalarmlable.setText(mclock.getLable());
         final int position = getIntent().getIntExtra(EXTAR_POSITON, 0);
@@ -113,10 +116,11 @@ public class SetAlarmActivity extends AppCompatActivity {
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        lable = metLable.getText().toString().trim();
-                        mclock.setLable(lable);
+                        String lable = metLable.getText().toString().trim();
+                        mtvalarmlable = (TextView) findViewById(R.id.tvalarmlable);
                         mtvalarmlable.setText(lable);
-                        Toast.makeText(SetAlarmActivity.this, "已设定标签：" + lable, Toast.LENGTH_SHORT).show();
+                        mclock.setLable(lable);
+                        Toast.makeText(SetAlarmActivity.this, "已设定标签：" + lable, Toast.LENGTH_SHORT);
                     }
                 });
                 builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -131,11 +135,9 @@ public class SetAlarmActivity extends AppCompatActivity {
         findViewById(R.id.btnDelClock).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
-                MainActivity.list.remove(position);
-                saveAlarmList(MainActivity.list);
+                ClockLab.get(SetAlarmActivity.this).deleteClock(mclock);
+                ClockLab.get(SetAlarmActivity.this).saveClocks();
                 finish();
-
             }
         });
         findViewById(R.id.btnSaveClock).setOnClickListener(new View.OnClickListener() {
@@ -143,7 +145,12 @@ public class SetAlarmActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SetAlarmActivity.this, ClockListActivity.class);
                 startActivity(intent);
-                ClockLab.get(SetAlarmActivity.this).saveClocks();
+
+                mclock.setRing(pickedURI.toString());
+                if(mclock.getLable()==null){
+                    mclock.setLable("闹钟");
+                }
+                ClockLab.get(getApplicationContext()).saveClocks();
                 SetAlarmActivity.this.finish();
             }
         });
@@ -204,46 +211,37 @@ public class SetAlarmActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode != RESULT_OK) {
-//            return;
-//        } else {
-//            Uri uri = data
-//                    .getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
-//            if (uri != null) {
-//                RingtoneManager.setActualDefaultRingtoneUri(this,
-//                        RingtoneManager.TYPE_ALARM, uri);
-//                Toast.makeText(getApplicationContext(), "设置闹钟铃声成功！", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-
-        if (resultCode != RESULT_OK) {
+        if (resultCode!=RESULT_OK) {
             return;
         }
         switch (requestCode) {
             case 1:
                 //获取选中的铃声的URI
-                Uri pickedURI = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+                pickedURI = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+                mRingName.setText(pickedURI.toString());
+                //Log.i(TAG,pickedURI.toString());
 
-                RingtoneManager.setActualDefaultRingtoneUri(this, RingtoneManager.TYPE_ALARM, pickedURI);
                 getName(RingtoneManager.TYPE_ALARM);
-                Toast.makeText(getApplicationContext(), "设置闹钟铃声成功！", Toast.LENGTH_SHORT).show();
+
                 break;
+
             default:
                 break;
         }
-
     }
-
-    private void getName(int type) {
+    private void getName(int type){
         Uri pickedUri = RingtoneManager.getActualDefaultRingtoneUri(this, type);
-
+        //Log.i(TAG,pickedUri.toString());
         Cursor cursor = this.getContentResolver().query(pickedUri, new String[]{MediaStore.Audio.Media.TITLE}, null, null, null);
-        if (cursor != null) {
+        if (cursor!=null) {
             if (cursor.moveToFirst()) {
                 String ring_name = cursor.getString(0);
 
+                //Log.i(TAG,ring_name);
                 String[] c = cursor.getColumnNames();
-
+                for (String string : c) {
+                    //Log.i(TAG,string);
+                }
             }
             cursor.close();
         }

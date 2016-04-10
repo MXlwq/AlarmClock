@@ -101,7 +101,7 @@ public class Clock {
         mDate=new Date(json.getLong(JSON_DATE));
         mOn=json.getBoolean(JSON_ON);
         //mShake=json.getBoolean(JSON_SHAKE);
-        //mRing=json.getString(JSON_RING);
+        mRing=json.getString(JSON_RING);
         //mWeeklyRepeat=json.getInt(JSON_WEEKLYREPEAT);
     }
 
@@ -114,7 +114,7 @@ public class Clock {
         json.put(JSON_ON,mOn);
         //json.put(JSON_WEEKLYREPEAT,mWeeklyRepeat);
         //json.put(JSON_SHAKE,mShake);
-        //json.put(JSON_RING,mRing);
+        json.put(JSON_RING,mRing);
 
         return json;
 

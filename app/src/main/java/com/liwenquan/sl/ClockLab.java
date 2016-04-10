@@ -36,6 +36,9 @@ public class ClockLab {
     public void addClock(Clock crime){
         mClocks.add(crime);
     }
+    public void deleteClock(Clock crime){
+        mClocks.remove(crime);
+    }
     public static ClockLab get(Context c){
         if(sClockLab==null){
             sClockLab=new ClockLab(c.getApplicationContext());

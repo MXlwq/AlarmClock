@@ -25,7 +25,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     public MyAdapter(Context context, ArrayList<String> list) {
         mContext = context;
-        this.list = list;
+        MyAdapter.list = list;
     }
 
     //adapter需要实现以下三个方法

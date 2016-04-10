@@ -12,7 +12,7 @@
         jar="D:\AndroidProject\Sleep\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         revision="23.0.1"
-        sha1="23f7f66115f3cc2f1a9db2bf24fe57fa086bced1">
+        sha1="8541da342aa93203ece0e56899e85ab44ec6f4a9">
         <dex dex="D:\AndroidProject\Sleep\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_ddea82c2eea34adfadbc8310a43e4cfb1004c20c\classes.dex" />
     </item>
     <item
@@ -33,7 +33,7 @@
         jar="D:\AndroidProject\Sleep\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         revision="23.0.1"
-        sha1="0a239b85f8a60d7298fa2dd358ef6b0614da2a4f">
+        sha1="d66867d4b2d1e56428da57f713f30ce3e0e24cac">
         <dex dex="D:\AndroidProject\Sleep\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_a04e4c2bf2da4f54c5529db12d9b7a64843d2038\classes.dex" />
     </item>
     <item

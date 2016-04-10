@@ -128,9 +128,7 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
                 public void onClick(View v) {
                     Intent i = new Intent(ClockListActivity.this, SetAlarmActivity.class);
                     i.putExtra(EXTRA_CRIME_ID, c.getId());
-                    //Toast.makeText(getApplicationContext(),"点击的是"+c.getId(), Toast.LENGTH_SHORT).show();
                     i.putExtra("闹钟时间", dateFormater.format(c.getDate()));
-                    //i.putExtra("闹钟标签", c.getLable());
                     startActivity(i);
                 }
             });

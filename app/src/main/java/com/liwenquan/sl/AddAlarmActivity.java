@@ -15,7 +15,6 @@ import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -42,7 +41,8 @@ public class AddAlarmActivity extends AppCompatActivity {
     private String mTime;
     private Calendar calendar;
     private AlarmManager alarmManager;
-    private Clock clock;
+    private Clock mclock;
+    private TextView mRingName;
     Uri ringUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
     private static final int INTERVAL = 1000 * 60 * 60 * 24;// 24h
     @Override
@@ -54,12 +54,13 @@ public class AddAlarmActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);
 
+        mRingName = (TextView) findViewById(R.id.ring_name);
 
         TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
         Calendar c = Calendar.getInstance();
         hour = c.get(Calendar.HOUR_OF_DAY);
         minute = c.get(Calendar.MINUTE);
-        clock=new Clock(Calendar.getInstance().getTime());
+        mclock = new Clock(Calendar.getInstance().getTime());
 
         //mTime = formattime(hour, minute);
         calendar = Calendar.getInstance();
@@ -73,20 +74,12 @@ public class AddAlarmActivity extends AppCompatActivity {
                 calendar.set(Calendar.MINUTE, minute);
                 calendar.set(Calendar.SECOND, 0);
                 calendar.set(Calendar.MILLISECOND, 0);
-                clock=new Clock(calendar.getTime());
+                mclock = new Clock(calendar.getTime());
             }
         });
         findViewById(R.id.chooseSong).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                Intent intent = new Intent(
-//                        RingtoneManager.ACTION_RINGTONE_PICKER);
-//                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE,
-//                        RingtoneManager.TYPE_ALARM);
-//                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE,
-//                        "设置闹钟铃声");
-//                startActivityForResult(intent, Alarm);
                 Intent intent = new Intent();
                 intent.setAction(RingtoneManager.ACTION_RINGTONE_PICKER);
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
@@ -118,7 +111,7 @@ public class AddAlarmActivity extends AppCompatActivity {
                         String lable = metLable.getText().toString().trim();
                         mtvalarmlable = (TextView) findViewById(R.id.tvalarmlable);
                         mtvalarmlable.setText(lable);
-                        clock.setLable(lable);
+                        mclock.setLable(lable);
                         Toast.makeText(AddAlarmActivity.this, "已设定标签：" + lable, Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -150,13 +143,13 @@ public class AddAlarmActivity extends AppCompatActivity {
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP,
                         calendar.getTimeInMillis(), pi);
 
-                ClockLab.get(getApplicationContext()).addClock(clock);
                 Intent intent = new Intent(AddAlarmActivity.this, ClockListActivity.class);
                 startActivity(intent);
-                ClockLab.get(getApplicationContext()).saveClocks();
-                if(clock.getLable()==null){
-                    clock.setLable("闹钟");
+                ClockLab.get(getApplicationContext()).addClock(mclock);
+                if (mclock.getLable() == null) {
+                    mclock.setLable("闹钟");
                 }
+                ClockLab.get(getApplicationContext()).saveClocks();
                 AddAlarmActivity.this.finish();
 
             }
@@ -197,10 +190,11 @@ public class AddAlarmActivity extends AppCompatActivity {
             case 1:
                 //获取选中的铃声的URI
                 Uri pickedURI = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
-                Log.i(TAG,pickedURI.toString());
-                clock.setRing(pickedURI.toString());
-
+                mRingName.setText(pickedURI.toString());
+                //Log.i(TAG,pickedURI.toString());
+                mclock.setRing(pickedURI.toString());
                 getName(RingtoneManager.TYPE_ALARM);
+
                 break;
 
             default:
@@ -209,15 +203,16 @@ public class AddAlarmActivity extends AppCompatActivity {
     }
     private void getName(int type){
         Uri pickedUri = RingtoneManager.getActualDefaultRingtoneUri(this, type);
-        Log.i(TAG,pickedUri.toString());
+        //Log.i(TAG,pickedUri.toString());
         Cursor cursor = this.getContentResolver().query(pickedUri, new String[]{MediaStore.Audio.Media.TITLE}, null, null, null);
         if (cursor!=null) {
             if (cursor.moveToFirst()) {
                 String ring_name = cursor.getString(0);
-                Log.i(TAG,ring_name);
+
+                //Log.i(TAG,ring_name);
                 String[] c = cursor.getColumnNames();
                 for (String string : c) {
-                    Log.i(TAG,string);
+                    //Log.i(TAG,string);
                 }
             }
             cursor.close();

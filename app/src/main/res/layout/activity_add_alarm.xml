@@ -29,7 +29,7 @@
             <TimePicker
                 android:id="@+id/timePicker"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
             </TimePicker>
 
@@ -48,7 +48,6 @@
                 android:gravity="center">
 
                 <ToggleButton
-                    android:id="@+id/toggleButton"
                     android:layout_width="48dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/selector_view"
@@ -57,7 +56,6 @@
                     android:textOn="周一" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton2"
                     android:layout_width="48dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/selector_view"
@@ -66,7 +64,6 @@
                     android:textOn="周二" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton3"
                     android:layout_width="48dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/selector_view"
@@ -75,7 +72,6 @@
                     android:textOn="周三" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton4"
                     android:layout_width="48dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/selector_view"
@@ -84,7 +80,6 @@
                     android:textOn="周四" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton5"
                     android:layout_width="48dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/selector_view"
@@ -93,7 +88,6 @@
                     android:textOn="周五" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton6"
                     android:layout_width="48dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/selector_view"
@@ -102,7 +96,6 @@
                     android:textOn="周六" />
 
                 <ToggleButton
-                    android:id="@+id/toggleButton7"
                     android:layout_width="48dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/selector_view"
@@ -112,12 +105,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                style="?android:listSeparatorTextViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"></LinearLayout>
 
             <LinearLayout
                 android:id="@+id/lllable"
@@ -152,16 +139,32 @@
                 android:layout_height="60dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@string/text_song"
-                    android:textColor="@color/color_black"
-                    android:textSize="16sp" />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="@string/text_song"
+                        android:textColor="@color/color_black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:id="@+id/ring_name"
+                        android:text="铃声"
+                        android:textSize="13sp" />
+                </LinearLayout>
 
                 <ImageView
                     android:layout_width="wrap_content"
