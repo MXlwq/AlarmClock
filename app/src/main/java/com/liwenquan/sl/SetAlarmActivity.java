@@ -1,5 +1,7 @@
 package com.liwenquan.sl;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,16 +22,17 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class SetAlarmActivity extends AppCompatActivity {
     public static final String EXTAR_POSITON = "com.lwq.position";
+    private static final String TAG = "AlarmClockTime";
     Uri ringUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
     private TextView mtvalarmlable;
     private AudioManager audiomanger;
     private int maxVolume, currentVolume;
     private SeekBar seekBar;
-    private int hour, minute;
     private EditText metLable;
     private Clock mclock;
     private String lable;
@@ -58,13 +61,13 @@ public class SetAlarmActivity extends AppCompatActivity {
         mtvalarmlable = (TextView) findViewById(R.id.tvalarmlable);
         mtvalarmlable.setText(mclock.getLable());
         final int position = getIntent().getIntExtra(EXTAR_POSITON, 0);
-        String s = getIntent().getStringExtra("闹钟时间");
+        SimpleDateFormat dateFormater = new SimpleDateFormat("HH:mm");
+
+        String s = dateFormater.format(mclock.getDate());
         String timelist[] = s.split(":");
         timePicker.setCurrentHour(Integer.valueOf(timelist[0]));
         timePicker.setCurrentMinute(Integer.valueOf(timelist[1]));
 
-        hour = timePicker.getCurrentHour();
-        minute = timePicker.getCurrentMinute();
 
         calendar = Calendar.getInstance();
         timePicker.setIs24HourView(true);//显示24小时制
@@ -146,6 +149,9 @@ public class SetAlarmActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ClockLab.get(SetAlarmActivity.this).deleteClock(mclock);
                 ClockLab.get(SetAlarmActivity.this).saveClocks();
+                AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), AddAlarmActivity.AlarmID, new Intent(getApplicationContext(), AlarmReceiver.class), 0);
+                am.cancel(pi);
                 finish();
             }
         });

@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -25,20 +26,21 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class AddAlarmActivity extends AppCompatActivity {
-    public static final String ACTION_SEND = "com.liwenquan.sl.ACTION_SEND";
-    public static final String PALY_ALARM="com.liwenquan.sl.playalarm";
+    //public static final String ACTION_SEND = "com.liwenquan.sl.ACTION_SEND";
+    public static final String PALY_ALARM = "com.liwenquan.sl.playalarm";
     private static final long INTERVAL_TIME = 1000 * 60 * 1;
+    private static final String TAG = "AddAlarmTAG";
     private TextView mtvalarmlable;
     private AudioManager audiomanger;
     private int maxVolume, currentVolume;
     private SeekBar seekBar;
-    private int hour, minute;
     private Calendar calendar;
-    private AlarmManager alarmManager;
+    public static AlarmManager alarmManager;
     private Clock mclock;
+    public static PendingIntent pi;
     private TextView mRingName;
     private int yourChose;
-    static Intent i;
+    public static int AlarmID;
     Uri ringUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
 
     @Override
@@ -52,13 +54,10 @@ public class AddAlarmActivity extends AppCompatActivity {
         findViewById(R.id.linearadd).setVisibility(View.VISIBLE);
         findViewById(R.id.linearset).setVisibility(View.GONE);
 
-
         mRingName = (TextView) findViewById(R.id.ring_name);
 
         TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
         Calendar c = Calendar.getInstance();
-        hour = c.get(Calendar.HOUR_OF_DAY);
-        minute = c.get(Calendar.MINUTE);
         mclock = new Clock(Calendar.getInstance().getTime());
 
         calendar = Calendar.getInstance();
@@ -132,6 +131,7 @@ public class AddAlarmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO
+                deleteAlarm();
                 finish();
             }
         });
@@ -139,14 +139,16 @@ public class AddAlarmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                i = new Intent(AddAlarmActivity.this, PlayAlarmActivity.class);
-                //i=new Intent();
-                //i.setAction(PALY_ALARM);
-
-                PendingIntent pi = PendingIntent.getActivity(AddAlarmActivity.this, mclock.getId().hashCode(), i, 0);
+                Log.e(TAG, mclock.getId().hashCode() + "");
+                //i = new Intent(AddAlarmActivity.this, PlayAlarmActivity.class);
+                Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
+                AlarmID = mclock.getId().hashCode();
+                pi = PendingIntent.getBroadcast(getApplicationContext(), AlarmID, i, 0);
                 alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                //设置重复闹钟
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                        INTERVAL_TIME, pi);
+                        AlarmManager.INTERVAL_DAY, pi);
+                //设置精准闹钟
 //                alarmManager.setExact(AlarmManager.RTC_WAKEUP,
 //                        calendar.getTimeInMillis(), pi);
                 //Toast.makeText(getApplicationContext(), "闹钟ID" + mclock.getId(), Toast.LENGTH_SHORT).show();
@@ -189,6 +191,13 @@ public class AddAlarmActivity extends AppCompatActivity {
         });
     }
 
+    private void deleteAlarm() {
+        Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
+        pi = PendingIntent.getBroadcast(getApplicationContext(), AlarmID, i, 0);
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.cancel(pi);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -227,7 +236,7 @@ public class AddAlarmActivity extends AppCompatActivity {
     }
 
     private void showSinChosDia() {
-        final String[] mList = {"普通", "扫码","疯狂摇手机", "算术题"};
+        final String[] mList = {"普通", "扫码", "疯狂摇手机", "算术题"};
         yourChose = 3;
         AlertDialog.Builder sinChosDia = new AlertDialog.Builder(AddAlarmActivity.this);
         sinChosDia.setTitle("选择闹钟停止方式");
@@ -290,6 +299,7 @@ public class AddAlarmActivity extends AppCompatActivity {
         });
         sinChosDia.create().show();
     }
+
 
 }
 

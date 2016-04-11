@@ -40,7 +40,7 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         firstTime = prefs.getBoolean("first_time", true);
         if (firstTime) {
-            Toast.makeText(getApplicationContext(), "HEllo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(ClockListActivity.this, HelloActivity.class));
             SharedPreferences.Editor pEdit = prefs.edit();
             pEdit.putBoolean("first_time", false);
@@ -139,15 +139,15 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     finalHolder.mswitchOn.setChecked(isChecked);
-                    //Toast.makeText(getContext(),"点击的是第"+position+"个闹钟",Toast.LENGTH_SHORT).show();
                     c.setOn(isChecked);
                     ClockLab.get(getApplicationContext()).saveClocks();
                     if (isChecked == false) {
-                        Intent i = new Intent(PLAY_ALARM);
-                        Toast.makeText(getContext(), "闹钟ID" + c.getId(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "闹钟ID" + c.getId().hashCode(), Toast.LENGTH_SHORT).show();
+                        //此处有问题，关闭闹钟功能不能用待解决
+                        // 20160411版本√测试通过
+                        Intent i = new Intent(getContext(), AlarmReceiver.class);
                         AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-                        //此处有问题，待解决
-                        PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), Integer.valueOf(c.getId().hashCode()), i, 0);
+                        PendingIntent pi = PendingIntent.getBroadcast(getContext(), Integer.valueOf(c.getId().hashCode()), i, 0);
                         am.cancel(pi);
                     }
                 }
@@ -164,7 +164,6 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
                 public void onClick(View v) {
                     Intent i = new Intent(ClockListActivity.this, SetAlarmActivity.class);
                     i.putExtra(EXTRA_CRIME_ID, c.getId());
-                    i.putExtra("闹钟时间", dateFormater.format(c.getDate()));
                     startActivity(i);
                 }
             });

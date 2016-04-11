@@ -80,32 +80,32 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/snoozeTime"
-            style="?android:listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
+        <!--<LinearLayout-->
+        <!--android:id="@+id/snoozeTime"-->
+        <!--style="?android:listSeparatorTextViewStyle"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="70dp"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:orientation="vertical">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="bottom"
-                android:text="@string/text_snooze"
-                android:textColor="@color/color_black"
-                android:textSize="17sp" />
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:gravity="bottom"-->
+        <!--android:text="@string/text_snooze"-->
+        <!--android:textColor="@color/color_black"-->
+        <!--android:textSize="17sp" />-->
 
-            <TextView
-                android:id="@+id/tvSnoozeTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/text_snoozetime"
-                android:textSize="14sp" />
+        <!--<TextView-->
+        <!--android:id="@+id/tvSnoozeTime"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="@string/text_snoozetime"-->
+        <!--android:textSize="14sp" />-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
     </LinearLayout>
 
 </LinearLayout>

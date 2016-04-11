@@ -3,22 +3,22 @@ package com.liwenquan.sl;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class PlayAlarmActivity extends Activity {
-
+    public static final String PALY_ALARM = "com.liwenquan.sl.playalarm";
+    private static final String TAG = "PalyAlarmTAG";
     private MediaPlayer mp;
     private TextView tvStop;
     private Button mputoff;
-    PendingIntent pi;
     private GestureDetector mGestureDetector;
     private Clock mclock;
 
@@ -31,13 +31,13 @@ public class PlayAlarmActivity extends Activity {
         mp = MediaPlayer.create(PlayAlarmActivity.this, RingtoneManager.getActualDefaultRingtoneUri(PlayAlarmActivity.this,
                 RingtoneManager.TYPE_ALARM));
         mp.start();
-        mputoff = (Button) findViewById(R.id.putoff);
-        mputoff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        mputoff = (Button) findViewById(R.id.putoff);
+//        mputoff.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
         tvStop = (TextView) findViewById(R.id.stopclock);
 
         //1.重写 GestureDetector的onFling方法
@@ -49,11 +49,9 @@ public class PlayAlarmActivity extends Activity {
                         && (e1.getX() >= 0 && e1.getX() <= 500)) {
                     if (Math.abs(e2.getX() - e1.getX()) > Math.abs(e2.getY() - e1.getY())
                             && Math.abs(velocityX) > 100) {
-                        Intent i = new Intent(AddAlarmActivity.ACTION_SEND);
-                        // And cancel the alarm.
-                        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-                        //此处有问题，待解决
-                        pi = PendingIntent.getBroadcast(getApplicationContext(), Integer.valueOf(mclock.getId().hashCode()), i, 0);
+                        //此处有问题，待解决√，已解决
+                        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                        PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), AddAlarmActivity.AlarmID, new Intent(getApplicationContext(), AlarmReceiver.class), 0);
                         am.cancel(pi);
                         mp.stop();
                         PlayAlarmActivity.this.finish();
