@@ -5,6 +5,8 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
@@ -60,11 +62,22 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
                 int id = item.getItemId();
 
                 if (id == R.id.action_bug) {
-                    Toast.makeText(ClockListActivity.this, "请点击关于⊙０⊙", Toast.LENGTH_SHORT).show();
-                    //startActivity(new Intent(ClockListActivity.this, PlayAlarmActivity.class));
+//                    Toast.makeText(ClockListActivity.this, "请点击关于⊙０⊙", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(ClockListActivity.this, PushBugActivity.class));
                     return true;
                 } else if (id == R.id.action_about) {
                     startActivity(new Intent(ClockListActivity.this, AboutUsActivity.class));
+                    return true;
+                } else if (id == R.id.action_update) {
+                    PackageManager pm = getPackageManager();
+                    PackageInfo pi = null;
+                    try {
+                        pi = pm.getPackageInfo(getPackageName(), 0);
+                    } catch (PackageManager.NameNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    String name = pi.versionName;
+                    Toast.makeText(ClockListActivity.this, getString(R.string.version, name), Toast.LENGTH_SHORT).show();
                     return true;
                 }
                 return true;

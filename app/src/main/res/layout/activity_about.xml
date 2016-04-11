@@ -21,13 +21,6 @@
         android:textColor="@color/color_about"
         android:textSize="20sp" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/button_commitbug"
-        android:textColor="@color/color_red" />
-
 
 </LinearLayout>
 

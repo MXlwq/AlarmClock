@@ -50,6 +50,7 @@ public class PlayAlarmActivity extends Activity {
                     if (Math.abs(e2.getX() - e1.getX()) > Math.abs(e2.getY() - e1.getY())
                             && Math.abs(velocityX) > 100) {
                         //此处有问题，待解决√，已解决
+                        //需要注释
                         AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                         PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), AddAlarmActivity.AlarmID, new Intent(getApplicationContext(), AlarmReceiver.class), 0);
                         am.cancel(pi);

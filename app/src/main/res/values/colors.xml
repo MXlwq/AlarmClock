@@ -9,4 +9,6 @@
     <color name="color_menu">#FFC107</color>
     <color name="color_addMenu">#ff4182</color>
     <color name="color_black">#000000</color>
+    <color name="color_gray">#E5EEFE</color>
+    <color name="color_gray_deep">#BDC7D8</color>
 </resources>

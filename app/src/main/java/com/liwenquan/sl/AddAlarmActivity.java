@@ -28,7 +28,7 @@ import java.util.Calendar;
 public class AddAlarmActivity extends AppCompatActivity {
     //public static final String ACTION_SEND = "com.liwenquan.sl.ACTION_SEND";
     public static final String PALY_ALARM = "com.liwenquan.sl.playalarm";
-    private static final long INTERVAL_TIME = 1000 * 60 * 1;
+    public static final long INTERVAL_TIME = 1000 * 60 * 1;
     private static final String TAG = "AddAlarmTAG";
     private TextView mtvalarmlable;
     private AudioManager audiomanger;
@@ -131,21 +131,21 @@ public class AddAlarmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO
-                deleteAlarm();
+                //deleteAlarm();
                 finish();
             }
         });
         findViewById(R.id.btnOk).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //Toast.makeText(getApplicationContext(),"闹钟的ID:"+mclock.getId(),Toast.LENGTH_SHORT).show();
                 Log.e(TAG, mclock.getId().hashCode() + "");
                 //i = new Intent(AddAlarmActivity.this, PlayAlarmActivity.class);
                 Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
                 AlarmID = mclock.getId().hashCode();
                 pi = PendingIntent.getBroadcast(getApplicationContext(), AlarmID, i, 0);
                 alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-                //设置重复闹钟
+                //设置每天重复闹钟
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                         AlarmManager.INTERVAL_DAY, pi);
                 //设置精准闹钟
@@ -191,12 +191,12 @@ public class AddAlarmActivity extends AppCompatActivity {
         });
     }
 
-    private void deleteAlarm() {
-        Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
-        pi = PendingIntent.getBroadcast(getApplicationContext(), AlarmID, i, 0);
-        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.cancel(pi);
-    }
+//    private void deleteAlarm() {
+//        Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
+//        pi = PendingIntent.getBroadcast(getApplicationContext(), AlarmID, i, 0);
+//        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+//        alarmManager.cancel(pi);
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

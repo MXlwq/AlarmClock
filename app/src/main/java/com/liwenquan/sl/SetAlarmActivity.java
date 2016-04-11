@@ -163,6 +163,15 @@ public class SetAlarmActivity extends AppCompatActivity {
                 if (mclock.getLable() == null) {
                     mclock.setLable("闹钟");
                 }
+                //Toast.makeText(getApplicationContext(),"闹钟的ID:"+mclock.getId(),Toast.LENGTH_SHORT).show();
+                AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                PendingIntent pi = PendingIntent.getBroadcast(getApplicationContext(), AddAlarmActivity.AlarmID, new Intent(getApplicationContext(), AlarmReceiver.class), 0);
+                am.cancel(pi);
+
+                Intent i = new Intent(getApplicationContext(), AlarmReceiver.class);
+                pi = PendingIntent.getBroadcast(getApplicationContext(), mclock.getId().hashCode(), i, 0);
+                am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                        AddAlarmActivity.INTERVAL_TIME, AddAlarmActivity.pi);
                 ClockLab.get(getApplicationContext()).saveClocks();
                 SetAlarmActivity.this.finish();
             }

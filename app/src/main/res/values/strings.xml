@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">WakeUp</string>
-    <string name="menu_bug">提Bug</string>
+    <string name="menu_bug">意见反馈</string>
     <string name="menu_about_us">关于</string>
-    <string name="home_page">Alarms</string>
+    <string name="menu_update">检查更新</string>
+    <string name="version">当前版本是%s\n已经是最新版本"</string>
+    <string name="bugfeedback">感谢您的反馈~\n您的关注是我前进的动力~</string>
+    <string name="home_page">闹钟</string>
     <string name="title_activity_set">SetActivity</string>
     <string name="title_activity_setting">SettingActivity</string>
     <string name="text_song">铃声</string>
@@ -19,7 +22,7 @@
     <string name="hint_lable">闹钟标签</string>
     <string name="text_snooze">小睡时间</string>
     <string name="text_snoozetime">5分钟</string>
-    <string name="button_commitbug">点我提交八阿哥啦~</string>
+    <string name="button_commitbug">点我发送</string>
     <string name="text_about">本程序目前是beta阶段，发现bug欢迎反馈，最终会实现以下功能来帮助你起床\n1.防止自己太轻松地关闭闹钟又睡过头，想要关闭闹钟，可能要花大力气或者动脑筋啦\n2.自己可以调节关闭闹钟的难度和方式，如果想早起，可以调的变态一点=-=。\n3.闹钟响起的时候无法关闭手机，也不能降低音量，总之，不完成自己设定的条件是不会停的，除非电池没电了.+.</string>
     <string name="title_activity_hello">HelloActivity</string>
     <string name="action_settings">Settings</string>
