@@ -67,7 +67,7 @@ public class SetAlarmActivity extends AppCompatActivity {
         minute = timePicker.getCurrentMinute();
 
         calendar = Calendar.getInstance();
-        timePicker.setIs24HourView(true);//是否显示24小时制？默认false
+        timePicker.setIs24HourView(true);//显示24小时制
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {

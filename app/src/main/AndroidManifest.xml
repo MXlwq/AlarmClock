@@ -33,7 +33,6 @@
 
             <action android:name="com.liwenquan.sl.playalarm" />
 
-            <category android:name="android.intent.category.DEFAULT" />
         </activity>
         <activity
             android:name=".AboutUsActivity"
@@ -59,7 +58,14 @@
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </receiver>
-
+        <receiver
+            android:name=".ClockReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.liwenquan.sl.ACTION_SEND"/>
+            </intent-filter>
+        </receiver>
         <activity
             android:name=".HelloActivity"
             android:label="@string/title_activity_hello"

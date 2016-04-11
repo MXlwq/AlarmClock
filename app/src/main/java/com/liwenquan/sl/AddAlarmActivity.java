@@ -25,8 +25,9 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class AddAlarmActivity extends AppCompatActivity {
-    public static final String PLAY_ALARM = "com.liwenquan.sl.playalarm";
-    private static final long INTERVAL_TIME = 1000 * 60 * 5;
+    public static final String ACTION_SEND = "com.liwenquan.sl.ACTION_SEND";
+    public static final String PALY_ALARM="com.liwenquan.sl.playalarm";
+    private static final long INTERVAL_TIME = 1000 * 60 * 1;
     private TextView mtvalarmlable;
     private AudioManager audiomanger;
     private int maxVolume, currentVolume;
@@ -37,8 +38,8 @@ public class AddAlarmActivity extends AppCompatActivity {
     private Clock mclock;
     private TextView mRingName;
     private int yourChose;
+    static Intent i;
     Uri ringUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-    public static final int INTERVAL = 1000 * 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,7 @@ public class AddAlarmActivity extends AppCompatActivity {
 
         calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        timePicker.setIs24HourView(true);//是否显示24小时制？默认false
+        timePicker.setIs24HourView(true);//24小时制
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
@@ -138,10 +139,17 @@ public class AddAlarmActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(PLAY_ALARM);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, i, PendingIntent.FLAG_CANCEL_CURRENT);
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), INTERVAL_TIME, pendingIntent);
-                Toast.makeText(getApplicationContext(), "闹钟ID" + mclock.getId(), Toast.LENGTH_SHORT).show();
+                i = new Intent(AddAlarmActivity.this, PlayAlarmActivity.class);
+                //i=new Intent();
+                //i.setAction(PALY_ALARM);
+
+                PendingIntent pi = PendingIntent.getActivity(AddAlarmActivity.this, mclock.getId().hashCode(), i, 0);
+                alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                        INTERVAL_TIME, pi);
+//                alarmManager.setExact(AlarmManager.RTC_WAKEUP,
+//                        calendar.getTimeInMillis(), pi);
+                //Toast.makeText(getApplicationContext(), "闹钟ID" + mclock.getId(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(AddAlarmActivity.this, ClockListActivity.class);
                 startActivity(intent);
                 ClockLab.get(getApplicationContext()).addClock(mclock);
@@ -219,7 +227,7 @@ public class AddAlarmActivity extends AppCompatActivity {
     }
 
     private void showSinChosDia() {
-        final String[] mList = {"普通", "扫码", "拍相同颜色照片", "疯狂摇手机", "算术题"};
+        final String[] mList = {"普通", "扫码","疯狂摇手机", "算术题"};
         yourChose = 3;
         AlertDialog.Builder sinChosDia = new AlertDialog.Builder(AddAlarmActivity.this);
         sinChosDia.setTitle("选择闹钟停止方式");

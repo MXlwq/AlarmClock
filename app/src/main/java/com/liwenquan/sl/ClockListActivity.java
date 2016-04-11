@@ -142,23 +142,6 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
                     //Toast.makeText(getContext(),"点击的是第"+position+"个闹钟",Toast.LENGTH_SHORT).show();
                     c.setOn(isChecked);
                     ClockLab.get(getApplicationContext()).saveClocks();
-//                    if (isChecked == true) {
-//                        Intent i = new Intent(ClockListActivity.this, PlayAlarmActivity.class);
-//                        Calendar calendar = Calendar.getInstance();
-//                        String s = getIntent().getStringExtra("闹钟时间");
-//                        String timelist[] = s.split(":");
-//                        calendar.set(Calendar.HOUR_OF_DAY, Integer.valueOf(timelist[0]));
-//                        calendar.set(Calendar.MINUTE, Integer.valueOf(timelist[1]));
-//                        calendar.set(Calendar.SECOND, 0);
-//                        calendar.set(Calendar.MILLISECOND, 0);
-//                        Toast.makeText(getContext(),"闹钟ID"+c.getId(),Toast.LENGTH_SHORT).show();
-//                        PendingIntent pi = PendingIntent.getActivity(ClockListActivity.this, c.getId().hashCode(), i, 0);
-//                        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-//                        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-//                                AddAlarmActivity.INTERVAL, pi);
-//                        alarmManager.setExact(AlarmManager.RTC_WAKEUP,
-//                                calendar.getTimeInMillis(), pi);
-//                    }
                     if (isChecked == false) {
                         Intent i = new Intent(PLAY_ALARM);
                         Toast.makeText(getContext(), "闹钟ID" + c.getId(), Toast.LENGTH_SHORT).show();
