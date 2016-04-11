@@ -27,14 +27,29 @@
             android:id="@+id/tvlable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:background="#fafafa"
-            android:gravity="left|top"
-            android:paddingLeft="8dp"
-            android:text="闹钟"
-            android:textSize="16sp" />
+            android:paddingLeft="12dp"
+            android:text="闹钟" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp">
+            <TextView
+                android:paddingLeft="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="每天"/>
+            <TextView
+                android:paddingLeft="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=".....分钟之后响铃"/>
+
+        </LinearLayout>
     </LinearLayout>
 
     <Switch

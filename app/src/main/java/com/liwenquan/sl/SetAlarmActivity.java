@@ -3,7 +3,6 @@ package com.liwenquan.sl;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.RingtoneManager;
@@ -24,20 +23,13 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class SetAlarmActivity extends AppCompatActivity {
-    public static final String EXTAR_TIME = "com.lwq.getTime";
     public static final String EXTAR_POSITON = "com.lwq.position";
-    private static final int Alarm = 1;
-    private static final String KEY = "alarmList";
-    SharedPreferences.Editor editor;
-    StringBuffer sb;
     Uri ringUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
     private TextView mtvalarmlable;
     private AudioManager audiomanger;
     private int maxVolume, currentVolume;
     private SeekBar seekBar;
     private int hour, minute;
-    private TextView mtvLable;
-    private String mTime;
     private EditText metLable;
     private Clock mclock;
     private String lable;
@@ -49,24 +41,24 @@ public class SetAlarmActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_set_alarm);
+        setContentView(R.layout.activity_alarm);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("设置闹钟");//设置主标题
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         setSupportActionBar(toolbar);
-
+        findViewById(R.id.linearadd).setVisibility(View.GONE);
+        findViewById(R.id.linearset).setVisibility(View.VISIBLE);
         String clockId = getIntent().getStringExtra(ClockListActivity.EXTRA_CRIME_ID);
         mclock = ClockLab.get(SetAlarmActivity.this).getClock(clockId);
 
         TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
-        mRingName = (TextView) findViewById(R.id.ring_name_set);
+        mRingName = (TextView) findViewById(R.id.ring_name);
         mRingName.setText(mclock.getRing());
 
-        String s = getIntent().getStringExtra("闹钟时间");
         mtvalarmlable = (TextView) findViewById(R.id.tvalarmlable);
         mtvalarmlable.setText(mclock.getLable());
         final int position = getIntent().getIntExtra(EXTAR_POSITON, 0);
-        //Log.e("检查点", "点击位置的时间是"+s);
+        String s = getIntent().getStringExtra("闹钟时间");
         String timelist[] = s.split(":");
         timePicker.setCurrentHour(Integer.valueOf(timelist[0]));
         timePicker.setCurrentMinute(Integer.valueOf(timelist[1]));
@@ -74,7 +66,6 @@ public class SetAlarmActivity extends AppCompatActivity {
         hour = timePicker.getCurrentHour();
         minute = timePicker.getCurrentMinute();
 
-        mTime = formattime(hour, minute);
         calendar = Calendar.getInstance();
         timePicker.setIs24HourView(true);//是否显示24小时制？默认false
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
@@ -134,7 +125,7 @@ public class SetAlarmActivity extends AppCompatActivity {
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String lable = metLable.getText().toString().trim();
+                        lable = metLable.getText().toString().trim();
                         mtvalarmlable = (TextView) findViewById(R.id.tvalarmlable);
                         mtvalarmlable.setText(lable);
                         mclock.setLable(lable);
@@ -196,17 +187,7 @@ public class SetAlarmActivity extends AppCompatActivity {
         });
     }
 
-    private String formattime(int hour, int minute) {
-        String mTime, mhour, mminute;
-        if (hour < 10)
-            mhour = "0" + hour;
-        else mhour = "" + hour;
-        if (minute < 10)
-            mminute = "0" + minute;
-        else mminute = "" + minute;
-        mTime = mhour + ":" + mminute;
-        return mTime;
-    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -21,5 +21,8 @@
     <string name="text_snoozetime">5分钟</string>
     <string name="button_commitbug">点我提交八阿哥啦~</string>
     <string name="text_about">本程序目前是beta阶段，发现bug欢迎反馈，最终会实现以下功能来帮助你起床\n1.防止自己太轻松地关闭闹钟又睡过头，想要关闭闹钟，可能要花大力气或者动脑筋啦\n2.自己可以调节关闭闹钟的难度和方式，如果想早起，可以调的变态一点=-=。\n3.闹钟响起的时候无法关闭手机，也不能降低音量，总之，不完成自己设定的条件是不会停的，除非电池没电了.+.</string>
+    <string name="title_activity_hello">HelloActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 
 </resources>

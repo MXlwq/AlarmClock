@@ -6,8 +6,7 @@
     android:background="@drawable/background_color"
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    tools:context="com.liwenquan.sleep.MainActivity">
+    android:orientation="vertical">
 
     <TextClock
         android:layout_width="wrap_content"

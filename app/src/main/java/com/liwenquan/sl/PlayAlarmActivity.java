@@ -3,6 +3,7 @@ package com.liwenquan.sl;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.os.Bundle;
@@ -18,16 +19,15 @@ public class PlayAlarmActivity extends Activity {
     private TextView tvStop;
     private Button mputoff;
     PendingIntent pi;
-    private AlarmManager alarmManager;
     private GestureDetector mGestureDetector;
     private Clock mclock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_play_alarm);
         String clockId = getIntent().getStringExtra(ClockListActivity.EXTRA_CRIME_ID);
         mclock = ClockLab.get(PlayAlarmActivity.this).getClock(clockId);
-        setContentView(R.layout.activity_play_alarm);
         mp = MediaPlayer.create(PlayAlarmActivity.this, RingtoneManager.getActualDefaultRingtoneUri(PlayAlarmActivity.this,
                 RingtoneManager.TYPE_ALARM));
         mp.start();
@@ -49,9 +49,11 @@ public class PlayAlarmActivity extends Activity {
                         && (e1.getX() >= 0 && e1.getX() <= 500)) {
                     if (Math.abs(e2.getX() - e1.getX()) > Math.abs(e2.getY() - e1.getY())
                             && Math.abs(velocityX) > 100) {
+                        Intent i = new Intent(AddAlarmActivity.PLAY_ALARM);
                         // And cancel the alarm.
                         AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-                        pi = PendingIntent.getBroadcast(PlayAlarmActivity.this, Integer.valueOf(mclock.getId().hashCode()), AddAlarmActivity.i, 0);
+                        //此处有问题，待解决
+                        pi = PendingIntent.getBroadcast(getApplicationContext(), Integer.valueOf(mclock.getId().hashCode()), i, 0);
                         am.cancel(pi);
                         mp.stop();
                         PlayAlarmActivity.this.finish();

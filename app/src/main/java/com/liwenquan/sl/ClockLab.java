@@ -22,7 +22,6 @@ public class ClockLab {
     private ClockLab(Context appContext) {
         mAppContext = appContext;
         mSerializer = new ClockIntentJSONSerialize(mAppContext, FILENAME);
-
         try {
             mClocks = mSerializer.loadClocks();
             Log.e(TAG, "Crimes Loading cimes");

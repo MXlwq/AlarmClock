@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_below="@id/toolbar"
-        android:id="@+id/list_view"></ListView>
+        android:id="@+id/list_view_main"></ListView>
     <ImageView
         android:id="@+id/clock_add"
         android:layout_width="wrap_content"
