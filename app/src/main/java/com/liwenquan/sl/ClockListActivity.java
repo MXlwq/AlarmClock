@@ -63,7 +63,6 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
                 int id = item.getItemId();
 
                 if (id == R.id.action_bug) {
-//                    Toast.makeText(ClockListActivity.this, "请点击关于⊙０⊙", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(ClockListActivity.this, PushBugActivity.class));
                     return true;
                 } else if (id == R.id.action_about) {
@@ -146,8 +145,6 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
             final Clock c = getItem(position);
             holder.titleTextView.setText(c.getLable());
 
-
-            //mswitchOn = (Switch) convertView.findViewById(R.id.switchOn);
             holder.mswitchOn.setChecked(c.isOn());
             final ViewHolder finalHolder = holder;
             holder.mswitchOn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -183,41 +180,9 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
                 }
             });
 
-            Calendar clock = Calendar.getInstance();
-//            int hour = clock.get(Calendar.HOUR_OF_DAY);
-//            int minute = clock.get(Calendar.MINUTE);
-//            int hourclock=c.getDate().getHours();
-//            int minuteclock=c.getDate().getMinutes();
-            long time1 = clock.getTimeInMillis();
-            long time2 = c.getDate().getTime();
-            long diff = time2 - time1;
-            int hourdiff = (int) (diff / 1000 / 60 / 60);
-            int minutediff = (int) (diff / 1000 / 60 % 60);
-            System.out.println(hourdiff + ":" + minutediff);
-            if (hourdiff < 0)
-                if (minutediff < 0) {
-                    hourdiff += 23;
-                    minutediff = Math.abs(minutediff - 60);
-                } else {
-                    hourdiff += 24;
-                }
-            else{
-                if(minutediff < 0){
-                    hourdiff-=1;
-                    minutediff+=60;
-                }
-            }
-            String stime;
-            if(hourdiff==0)
-                stime=minutediff+"分钟后";
-            if(minutediff==0)
-                stime=hourdiff+"小时后";
-            if(hourdiff!=0&&minutediff!=0){
-                stime=hourdiff+"小时"+minutediff+"分钟后";
-            }
+            String stime = getTimeDiff(c);
 
-
-            //holder.mtime_left.setText(getString(R.string.string_time_left,stime));
+            holder.mtime_left.setText(getString(R.string.string_time_left, stime));
 
             return convertView;
         }
@@ -227,6 +192,38 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
             public TextView mtvClockClock;
             public TextView titleTextView;
             public TextView mtime_left;
+        }
+
+        public String getTimeDiff(Clock c) {
+            Calendar clock = Calendar.getInstance();
+            long time1 = clock.getTimeInMillis();
+            long time2 = c.getDate().getTime();
+            long diff = time2 - time1;
+            int hourdiff = 0;
+            int minutediff = 0;
+            int minutediffInminute = (int) (diff / 1000 / 60);
+            String stime = null;
+            if (minutediffInminute < 0) {
+                minutediffInminute += 24 * 60;
+                hourdiff = (minutediffInminute / 60);
+                minutediff = (minutediffInminute % 60);
+                if (hourdiff == 0)
+                    stime = minutediff + "分钟后";
+                else if (minutediff == 0)
+                    stime = hourdiff + "小时后";
+                else stime = hourdiff + "小时" + minutediff + "分钟后";
+            } else if (minutediffInminute == 0) {
+                stime = "一分钟内";
+            } else if (minutediffInminute > 0) {
+                hourdiff = (minutediffInminute / 60);
+                minutediff = (minutediffInminute % 60);
+                if (hourdiff == 0)
+                    stime = minutediff + "分钟后";
+                else if (minutediff == 0)
+                    stime = hourdiff + "小时后";
+                else stime = hourdiff + "小时" + minutediff + "分钟后";
+            }
+            return stime;
         }
     }
 
