@@ -4,16 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.liwenquan.sl.PushBugActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_menu"
+        android:fitsSystemWindows="true">
 
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/bugfeedback"
         android:textColor="@color/color_black"
         android:textSize="20sp" />
@@ -41,8 +50,10 @@
         android:id="@+id/push_bugs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:background="@color/color_menu"
         android:text="@string/button_commitbug"
-        android:textColor="@color/color_red" />
+        android:textSize="16sp"
+        android:textColor="#FFFFFF" />
+    </LinearLayout>
 
 </LinearLayout>

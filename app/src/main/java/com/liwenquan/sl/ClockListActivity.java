@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by LWQ on 2016/4/8.
@@ -134,6 +135,7 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
                 holder.mswitchOn = (Switch) convertView.findViewById(R.id.switchOn);
                 holder.mtvClockClock = (TextView) convertView.findViewById(R.id.tvTime);
                 holder.titleTextView = (TextView) convertView.findViewById(R.id.tvlable);
+                holder.mtime_left = (TextView) convertView.findViewById(R.id.time_left);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
@@ -171,7 +173,7 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
             TextView dateTextView = (TextView) convertView.findViewById(R.id.tvTime);
             dateTextView.setText(dateFormater.format(c.getDate()));
 
-            holder.mtvClockClock = (TextView) convertView.findViewById(R.id.tvTime);
+
             holder.mtvClockClock.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -180,6 +182,43 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
                     startActivity(i);
                 }
             });
+
+            Calendar clock = Calendar.getInstance();
+//            int hour = clock.get(Calendar.HOUR_OF_DAY);
+//            int minute = clock.get(Calendar.MINUTE);
+//            int hourclock=c.getDate().getHours();
+//            int minuteclock=c.getDate().getMinutes();
+            long time1 = clock.getTimeInMillis();
+            long time2 = c.getDate().getTime();
+            long diff = time2 - time1;
+            int hourdiff = (int) (diff / 1000 / 60 / 60);
+            int minutediff = (int) (diff / 1000 / 60 % 60);
+            System.out.println(hourdiff + ":" + minutediff);
+            if (hourdiff < 0)
+                if (minutediff < 0) {
+                    hourdiff += 23;
+                    minutediff = Math.abs(minutediff - 60);
+                } else {
+                    hourdiff += 24;
+                }
+            else{
+                if(minutediff < 0){
+                    hourdiff-=1;
+                    minutediff+=60;
+                }
+            }
+            String stime;
+            if(hourdiff==0)
+                stime=minutediff+"分钟后";
+            if(minutediff==0)
+                stime=hourdiff+"小时后";
+            if(hourdiff!=0&&minutediff!=0){
+                stime=hourdiff+"小时"+minutediff+"分钟后";
+            }
+
+
+            //holder.mtime_left.setText(getString(R.string.string_time_left,stime));
+
             return convertView;
         }
 
@@ -187,6 +226,7 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
             public Switch mswitchOn;
             public TextView mtvClockClock;
             public TextView titleTextView;
+            public TextView mtime_left;
         }
     }
 

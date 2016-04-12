@@ -45,9 +45,10 @@
                 android:text="每天"/>
             <TextView
                 android:paddingLeft="16dp"
+                android:id="@+id/time_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=".....分钟之后响铃"/>
+                android:text="@string/string_time_left"/>
 
         </LinearLayout>
     </LinearLayout>

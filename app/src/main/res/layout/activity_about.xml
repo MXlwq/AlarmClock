@@ -18,8 +18,8 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="@string/text_about"
-        android:textColor="@color/color_about"
-        android:textSize="20sp" />
+        android:textColor="#FF027BBB"
+        android:textSize="18sp" />
 
 
 </LinearLayout>
