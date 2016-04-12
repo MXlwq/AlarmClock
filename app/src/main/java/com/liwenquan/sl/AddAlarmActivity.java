@@ -2,6 +2,7 @@ package com.liwenquan.sl;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,11 +25,14 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class AddAlarmActivity extends AppCompatActivity {
     //public static final String ACTION_SEND = "com.liwenquan.sl.ACTION_SEND";
     public static final String PALY_ALARM = "com.liwenquan.sl.playalarm";
-    public static final long INTERVAL_TIME = 1000 * 60 * 1;
+    public static final long INTERVAL_TIME = 1000 * 60 * 60 * 24;
     private static final String TAG = "AddAlarmTAG";
     private TextView mtvalarmlable;
     private AudioManager audiomanger;
@@ -214,11 +218,48 @@ public class AddAlarmActivity extends AppCompatActivity {
         switch (requestCode) {
             case 1:
                 //获取选中的铃声的URI
+                //当外部应用需要对ContentProvider中的数据进行添加、删除、修改和查询操作
+                /*
+                query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) 用于查询指定Uri的ContentProvider
+                 */
                 Uri pickedURI = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
-                mRingName.setText(pickedURI.toString());
-                mclock.setRing(pickedURI.toString());
-                getName(RingtoneManager.TYPE_ALARM);
-
+//                Cursor cursor = this.getContentResolver().query(pickedURI, new String[]{MediaStore.Audio.Media.TITLE}, null, null, null);
+                ContentResolver musicResolver = this.getContentResolver();
+                Cursor musicCursor = musicResolver.query(
+                        pickedURI, null, null, null,
+                        null);
+                int musicColumnIndex;
+                if (null != musicCursor && musicCursor.getCount() > 0) {
+                    for (musicCursor.moveToFirst(); !musicCursor.isAfterLast(); musicCursor
+                            .moveToNext()) {
+                        Map musicDataMap = new HashMap();
+                        Random random = new Random();
+                        int musicRating = Math.abs(random.nextInt()) % 10;
+                        musicDataMap.put("musicRating", musicRating);// 取得音乐播放路径
+                        musicColumnIndex = musicCursor
+                                .getColumnIndex(MediaStore.Audio.AudioColumns.DATA);
+                        String musicPath = musicCursor.getString(musicColumnIndex);
+                        musicDataMap.put("musicPath", musicPath);// 取得音乐的名字
+                        musicColumnIndex = musicCursor
+                                .getColumnIndex(MediaStore.Audio.AudioColumns.TITLE);
+                        String musicName = musicCursor.getString(musicColumnIndex);
+                        musicDataMap.put("musicName", musicName);
+                        mRingName.setText(musicName);
+                        mclock.setRing(musicName);
+                    }
+                }
+//                if (cursor != null) {
+//                    if (cursor.moveToFirst()) {
+//                        String ring_name = cursor.getString(0);
+//                        mRingName.setText(ring_name);
+//                        mclock.setRing(ring_name);
+////                        String[] c = cursor.getColumnNames();
+////                        for (String string : c) {
+////
+////                        }
+//                    }
+//                    cursor.close();
+//                }
                 break;
 
             default:
@@ -232,7 +273,8 @@ public class AddAlarmActivity extends AppCompatActivity {
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 String ring_name = cursor.getString(0);
-
+                mRingName.setText(ring_name);
+                mclock.setRing(ring_name);
                 String[] c = cursor.getColumnNames();
                 for (String string : c) {
 

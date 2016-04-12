@@ -1,7 +1,6 @@
 package com.liwenquan.sl;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -24,10 +23,10 @@ public class ClockLab {
         mSerializer = new ClockIntentJSONSerialize(mAppContext, FILENAME);
         try {
             mClocks = mSerializer.loadClocks();
-            Log.e(TAG, "Crimes Loading cimes");
+            //Log.i(TAG, "Crimes Loading cimes");
         } catch (Exception e) {
             mClocks = new ArrayList<Clock>();
-            Log.e(TAG, "Error Loading cimes");
+            //Log.i(TAG, "Error Loading cimes");
         }
 
     }
@@ -64,10 +63,10 @@ public class ClockLab {
     public boolean saveClocks() {
         try {
             mSerializer.saveClocks(mClocks);
-            Log.e(TAG, "Crimes saved to file");
+            //Log.i(TAG, "Crimes saved to file");
             return true;
         } catch (Exception e) {
-            Log.e(TAG, "Error saving cimes:", e);
+            //Log.i(TAG, "Error saving cimes:", e);
             return false;
         }
     }
