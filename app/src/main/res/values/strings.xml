@@ -28,5 +28,9 @@
     <string name="title_activity_hello">HelloActivity</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">欢迎使用WakeUp闹钟叫你起床</string>
-
+    <string name="title_about">关于</string>
+    <string name="title_setting">设  置</string>
+    <string name="title_add_clock">添加闹钟</string>
+    <string name="title_feed_back">问题反馈</string>
+    <string name="string_title_email">"WakeUp闹钟Bug"</string>
 </resources>

@@ -41,12 +41,11 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
         setContentView(R.layout.activity_clock_list);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        firstTime = prefs.getBoolean("first_time", true);
+        firstTime = prefs.getBoolean("first_time_to_enter", true);
         if (firstTime) {
-            Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(ClockListActivity.this, HelloActivity.class));
             SharedPreferences.Editor pEdit = prefs.edit();
-            pEdit.putBoolean("first_time", false);
+            pEdit.putBoolean("first_time_to_enter", false);
             pEdit.commit();
         }
         mClocks = ClockLab.get(this).getClocks();
@@ -109,7 +108,8 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.action_setting:
-                startActivity(new Intent(ClockListActivity.this, SettingActivity.class));
+                Intent i=new Intent(ClockListActivity.this, SettingActivity.class);
+                startActivity(i);
                 break;
         }
     }

@@ -34,6 +34,7 @@
 
             <Switch
                 android:layout_width="match_parent"
+                android:id="@+id/notification_switch"
                 android:layout_height="30dp" />
         </LinearLayout>
 

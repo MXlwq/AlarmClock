@@ -20,9 +20,16 @@ public class PushBugActivity extends AppCompatActivity {
         setContentView(R.layout.activity_push_bug);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("问题反馈");//设置主标题
+        toolbar.setTitle(R.string.title_feed_back);//设置主标题
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+        toolbar.setNavigationIcon(R.mipmap.back);//设置导航栏图标
         setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         mEditTextTitle = (EditText) findViewById(R.id.et_bug_title);
         mEditTextAddress = (EditText) findViewById(R.id.et_email_address);
@@ -73,7 +80,7 @@ public class PushBugActivity extends AppCompatActivity {
                 //String[] email = {bugTitle};
                 Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
                 intent.putExtra(Intent.EXTRA_CC, mailaddress); // 抄送人
-                intent.putExtra(Intent.EXTRA_SUBJECT, "WakeUp闹钟Bug"); // 主题
+                intent.putExtra(Intent.EXTRA_SUBJECT, R.string.string_title_email); // 主题
                 intent.putExtra(Intent.EXTRA_TEXT, bugContent); // 正文
                 startActivity(Intent.createChooser(intent, "请选择邮件类应用"));
 

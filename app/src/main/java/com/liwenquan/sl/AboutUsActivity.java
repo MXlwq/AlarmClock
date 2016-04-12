@@ -12,7 +12,7 @@ public class AboutUsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("关于");//设置主标题
+        toolbar.setTitle(R.string.title_about);//设置主标题
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         toolbar.setNavigationIcon(R.mipmap.back);//设置导航栏图标
         setSupportActionBar(toolbar);

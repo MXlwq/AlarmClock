@@ -48,9 +48,16 @@ public class AddAlarmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("添加闹钟");//设置主标题
+        toolbar.setTitle(R.string.title_add_clock);//设置主标题
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+        toolbar.setNavigationIcon(R.mipmap.back);//设置导航栏图标
         setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         findViewById(R.id.linearadd).setVisibility(View.VISIBLE);
         findViewById(R.id.linearset).setVisibility(View.GONE);
 
