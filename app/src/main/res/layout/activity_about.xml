@@ -13,13 +13,63 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <ImageView
+        android:padding="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/alarmclock"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="@string/text_about"
-        android:textColor="#FF027BBB"
-        android:textSize="18sp" />
+        android:layout_gravity="center"
+        android:text="0.0.4.12Alpha"
+        android:textColor="@color/color_black"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Keep Calm And Carry On"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="开发者:MXD"
+        android:layout_gravity="center"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="邮箱:573384928@qq.com"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:id="@+id/copyright"
+        android:textColor="@color/colorAccent"
+        android:text="©2016 lwq.coding.io"
+        android:layout_gravity="center"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        android:text="All rights reserved."
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:id="@+id/more_about"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/color_menu"
+        android:text="更多相关"/>
+
 
 
 </LinearLayout>

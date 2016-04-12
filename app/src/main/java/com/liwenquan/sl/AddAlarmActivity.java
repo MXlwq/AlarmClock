@@ -45,6 +45,8 @@ public class AddAlarmActivity extends AppCompatActivity {
     private TextView mRingName;
     private int yourChose;
     public static int AlarmID;
+    PickerView hour_pv;
+    PickerView minute_pv;
     Uri ringUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
 
     @Override
@@ -73,6 +75,47 @@ public class AddAlarmActivity extends AppCompatActivity {
 
         calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
+
+
+//        hour_pv = (PickerView) findViewById(R.id.hour_pv);
+//        minute_pv = (PickerView) findViewById(R.id.minute_pv);
+//        List<String> data = new ArrayList<String>();
+//        List<String> seconds = new ArrayList<String>();
+//        for (int i = 0; i < 24; i++)
+//        {
+//            data.add(i < 10 ? "0" + i : "" + i);
+//
+//        }
+//        for (int i = 0; i < 60; i++)
+//        {
+//            seconds.add(i < 10 ? "0" + i : "" + i);
+//        }
+//        hour_pv.setData(data);
+//        hour_pv.setOnSelectListener(new PickerView.onSelectListener()
+//        {
+//
+//            @Override
+//            public void onSelect(String text)
+//            {
+//                Toast.makeText(AddAlarmActivity.this, "选择了 " + text + " 时",
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        hour_pv.mCurrentSelected=calendar.get(Calendar.HOUR_OF_DAY);
+//        minute_pv.setData(seconds);
+//
+//        minute_pv.setOnSelectListener(new PickerView.onSelectListener()
+//        {
+//
+//            @Override
+//            public void onSelect(String text)
+//            {
+//                Toast.makeText(AddAlarmActivity.this, "选择了 " + text + " 分",
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        minute_pv.mCurrentSelected=calendar.get(Calendar.HOUR_OF_DAY);
+
         timePicker.setIs24HourView(true);//24小时制
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
@@ -322,31 +365,32 @@ public class AddAlarmActivity extends AppCompatActivity {
     }
 
     private void showshakeChos() {
-        final String[] mList = {"疯狂摇手机变换次数"};
-        yourChose = 0;
-        AlertDialog.Builder sinChosDia = new AlertDialog.Builder(AddAlarmActivity.this);
-        sinChosDia.setTitle("设置摇动次数");
-        //待修改为输入文本，或者选择！
-        sinChosDia.setSingleChoiceItems(mList, 0, new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(AddAlarmActivity.this);
+        builder.setTitle("标签");
+        //    通过LayoutInflater来加载一个xml的布局文件作为一个View对象
+        View view = LayoutInflater.from(AddAlarmActivity.this).inflate(R.layout.dialog_lable, null);
+        //    设置我们自己定义的布局文件作为弹出框的Content
+        builder.setView(view);
 
+        final EditText metLable = (EditText) view.findViewById(R.id.etLable);
+
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // TODO Auto-generated method stub
-                yourChose = which;
+                String lable = metLable.getText().toString().trim();
+                mtvalarmlable = (TextView) findViewById(R.id.tvalarmlable);
+                mtvalarmlable.setText(lable);
+                mclock.setLable(lable);
+                Toast.makeText(AddAlarmActivity.this, "已设定标签：" + lable, Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
             }
         });
-        sinChosDia.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // TODO Auto-generated method stub
-
-                showClickMessage(mList[yourChose]);
-
-            }
-        });
-        sinChosDia.create().show();
+        builder.show();
     }
 
 

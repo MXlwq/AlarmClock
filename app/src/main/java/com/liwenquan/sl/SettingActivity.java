@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 public class SettingActivity extends AppCompatActivity {
     int yourChose = 1;
+    PickerView hour_pv;
+    PickerView minute_pv;
     String[] mList = {"1分钟", "5分钟", "10分钟", "30分钟"};
     private TextView mTvSnoozeTime;
     private Switch mNotificationSwitch;
@@ -30,10 +32,6 @@ public class SettingActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         toolbar.setNavigationIcon(R.mipmap.back);//设置导航栏图标
         setSupportActionBar(toolbar);
-//        mTvSnoozeTime = (TextView) findViewById(R.id.tvSnoozeTime);
-//        if (savedInstanceState != null) {
-//            mTvSnoozeTime.setText(savedInstanceState.getString("我是睡眠时间"));
-//        }
 
         manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationSwitch= (Switch) findViewById(R.id.notification_switch);
@@ -65,14 +63,49 @@ public class SettingActivity extends AppCompatActivity {
                 finish();
             }
         });
-//        findViewById(R.id.snoozeTime).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showSinChosDia();
+
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTimeInMillis(System.currentTimeMillis());
 //
+//        hour_pv = (PickerView) findViewById(R.id.hour_pv);
+//        minute_pv = (PickerView) findViewById(R.id.minute_pv);
+//        List<String> data = new ArrayList<String>();
+//        List<String> seconds = new ArrayList<String>();
+//        for (int i = 0; i < 24; i++)
+//        {
+//            data.add(i < 10 ? "0" + i : "" + i);
+//
+//        }
+//        for (int i = 0; i < 60; i++)
+//        {
+//            seconds.add(i < 10 ? "0" + i : "" + i);
+//        }
+//        hour_pv.setData(data);
+//
+//
+//        hour_pv.setOnSelectListener(new PickerView.onSelectListener()
+//        {
+//
+//            @Override
+//            public void onSelect(String text)
+//            {
+//                Toast.makeText(SettingActivity.this, "选择了 " + text + " 时",
+//                        Toast.LENGTH_SHORT).show();
 //            }
 //        });
-
+//        hour_pv.mCurrentSelected=calendar.get(Calendar.HOUR_OF_DAY);
+//        minute_pv.setData(seconds);
+//        minute_pv.setOnSelectListener(new PickerView.onSelectListener()
+//        {
+//
+//            @Override
+//            public void onSelect(String text)
+//            {
+//                Toast.makeText(SettingActivity.this, "选择了 " + text + " 分",
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        minute_pv.mCurrentSelected=calendar.get(Calendar.MINUTE);
 
     }
 

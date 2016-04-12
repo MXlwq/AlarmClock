@@ -154,7 +154,7 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
                     c.setOn(isChecked);
                     ClockLab.get(getApplicationContext()).saveClocks();
                     if (isChecked == false) {
-                        Toast.makeText(getContext(), "闹钟ID" + c.getId().hashCode(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), "闹钟ID" + c.getId().hashCode(), Toast.LENGTH_SHORT).show();
                         //此处有问题，关闭闹钟功能不能用待解决
                         // 20160411版本√测试通过
                         Intent i = new Intent(getContext(), AlarmReceiver.class);

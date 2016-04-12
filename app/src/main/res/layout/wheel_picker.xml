@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fafafa"
+    android:gravity="center">
+
+    <com.liwenquan.sl.PickerView
+        android:id="@+id/hour_pv"
+        android:layout_width="80dp"
+        android:layout_height="180dp" />
+
+    <TextView
+        android:id="@+id/hour_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/hour_pv"
+        android:text="时"
+        android:textColor="#ffaa33"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <com.liwenquan.sl.PickerView
+        android:id="@+id/minute_pv"
+        android:layout_width="80dp"
+        android:layout_height="180dp"
+        android:layout_toRightOf="@id/hour_tv" />
+
+    <TextView
+        android:id="@+id/minute_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/minute_pv"
+        android:text="分"
+        android:textColor="#ffaa33"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>
