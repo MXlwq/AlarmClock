@@ -262,6 +262,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/color_menu"
             android:text="@string/button_cancel" />
 
 
@@ -270,6 +271,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/color_menu"
             android:text="@string/button_ok" />
     </LinearLayout>
 
@@ -284,14 +286,15 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/color_menu"
             android:text="@string/button_delete" />
-
 
         <Button
             android:id="@+id/btnSaveClock"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/color_menu"
             android:text="@string/button_save" />
     </LinearLayout>
 

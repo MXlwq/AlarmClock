@@ -24,8 +24,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -366,22 +368,57 @@ public class AddAlarmActivity extends AppCompatActivity {
 
     private void showshakeChos() {
         AlertDialog.Builder builder = new AlertDialog.Builder(AddAlarmActivity.this);
-        builder.setTitle("标签");
+        builder.setTitle("摇动次数");
         //    通过LayoutInflater来加载一个xml的布局文件作为一个View对象
-        View view = LayoutInflater.from(AddAlarmActivity.this).inflate(R.layout.dialog_lable, null);
+        View view = LayoutInflater.from(AddAlarmActivity.this).inflate(R.layout.wheel_picker, null);
         //    设置我们自己定义的布局文件作为弹出框的Content
         builder.setView(view);
 
-        final EditText metLable = (EditText) view.findViewById(R.id.etLable);
+        //final EditText metLable = (EditText) view.findViewById(R.id.etLable);
 
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String lable = metLable.getText().toString().trim();
-                mtvalarmlable = (TextView) findViewById(R.id.tvalarmlable);
-                mtvalarmlable.setText(lable);
-                mclock.setLable(lable);
-                Toast.makeText(AddAlarmActivity.this, "已设定标签：" + lable, Toast.LENGTH_SHORT).show();
+//                String lable = metLable.getText().toString().trim();
+//                mtvalarmlable = (TextView) findViewById(R.id.tvalarmlable);
+//                mtvalarmlable.setText(lable);
+//                mclock.setLable(lable);
+//                Toast.makeText(AddAlarmActivity.this, "已设定标签：" + lable, Toast.LENGTH_SHORT).show();
+                hour_pv = (PickerView) findViewById(R.id.hour_pv);
+                minute_pv = (PickerView) findViewById(R.id.minute_pv);
+                List<String> data = new ArrayList<String>();
+                List<String> seconds = new ArrayList<String>();
+                for (int i = 0; i < 24; i++) {
+                    data.add(i < 10 ? "0" + i : "" + i);
+
+                }
+                for (int i = 0; i < 60; i++) {
+                    seconds.add(i < 10 ? "0" + i : "" + i);
+                }
+                hour_pv.setData(data);
+
+
+                hour_pv.setOnSelectListener(new PickerView.onSelectListener() {
+
+                    @Override
+                    public void onSelect(String text) {
+                        Toast.makeText(AddAlarmActivity.this, "选择了 " + text + " 时",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+                hour_pv.mCurrentSelected = calendar.get(Calendar.HOUR_OF_DAY);
+                minute_pv.setData(seconds);
+                minute_pv.setOnSelectListener(new PickerView.onSelectListener() {
+
+                    @Override
+                    public void onSelect(String text) {
+                        Toast.makeText(AddAlarmActivity.this, "选择了 " + text + " 分",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+                minute_pv.mCurrentSelected = calendar.get(Calendar.MINUTE);
+
+
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {

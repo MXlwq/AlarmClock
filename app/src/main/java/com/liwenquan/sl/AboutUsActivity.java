@@ -26,7 +26,15 @@ public class AboutUsActivity extends AppCompatActivity {
                 finish();
             }
         });
-        findViewById(R.id.copyright).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.copyright01).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri= Uri.parse("http://mxlwq.github.io/about/");
+                Intent intent=new Intent(Intent.ACTION_VIEW,uri);
+                startActivity(intent);
+            }
+        });
+        findViewById(R.id.copyright02).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Uri uri= Uri.parse("http://mxlwq.github.io/about/");

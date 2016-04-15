@@ -37,7 +37,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="开发者:MXD"
         android:layout_gravity="center"/>
     <TextView
@@ -49,8 +49,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
-        android:id="@+id/copyright"
+        android:layout_marginTop="144dp"
+        android:id="@+id/copyright01"
         android:textColor="@color/colorAccent"
         android:text="©2016 lwq.coding.io"
         android:layout_gravity="center"/>
@@ -58,6 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorAccent"
+        android:id="@+id/copyright02"
         android:text="All rights reserved."
         android:layout_gravity="center"/>
 
