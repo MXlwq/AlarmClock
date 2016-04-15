@@ -7,7 +7,6 @@
     <EditText
         android:id="@+id/etLable"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:hint="@string/hint_lable" />
+        android:layout_height="60dp" />
 
 </LinearLayout>

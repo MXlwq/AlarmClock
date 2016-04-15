@@ -38,18 +38,22 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_clock_list);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         firstTime = prefs.getBoolean("first_time_to_enter", true);
         if (firstTime) {
-            startActivity(new Intent(ClockListActivity.this, HelloActivity.class));
+            /*
+            暂时没有添加这一部分的样式，添加之后实现引导
+             */
+            //startActivity(new Intent(ClockListActivity.this, HelloActivity.class));
             SharedPreferences.Editor pEdit = prefs.edit();
             pEdit.putBoolean("first_time_to_enter", false);
             pEdit.commit();
         }
+        setContentView(R.layout.activity_clock_list);
         mClocks = ClockLab.get(this).getClocks();
         adapter = new ClockAdapter(mClocks);
+
         mListView = (ListView) findViewById(R.id.list_view_main);
         if (adapter != null)
             mListView.setAdapter(adapter);
@@ -101,6 +105,18 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
     public void onResume() {
         super.onResume();
         //刷新列表信息；
+        if (mClocks.size() != 0) {
+            findViewById(R.id.list_view_main).setVisibility(View.VISIBLE);
+            findViewById(R.id.noclock).setVisibility(View.INVISIBLE);
+            findViewById(R.id.downarrow).setVisibility(View.INVISIBLE);
+            findViewById(R.id.addtext).setVisibility(View.INVISIBLE);
+        } else {
+            findViewById(R.id.list_view_main).setVisibility(View.INVISIBLE);
+            findViewById(R.id.noclock).setVisibility(View.VISIBLE);
+            findViewById(R.id.downarrow).setVisibility(View.VISIBLE);
+            findViewById(R.id.addtext).setVisibility(View.VISIBLE);
+
+        }
         adapter.notifyDataSetChanged();
     }
 
@@ -108,7 +124,7 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.action_setting:
-                Intent i=new Intent(ClockListActivity.this, SettingActivity.class);
+                Intent i = new Intent(ClockListActivity.this, SettingActivity.class);
                 startActivity(i);
                 break;
         }
