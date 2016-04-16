@@ -24,14 +24,13 @@
     <string name="text_snoozetime">5分钟</string>
     <string name="button_commitbug">发送</string>
     <string name="string_time_left">%s响铃</string>
-    <string name="text_about">本程序目前为Alpha阶段，发现bug欢迎反馈，最终会实现以下功能来帮助你起床\n1.防止自己太轻松地关闭闹钟睡过头，想要关闭闹钟，可能要花大力气或者动脑筋让自己清醒\n2.自己可以调节关闭闹钟的难度和方式，如果想早起，可以调地难一些。\n3.闹钟响起的时候无法关闭手机，也不能降低音量，总之，不完成自己设定的条件是不会停的</string>
+    <string name="text_about">本程序目前为Alpha阶段，欢迎反馈BUG，最终会实现以下功能来帮助你起床\n1.防止自己太轻松地关闭闹钟睡过头，想要关闭闹钟，可能要花大力气或者动脑筋让自己清醒\n2.自己可以调节关闭闹钟的难度和方式，如果想早起，可以调地难一些。\n3.闹钟响起的时候无法关闭手机，也不能降低音量，总之，不完成自己设定的条件是不会停的</string>
     <string name="title_activity_hello">HelloActivity</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">欢迎使用WakeUp闹钟叫你起床</string>
     <string name="title_about">关于</string>
-    <string name="title_setting">设  置</string>
+    <string name="title_setting">设　置</string>
     <string name="title_add_clock">添加闹钟</string>
     <string name="title_feed_back">问题反馈</string>
     <string name="string_title_email">"WakeUp闹钟Bug"</string>
-    <string name="version_text">0.0.4.15Alpha</string>
 </resources>
