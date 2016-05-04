@@ -108,12 +108,10 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
         if (mClocks.size() != 0) {
             findViewById(R.id.list_view_main).setVisibility(View.VISIBLE);
             findViewById(R.id.noclock).setVisibility(View.INVISIBLE);
-            findViewById(R.id.downarrow).setVisibility(View.INVISIBLE);
             findViewById(R.id.addtext).setVisibility(View.INVISIBLE);
         } else {
             findViewById(R.id.list_view_main).setVisibility(View.INVISIBLE);
             findViewById(R.id.noclock).setVisibility(View.VISIBLE);
-            findViewById(R.id.downarrow).setVisibility(View.VISIBLE);
             findViewById(R.id.addtext).setVisibility(View.VISIBLE);
 
         }

@@ -290,38 +290,26 @@ public class AddAlarmActivity extends AppCompatActivity {
             }
         });
         sinChosDia.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
-
-                showClickMessage(mList[yourChose]);
-
+                if (yourChose == 2)
+                    showshakeChos();
+                else
+                    Toast.makeText(AddAlarmActivity.this, "你选择的是: " + mList[yourChose], Toast.LENGTH_SHORT).show();
             }
         });
         sinChosDia.create().show();
     }
 
-    /*显示点击的内容*/
-    private void showClickMessage(String message) {
-
-        if (message == "疯狂摇手机")
-            showshakeChos();
-        else
-            //待补充
-            Toast.makeText(AddAlarmActivity.this, "你选择的是: " + message, Toast.LENGTH_SHORT).show();
-    }
 
     private void showshakeChos() {
         AlertDialog.Builder builder = new AlertDialog.Builder(AddAlarmActivity.this);
         builder.setTitle("摇动次数");
-        //    通过LayoutInflater来加载一个xml的布局文件作为一个View对象
+        //通过LayoutInflater来加载一个xml的布局文件作为一个View对象
         View view = LayoutInflater.from(AddAlarmActivity.this).inflate(R.layout.dialog_lable, null);
         //    设置我们自己定义的布局文件作为弹出框的Content
         builder.setView(view);
-
-        //final EditText metLable = (EditText) view.findViewById(R.id.etLable);
-
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

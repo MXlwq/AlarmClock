@@ -12,32 +12,24 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".AddAlarmActivity"
-            android:label="@string/title_activity_set"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:label="@string/title_activity_set" />
         <activity
             android:name=".SettingActivity"
-            android:label="@string/title_activity_setting"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:label="@string/title_activity_setting" />
         <activity
             android:name=".PlayAlarmActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="com.liwenquan.sl.playalarm" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".AboutUsActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
-            android:name=".SetAlarmActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".AboutUsActivity" />
+        <activity android:name=".SetAlarmActivity" />
         <activity
             android:name=".ClockListActivity"
-            android:launchMode="singleTask"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -56,11 +48,9 @@
 
         <activity
             android:name=".HelloActivity"
-            android:label="@string/title_activity_hello"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
-            android:name=".PushBugActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:label="@string/title_activity_hello" />
+        <activity android:name=".PushBugActivity" />
+        <activity android:name=".ShakeToStopActivity"></activity>
     </application>
 
 </manifest>
