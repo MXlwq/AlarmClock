@@ -38,6 +38,7 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_clock_list);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         firstTime = prefs.getBoolean("first_time_to_enter", true);
@@ -50,13 +51,8 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
             pEdit.putBoolean("first_time_to_enter", false);
             pEdit.commit();
         }
-        setContentView(R.layout.activity_clock_list);
-        mClocks = ClockLab.get(this).getClocks();
-        adapter = new ClockAdapter(mClocks);
 
-        mListView = (ListView) findViewById(R.id.list_view_main);
-        if (adapter != null)
-            mListView.setAdapter(adapter);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.menu_main);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -99,6 +95,13 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
                 startActivityForResult(i, 0);
             }
         });
+
+        mClocks = ClockLab.get(this).getClocks();
+        adapter = new ClockAdapter(mClocks);
+
+        mListView = (ListView) findViewById(R.id.list_view_main);
+        if (adapter != null)
+            mListView.setAdapter(adapter);
     }
 
     @Override
