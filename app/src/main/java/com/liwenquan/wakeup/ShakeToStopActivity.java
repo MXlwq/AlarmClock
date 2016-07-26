@@ -1,7 +1,7 @@
-package com.liwenquan.sl;
+package com.liwenquan.wakeup;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 public class ShakeToStopActivity extends AppCompatActivity {
 

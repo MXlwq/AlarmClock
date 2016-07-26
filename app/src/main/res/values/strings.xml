@@ -3,7 +3,7 @@
     <string name="menu_bug">意见反馈</string>
     <string name="menu_about_us">关于</string>
     <string name="menu_update">检查更新</string>
-    <string name="version">当前版本是%s\n已是最新版本"</string>
+    <string name="version">当前版本是%s\n已是最新版本</string>
     <string name="bugfeedback">感谢您的反馈建议，您的关注是我前进的动力</string>
     <string name="home_page">闹钟</string>
     <string name="title_activity_set">SetActivity</string>

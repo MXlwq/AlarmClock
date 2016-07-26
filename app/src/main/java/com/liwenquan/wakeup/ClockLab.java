@@ -1,4 +1,4 @@
-package com.liwenquan.sl;
+package com.liwenquan.wakeup;
 
 import android.content.Context;
 
@@ -9,7 +9,6 @@ import java.util.ArrayList;
  */
 public class ClockLab {
 
-    private static final String TAG = "CrimeLab";
     private static final String FILENAME = "crimes.json";
     private static ClockLab sClockLab;
     private Context mAppContext;
@@ -31,19 +30,19 @@ public class ClockLab {
 
     }
 
+    public static ClockLab get(Context c) {
+        if (sClockLab == null) {
+            sClockLab = new ClockLab(c.getApplicationContext());
+        }
+        return sClockLab;
+    }
+
     public void addClock(Clock crime) {
         mClocks.add(crime);
     }
 
     public void deleteClock(Clock crime) {
         mClocks.remove(crime);
-    }
-
-    public static ClockLab get(Context c) {
-        if (sClockLab == null) {
-            sClockLab = new ClockLab(c.getApplicationContext());
-        }
-        return sClockLab;
     }
 
     //容纳Crime对象的ArrayList数组列表

@@ -1,4 +1,4 @@
-package com.liwenquan.sl;
+package com.liwenquan.wakeup;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -14,6 +14,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 public class SettingActivity extends AppCompatActivity {
+    private static final int NOTIFICATION_FLAG = 1;
     int yourChose = 1;
     PickerView hour_pv;
     PickerView minute_pv;
@@ -21,8 +22,8 @@ public class SettingActivity extends AppCompatActivity {
     private TextView mTvSnoozeTime;
     private Switch mNotificationSwitch;
     private NotificationManager manager;
-    private static final int NOTIFICATION_FLAG = 1;
     private Clock mclock;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +35,11 @@ public class SettingActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationSwitch= (Switch) findViewById(R.id.notification_switch);
+        mNotificationSwitch = (Switch) findViewById(R.id.notification_switch);
         mNotificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked==true) {
+                if (isChecked == true) {
                     PendingIntent pendingIntent3 = PendingIntent.getActivity(SettingActivity.this, 0,
                             new Intent(SettingActivity.this, ClockListActivity.class), 0);
                     // 通过Notification.Builder来创建通知，注意API Level

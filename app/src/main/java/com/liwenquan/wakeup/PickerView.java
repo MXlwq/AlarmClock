@@ -1,4 +1,4 @@
-package com.liwenquan.sl;
+package com.liwenquan.wakeup;
 
 /**
  * Created by LWQ on 2016/4/12.
@@ -37,12 +37,11 @@ public class PickerView extends View {
      * 自动回滚到中间的速度
      */
     public static final float SPEED = 2;
-
-    private List<String> mDataList;
     /**
      * 选中的位置，这个位置是mDataList的中心位置，一直不变
      */
     public int mCurrentSelected;
+    private List<String> mDataList;
     private Paint mPaint;
 
     private float mMaxTextSize = 80;
@@ -266,6 +265,10 @@ public class PickerView extends View {
         timer.schedule(mTask, 0, 10);
     }
 
+    public interface onSelectListener {
+        void onSelect(String text);
+    }
+
     class MyTimerTask extends TimerTask {
         Handler handler;
 
@@ -278,9 +281,5 @@ public class PickerView extends View {
             handler.sendMessage(handler.obtainMessage());
         }
 
-    }
-
-    public interface onSelectListener {
-        void onSelect(String text);
     }
 }

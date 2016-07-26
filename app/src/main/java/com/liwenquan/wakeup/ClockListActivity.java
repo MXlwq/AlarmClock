@@ -1,8 +1,9 @@
-package com.liwenquan.sl;
+package com.liwenquan.wakeup;
 
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -28,12 +29,24 @@ import java.util.Calendar;
  * Created by LWQ on 2016/4/8.
  */
 public class ClockListActivity extends Activity implements View.OnClickListener {
-    private ArrayList<Clock> mClocks;
     public static final String PLAY_ALARM = "com.liwenquan.sl.playalarm";
     public static final String EXTRA_CRIME_ID = "com.liwenquan.sleep.clock_id";
-    private ListView mListView;
-    ClockAdapter adapter;
     static boolean firstTime;
+    ClockAdapter adapter;
+    private ArrayList<Clock> mClocks;
+    private ListView mListView;
+
+    public static void goTo(Context context) {
+
+        Intent intent = new Intent(context, ClockListActivity.class);
+
+        if (context instanceof Activity) {
+            context.startActivity(intent);
+        } else {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,13 +217,6 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
             return convertView;
         }
 
-        public final class ViewHolder {
-            public Switch mswitchOn;
-            public TextView mtvClockClock;
-            public TextView titleTextView;
-            public TextView mtime_left;
-        }
-
         public String getTimeDiff(Clock c) {
             Calendar clock = Calendar.getInstance();
             long time1 = clock.getTimeInMillis();
@@ -241,6 +247,13 @@ public class ClockListActivity extends Activity implements View.OnClickListener 
                 else stime = hourdiff + "小时" + minutediff + "分钟后";
             }
             return stime;
+        }
+
+        public final class ViewHolder {
+            public Switch mswitchOn;
+            public TextView mtvClockClock;
+            public TextView titleTextView;
+            public TextView mtime_left;
         }
     }
 

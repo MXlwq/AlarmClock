@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.liwenquan.sl">
+          package="com.liwenquan.wakeup">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
@@ -20,7 +20,7 @@
             android:name=".PlayAlarmActivity"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="com.liwenquan.sl.playalarm" />
+                <action android:name="com.liwenquan.wakeup.playalarm" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -30,11 +30,6 @@
         <activity
             android:name=".ClockListActivity"
             android:launchMode="singleTask">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <!-- 注册系统广播接收器 -->
         <receiver android:name=".BootBroadcastReceiver">
@@ -50,7 +45,14 @@
             android:name=".HelloActivity"
             android:label="@string/title_activity_hello" />
         <activity android:name=".PushBugActivity" />
-        <activity android:name=".ShakeToStopActivity"></activity>
+        <activity android:name=".ShakeToStopActivity" />
+        <activity android:name=".splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

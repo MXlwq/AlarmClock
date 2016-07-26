@@ -1,4 +1,4 @@
-package com.liwenquan.sl;
+package com.liwenquan.wakeup;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

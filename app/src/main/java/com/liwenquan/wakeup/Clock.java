@@ -1,4 +1,4 @@
-package com.liwenquan.sl;
+package com.liwenquan.wakeup;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,6 +32,30 @@ public class Clock {
     //    private int[] mWeeklyRepeat=new int[7];
     private int mWeeklyRepeat;
     private boolean mShake;
+
+    public Clock(Date time) {
+        mId = UUID.randomUUID().toString();
+        mDate = time;
+    }
+
+    public Clock(JSONObject json) throws JSONException {
+        mId = UUID.fromString(json.getString(JSON_ID)).toString();
+        if (json.has(JSON_LABLE)) {
+            mLable = json.getString(JSON_LABLE);
+        } else
+            mLable = "闹钟";
+        mDate = new Date(json.getLong(JSON_DATE));
+        if (json.has(JSON_ON)) {
+            mOn = json.getBoolean(JSON_ON);
+        } else
+            mOn = true;
+        if (json.has(JSON_RING)) {
+            mRing = json.getString(JSON_RING);
+        } else
+            mRing = "音乐";
+        //mShake=json.getBoolean(JSON_SHAKE);
+        //mWeeklyRepeat=json.getInt(JSON_WEEKLYREPEAT);
+    }
 
     public boolean isOn() {
         return mOn;
@@ -87,30 +111,6 @@ public class Clock {
 
     public void setShake(boolean mShake) {
         this.mShake = mShake;
-    }
-
-    public Clock(Date time) {
-        mId = UUID.randomUUID().toString();
-        mDate = time;
-    }
-
-    public Clock(JSONObject json) throws JSONException {
-        mId = UUID.fromString(json.getString(JSON_ID)).toString();
-        if (json.has(JSON_LABLE)) {
-            mLable = json.getString(JSON_LABLE);
-        } else
-            mLable = "闹钟";
-        mDate = new Date(json.getLong(JSON_DATE));
-        if (json.has(JSON_ON)) {
-            mOn = json.getBoolean(JSON_ON);
-        } else
-            mOn = true;
-        if (json.has(JSON_RING)) {
-            mRing = json.getString(JSON_RING);
-        } else
-            mRing = "音乐";
-        //mShake=json.getBoolean(JSON_SHAKE);
-        //mWeeklyRepeat=json.getInt(JSON_WEEKLYREPEAT);
     }
 
     public JSONObject toJSON() throws JSONException {

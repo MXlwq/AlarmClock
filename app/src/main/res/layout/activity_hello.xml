@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:context="com.liwenquan.sl.HelloActivity">
+    tools:context="com.liwenquan.wakeup.HelloActivity">
 
 
     <android.support.v4.view.ViewPager

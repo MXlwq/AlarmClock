@@ -1,4 +1,4 @@
-package com.liwenquan.sl;
+package com.liwenquan.wakeup;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,13 +47,11 @@ public class HelloActivity extends AppCompatActivity {
         findViewById(R.id.buttonIn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HelloActivity.this,ClockListActivity.class));
+                startActivity(new Intent(HelloActivity.this, ClockListActivity.class));
             }
         });
 
     }
-
-
 
 
     /**

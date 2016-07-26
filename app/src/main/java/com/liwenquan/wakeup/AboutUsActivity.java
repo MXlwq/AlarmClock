@@ -1,4 +1,4 @@
-package com.liwenquan.sl;
+package com.liwenquan.wakeup;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,16 +32,16 @@ public class AboutUsActivity extends AppCompatActivity {
         findViewById(R.id.copyright01).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uri= Uri.parse("http://mxlwq.github.io/about/");
-                Intent intent=new Intent(Intent.ACTION_VIEW,uri);
+                Uri uri = Uri.parse("http://liwenquan.top/about/");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }
         });
         findViewById(R.id.copyright02).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uri= Uri.parse("http://mxlwq.github.io/about/");
-                Intent intent=new Intent(Intent.ACTION_VIEW,uri);
+                Uri uri = Uri.parse("http://liwenquan.top/about/");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }
         });
@@ -51,7 +51,7 @@ public class AboutUsActivity extends AppCompatActivity {
                 showNormalDia();
             }
         });
-        TextView mVersionText= (TextView) findViewById(R.id.version_text);
+        TextView mVersionText = (TextView) findViewById(R.id.version_text);
         PackageManager pm = getPackageManager();
         PackageInfo pi = null;
         try {
@@ -63,10 +63,9 @@ public class AboutUsActivity extends AppCompatActivity {
 
 
     }
+
     private void showNormalDia() {
-        //AlertDialog.Builder normalDialog=new AlertDialog.Builder(getApplicationContext());
         AlertDialog.Builder normalDia = new AlertDialog.Builder(AboutUsActivity.this);
-        //normalDia.setIcon(R.drawable.ic_launcher);
         normalDia.setTitle("更多关于");
         normalDia.setMessage(R.string.text_about);
 

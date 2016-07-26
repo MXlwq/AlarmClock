@@ -1,4 +1,4 @@
-# Intrduction
+# Introduction
 Want to achieve easier than ordinary alarm clock to wake up people .
 Ordinary alarm clock compared with the following features:
 1. Shake N times the phone off the alarm , shoot the same scene turn off the alarm , turn off the alarm count arithmetic

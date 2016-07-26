@@ -1,4 +1,4 @@
-package com.liwenquan.sl;
+package com.liwenquan.wakeup;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -31,13 +31,7 @@ public class PlayAlarmActivity extends Activity {
         mp = MediaPlayer.create(PlayAlarmActivity.this, RingtoneManager.getActualDefaultRingtoneUri(PlayAlarmActivity.this,
                 RingtoneManager.TYPE_ALARM));
         mp.start();
-//        mputoff = (Button) findViewById(R.id.putoff);
-//        mputoff.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
+
         tvStop = (TextView) findViewById(R.id.stopclock);
 
         //1.重写 GestureDetector的onFling方法
